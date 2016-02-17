@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.example.enzo.practicedemos.R;
 
 import java.lang.ref.WeakReference;
 
@@ -15,6 +18,7 @@ public class CreateService extends Service {
 
     private StopHandler handler;
     private NotificationManager manager;
+    private NotificationCompat.Builder builder;
 
     public CreateService() {
     }
@@ -23,9 +27,13 @@ public class CreateService extends Service {
     public void onCreate() {
         super.onCreate();
         Log.i("Service", "----> onCreate");
-        handler = new StopHandler(this);
         manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
+        builder = new NotificationCompat.Builder(getApplicationContext());
+        builder.setSmallIcon(R.mipmap.ic_launcher);
+        builder.setContentTitle("Status");
+        builder.setContentText("Downlaoding...");
+        manager.notify(1001, builder.build());
+        handler = new StopHandler(this, builder, manager);
     }
 
     @Override
@@ -50,12 +58,26 @@ public class CreateService extends Service {
         @Override
         public void run() {
             //Sleep for 5 seconds
-            long startTime = System.currentTimeMillis();
-            long endTime = startTime + 5 * 1000;
-            while (System.currentTimeMillis() < endTime) {
+//            long startTime = System.currentTimeMillis();
+//            long endTime = startTime + 5 * 1000;
+//            while (System.currentTimeMillis() < endTime) {
+//                synchronized (this) {
+//                    try {
+//                        wait(endTime - System.currentTimeMillis());
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+            int duration = 50;
+            for (int i = 1; i <= duration; i++) {
                 synchronized (this) {
                     try {
-                        wait(endTime - System.currentTimeMillis());
+                        int value = (int) (i / (float) duration * 100);
+                        Message msg = Message.obtain();
+                        msg.arg1 = value;
+                        handler.sendMessage(msg);
+                        wait(100);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -68,17 +90,22 @@ public class CreateService extends Service {
 
     public static class StopHandler extends Handler {
         private WeakReference<CreateService> refSender = null;
+        private NotificationCompat.Builder builder;
+        private NotificationManager manager;
 
-        public StopHandler(CreateService sender) {
-            refSender = new WeakReference<>(sender);
+        public StopHandler(CreateService sender, NotificationCompat.Builder builder, NotificationManager manager) {
+            this.refSender = new WeakReference<>(sender);
+            this.builder = builder;
+            this.manager = manager;
         }
 
         @Override
         public void handleMessage(Message msg) {
+            super.handleMessage(msg);
             CreateService service = refSender.get();
             if (service == null) return;
-
-            super.handleMessage(msg);
+            builder.setProgress(100, msg.arg1, false);
+            manager.notify(1001, builder.build());
             if (msg.what == 1) {
                 service.stopSelf();
                 Toast.makeText(service.getApplicationContext(), "Download finished!", Toast.LENGTH_SHORT).show();
