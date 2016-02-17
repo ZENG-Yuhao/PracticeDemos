@@ -33,7 +33,7 @@ public class CreateService extends Service {
         builder.setContentTitle("Status");
         builder.setContentText("Downlaoding...");
         manager.notify(1001, builder.build());
-        handler = new StopHandler(this, builder, manager);
+        handler = new StopHandler(this);
     }
 
     @Override
@@ -90,13 +90,9 @@ public class CreateService extends Service {
 
     public static class StopHandler extends Handler {
         private WeakReference<CreateService> refSender = null;
-        private NotificationCompat.Builder builder;
-        private NotificationManager manager;
 
-        public StopHandler(CreateService sender, NotificationCompat.Builder builder, NotificationManager manager) {
+        public StopHandler(CreateService sender) {
             this.refSender = new WeakReference<>(sender);
-            this.builder = builder;
-            this.manager = manager;
         }
 
         @Override
@@ -104,13 +100,15 @@ public class CreateService extends Service {
             super.handleMessage(msg);
             CreateService service = refSender.get();
             if (service == null) return;
-            builder.setProgress(100, msg.arg1, false);
-            manager.notify(1001, builder.build());
+            service.builder.setProgress(100, msg.arg1, false);
+            service.manager.notify(1001, service.builder.build());
             if (msg.what == 1) {
                 service.stopSelf();
                 Toast.makeText(service.getApplicationContext(), "Download finished!", Toast.LENGTH_SHORT).show();
                 Log.i("Service", "---->Task Finished.");
             }
         }
+
+
     }
 }
