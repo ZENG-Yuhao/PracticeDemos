@@ -104,8 +104,9 @@ public class CreateService extends Service {
             service.manager.notify(1001, service.builder.build());
             if (msg.what == 1) {
                 service.stopSelf();
-                Toast.makeText(service.getApplicationContext(), "Download finished!", Toast.LENGTH_SHORT).show();
-                Log.i("Service", "---->Task Finished.");
+                Toast.makeText(service.getApplicationContext(), "Download finished!", Toast
+                        .LENGTH_SHORT).show();
+                        Log.i("Service", "---->Task Finished.");
             }
         }
 
