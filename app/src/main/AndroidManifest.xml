@@ -21,6 +21,8 @@
             android:name=".Services.CreateService"
             android:enabled="true"
             android:exported="true" />
+
+        <activity android:name=".DragAndDropActivity"></activity>
     </application>
 
 </manifest>

@@ -8,6 +8,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
     private Button btn_create_service;
+    private Button btn_drag_and_drop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CreateServiceActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        btn_drag_and_drop = (Button) findViewById(R.id.btn_drag_and_drop);
+        btn_drag_and_drop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, DragAndDropActivity.class);
                 startActivity(intent);
             }
         });
