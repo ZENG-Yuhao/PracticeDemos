@@ -37,7 +37,7 @@ public class BaseAdapterActivity extends AppCompatActivity {
             Map<String, Object> listItem = new HashMap<>();
             listItem.put("title", "user "+i);
             listItem.put("content", "this is content " + i);
-            listItem.put("points", i);
+            listItem.put("points", "points"+i);
             list.add(listItem);
         }
         return list;
