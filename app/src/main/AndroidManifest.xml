@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.enzo.practicedemos">
+<manifest package="com.example.enzo.practicedemos"
+          xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:allowBackup="true"
@@ -10,19 +10,21 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".CreateServiceActivity" />
+        <activity android:name=".CreateServiceActivity"/>
 
         <service
             android:name=".Services.CreateService"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="true"/>
 
-        <activity android:name=".DragAndDropActivity"></activity>
+        <activity android:name=".DragAndDropActivity"/>
+        <activity android:name=".BaseAdapterActivity">
+        </activity>
     </application>
 
 </manifest>

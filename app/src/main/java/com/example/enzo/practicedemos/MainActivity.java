@@ -9,6 +9,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
     private Button btn_create_service;
     private Button btn_drag_and_drop;
+    private Button btn_base_adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,5 +35,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btn_base_adapter = (Button) findViewById(R.id.btn_base_adapter);
+        btn_base_adapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, BaseAdapterActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

@@ -17,12 +17,22 @@
         android:id="@+id/btn_create_service"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textAllCaps="false"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btn_drag_and_drop"
         android:text="Drag and Drop"
-        android:layout_toRightOf="@id/btn_create_service"/>
+        android:layout_toRightOf="@id/btn_create_service"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btn_base_adapter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Baseadapter"
+        android:textAllCaps="false"
+        android:layout_toRightOf="@id/btn_drag_and_drop"/>
 </RelativeLayout>
