@@ -25,6 +25,8 @@
         <activity android:name=".DragAndDropActivity"/>
         <activity android:name=".BaseAdapterActivity">
         </activity>
+        <activity android:name=".PropertyAnimationActivity">
+        </activity>
     </application>
 
 </manifest>

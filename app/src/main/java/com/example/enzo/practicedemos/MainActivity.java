@@ -10,6 +10,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btn_create_service;
     private Button btn_drag_and_drop;
     private Button btn_base_adapter;
+    private Button btn_animation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, BaseAdapterActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_animation = (Button) findViewById(R.id.btn_animation);
+        btn_animation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, PropertyAnimationActivity.class);
                 startActivity(intent);
             }
         });
