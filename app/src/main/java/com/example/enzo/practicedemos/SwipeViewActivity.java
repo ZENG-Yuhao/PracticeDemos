@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 
+import com.example.enzo.practicedemos.Animations.ZoomOutPageTransformer;
 import com.example.enzo.practicedemos.Fragments.SwipeViewFragment;
 
 public class SwipeViewActivity extends FragmentActivity {
@@ -35,6 +36,7 @@ public class SwipeViewActivity extends FragmentActivity {
 
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = (ViewPager) findViewById(R.id.pager);
+        mPager.setPageTransformer(true, new ZoomOutPageTransformer());
         mPagerAdapter = new SwipeViewPagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
     }

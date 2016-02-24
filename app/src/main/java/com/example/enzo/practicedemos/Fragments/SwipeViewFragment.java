@@ -14,8 +14,11 @@ public class SwipeViewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_swipe_view,
-                container, false);
-        return rootView;
+//        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_swipe_view,
+//                container, false);
+//        return rootView;
+
+        View view  = (View) inflater.inflate(R.layout.fragment_swipe_view, null);
+        return view;
     }
 }
