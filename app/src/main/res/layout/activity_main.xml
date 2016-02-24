@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -10,7 +11,7 @@
                 tools:context="com.example.enzo.practicedemos.MainActivity">
 
 
-    <Button
+    <com.beardedhen.androidbootstrap.BootstrapButton
         android:id="@+id/btn_create_service"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,30 +19,62 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:text="Create Service"
-        android:textAllCaps="false"/>
+        android:textAllCaps="false"
+        app:bootstrapBrand="success"
+        app:bootstrapSize="lg"
+        app:buttonMode="regular"
+        app:roundedCorners="true"
+        app:showOutline="false"/>
 
-    <Button
+    <com.beardedhen.androidbootstrap.BootstrapButton
         android:id="@+id/btn_drag_and_drop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/btn_create_service"
         android:text="Drag and Drop"
-        android:textAllCaps="false"/>
+        android:textAllCaps="false"
+        app:bootstrapBrand="success"
+        app:bootstrapSize="lg"
+        app:buttonMode="regular"
+        app:roundedCorners="true"
+        app:showOutline="false"/>
 
-    <Button
+    <com.beardedhen.androidbootstrap.BootstrapButton
         android:id="@+id/btn_base_adapter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_drag_and_drop"
         android:text="Baseadapter"
-        android:textAllCaps="false"/>
+        android:textAllCaps="false"
+        app:bootstrapBrand="success"
+        app:bootstrapSize="lg"
+        app:buttonMode="regular"
+        app:roundedCorners="true"
+        app:showOutline="false"/>
 
-    <Button
+    <com.beardedhen.androidbootstrap.BootstrapButton
         android:id="@+id/btn_animation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Animation"
         android:layout_below="@id/btn_drag_and_drop"
         android:layout_toRightOf="@id/btn_base_adapter"
-        android:textAllCaps="false"/>
+        android:text="Animation"
+        android:textAllCaps="false"
+        app:bootstrapBrand="success"
+        app:bootstrapSize="lg"
+        app:buttonMode="regular"
+        app:roundedCorners="true"
+        app:showOutline="false"/>
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/btn_swipe_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_animation"
+        android:text="Swipe View"
+        app:bootstrapBrand="success"
+        app:bootstrapSize="lg"
+        app:buttonMode="regular"
+        app:roundedCorners="true"
+        app:showOutline="false"/>
 </RelativeLayout>
