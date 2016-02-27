@@ -1,4 +1,4 @@
-package com.example.enzo.practicedemos;
+package com.example.enzo.practicedemos.Activities;
 
 import android.content.ClipData;
 import android.content.ClipDescription;
@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.enzo.practicedemos.R;
 
 public class DragAndDropActivity extends AppCompatActivity {
 

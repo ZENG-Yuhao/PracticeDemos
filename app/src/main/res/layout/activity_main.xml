@@ -8,7 +8,7 @@
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingTop="@dimen/activity_vertical_margin"
-                tools:context="com.example.enzo.practicedemos.MainActivity">
+                tools:context=".Activities.MainActivity">
 
 
     <com.beardedhen.androidbootstrap.BootstrapButton
@@ -20,6 +20,7 @@
         android:layout_alignParentTop="true"
         android:text="Create Service"
         android:textAllCaps="false"
+        android:layout_margin="10dp"
         app:bootstrapBrand="success"
         app:bootstrapSize="lg"
         app:buttonMode="regular"
@@ -33,6 +34,7 @@
         android:layout_toRightOf="@id/btn_create_service"
         android:text="Drag and Drop"
         android:textAllCaps="false"
+        android:layout_margin="10dp"
         app:bootstrapBrand="success"
         app:bootstrapSize="lg"
         app:buttonMode="regular"
@@ -46,6 +48,7 @@
         android:layout_below="@id/btn_drag_and_drop"
         android:text="Baseadapter"
         android:textAllCaps="false"
+        android:layout_margin="10dp"
         app:bootstrapBrand="success"
         app:bootstrapSize="lg"
         app:buttonMode="regular"
@@ -60,6 +63,7 @@
         android:layout_toRightOf="@id/btn_base_adapter"
         android:text="Animation"
         android:textAllCaps="false"
+        android:layout_margin="10dp"
         app:bootstrapBrand="success"
         app:bootstrapSize="lg"
         app:buttonMode="regular"
@@ -72,6 +76,34 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_animation"
         android:text="Swipe View"
+        android:layout_margin="10dp"
+        app:bootstrapBrand="success"
+        app:bootstrapSize="lg"
+        app:buttonMode="regular"
+        app:roundedCorners="true"
+        app:showOutline="false"/>
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/btn_swipe_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_animation"
+        android:layout_toRightOf="@id/btn_swipe_view"
+        android:text="Swipe List"
+        android:layout_margin="10dp"
+        app:bootstrapBrand="success"
+        app:bootstrapSize="lg"
+        app:buttonMode="regular"
+        app:roundedCorners="true"
+        app:showOutline="false"/>
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/btn_tool_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_swipe_view"
+        android:text="Tool Bar"
+        android:layout_margin="10dp"
         app:bootstrapBrand="success"
         app:bootstrapSize="lg"
         app:buttonMode="regular"

@@ -1,4 +1,4 @@
-package com.example.enzo.practicedemos;
+package com.example.enzo.practicedemos.Activities;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager;
 
 import com.example.enzo.practicedemos.Animations.ZoomOutPageTransformer;
 import com.example.enzo.practicedemos.Fragments.SwipeViewFragment;
+import com.example.enzo.practicedemos.R;
 
 public class SwipeViewActivity extends FragmentActivity {
 

@@ -1,4 +1,4 @@
-package com.example.enzo.practicedemos;
+package com.example.enzo.practicedemos.Core;
 
 import android.app.Application;
 

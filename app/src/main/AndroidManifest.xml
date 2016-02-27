@@ -3,32 +3,42 @@
           xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
-        android:name=".MyApplication"
+        android:name=".Core.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".CreateServiceActivity"/>
+        <activity android:name=".Activities.CreateServiceActivity"/>
 
         <service
             android:name=".Services.CreateService"
             android:enabled="true"
             android:exported="true"/>
 
-        <activity android:name=".DragAndDropActivity"/>
-        <activity android:name=".BaseAdapterActivity">
+        <activity android:name=".Activities.DragAndDropActivity"/>
+        <activity android:name=".Activities.BaseAdapterActivity">
         </activity>
-        <activity android:name=".PropertyAnimationActivity">
+        <activity android:name=".Activities.PropertyAnimationActivity">
         </activity>
-        <activity android:name=".SwipeViewActivity">
+        <activity android:name=".Activities.SwipeViewActivity">
+        </activity>
+        <activity android:name=".Activities.SwipeListActivity">
+        </activity>
+        <activity android:name=".Activities.ToolBarActivity"
+            android:parentActivityName=".Activities.MainActivity">
+            <!-- Parent Activity meta-data to support 4.0 and lower-->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.enzo.practicedemos.Activities.MainActivity"
+                />
         </activity>
     </application>
 

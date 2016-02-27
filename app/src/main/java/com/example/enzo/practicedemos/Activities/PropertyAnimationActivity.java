@@ -1,4 +1,4 @@
-package com.example.enzo.practicedemos;
+package com.example.enzo.practicedemos.Activities;
 
 import android.animation.AnimatorSet;
 import android.animation.IntEvaluator;
@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
+
+import com.example.enzo.practicedemos.R;
 
 public class PropertyAnimationActivity extends AppCompatActivity {
 
