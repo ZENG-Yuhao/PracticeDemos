@@ -12,7 +12,8 @@ import com.example.enzo.practicedemos.Animations.ZoomOutPageTransformer;
 import com.example.enzo.practicedemos.Fragments.SwipeViewFragment;
 import com.example.enzo.practicedemos.R;
 
-public class SwipeViewActivity extends FragmentActivity {
+public class SwipeViewActivity extends FragmentActivity
+{
 
     /**
      * The number of pages (wizard steps) to show in this demo.
@@ -31,7 +32,8 @@ public class SwipeViewActivity extends FragmentActivity {
     private PagerAdapter mPagerAdapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_swipe_view);
 
@@ -43,12 +45,15 @@ public class SwipeViewActivity extends FragmentActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        if (mPager.getCurrentItem() == 0) {
+    public void onBackPressed()
+    {
+        if (mPager.getCurrentItem() == 0)
+        {
             // If the user is currently looking at the first step, allow the system to handle the
             // Back button. This calls finish() on this activity and pops the back stack.
             super.onBackPressed();
-        } else {
+        } else
+        {
             // Otherwise, select the previous step.
             mPager.setCurrentItem(mPager.getCurrentItem() - 1);
         }
@@ -58,18 +63,22 @@ public class SwipeViewActivity extends FragmentActivity {
      * A simple pager adapter that represents 5 ScreenSlidePageFragment objects, in
      * sequence.
      */
-    private class SwipeViewPagerAdapter extends FragmentStatePagerAdapter {
-        public SwipeViewPagerAdapter(FragmentManager fm) {
+    private class SwipeViewPagerAdapter extends FragmentStatePagerAdapter
+    {
+        public SwipeViewPagerAdapter(FragmentManager fm)
+        {
             super(fm);
         }
 
         @Override
-        public Fragment getItem(int position) {
+        public Fragment getItem(int position)
+        {
             return new SwipeViewFragment();
         }
 
         @Override
-        public int getCount() {
+        public int getCount()
+        {
             return NUM_PAGES;
         }
     }

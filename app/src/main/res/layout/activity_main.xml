@@ -109,4 +109,19 @@
         app:buttonMode="regular"
         app:roundedCorners="true"
         app:showOutline="false"/>
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/btn_drawer_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_swipe_list"
+        android:layout_toRightOf="@id/btn_tool_bar"
+        android:text="Drawer Layout"
+        android:layout_margin="10dp"
+        app:bootstrapBrand="success"
+        app:bootstrapSize="lg"
+        app:buttonMode="regular"
+        app:roundedCorners="true"
+        app:showOutline="false"/>
+
 </RelativeLayout>

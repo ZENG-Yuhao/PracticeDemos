@@ -12,7 +12,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CustomBaseAdapter extends BaseAdapter {
+public class CustomBaseAdapter extends BaseAdapter
+{
 
     private Context context;
     private ArrayList<? extends Map<String, ?>> data;
@@ -21,7 +22,8 @@ public class CustomBaseAdapter extends BaseAdapter {
     private int[] to;
 
     public CustomBaseAdapter(Context context, ArrayList<? extends Map<String, ?>> data, int
-            resource, String[] from, int[] to) {
+            resource, String[] from, int[] to)
+    {
         this.context = context;
         this.data = data;
         this.resource = resource;
@@ -30,30 +32,37 @@ public class CustomBaseAdapter extends BaseAdapter {
     }
 
     @Override
-    public int getCount() {
+    public int getCount()
+    {
         return data.size();
     }
 
     @Override
-    public Object getItem(int position) {
+    public Object getItem(int position)
+    {
         return data.get(position);
     }
 
     @Override
-    public long getItemId(int position) {
+    public long getItemId(int position)
+    {
         return position;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent)
+    {
         View view = null;
-        if (convertView == null) {
+        if (convertView == null)
+        {
             view = LayoutInflater.from(context).inflate(resource, null);
-        } else {
+        } else
+        {
             view = convertView;
         }
 
-        for (int i = 0; i < from.length; i++) {
+        for (int i = 0; i < from.length; i++)
+        {
             HashMap<String, Object> map = (HashMap<String, Object>) getItem(position);
             Object obj = map.get(from[i]);
             TextView textView = (TextView) view.findViewById(to[i]);

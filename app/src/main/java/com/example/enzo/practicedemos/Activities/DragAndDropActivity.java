@@ -14,21 +14,25 @@ import android.widget.TextView;
 
 import com.example.enzo.practicedemos.R;
 
-public class DragAndDropActivity extends AppCompatActivity {
+public class DragAndDropActivity extends AppCompatActivity
+{
 
     private final String IMAGEVIEW_TAG = "{This is a Tag}";
     private ImageView imageView;
     private LinearLayout container;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drag_and_drop);
 
         imageView = (ImageView) findViewById(R.id.img);
-        imageView.setOnLongClickListener(new View.OnLongClickListener() {
+        imageView.setOnLongClickListener(new View.OnLongClickListener()
+        {
             @Override
-            public boolean onLongClick(View v) {
+            public boolean onLongClick(View v)
+            {
                 ClipData.Item item = new ClipData.Item((CharSequence) v.getTag());
                 ClipData data = new ClipData((CharSequence) v.getTag(), new String[]{ClipDescription
                         .MIMETYPE_TEXT_PLAIN}, item);
@@ -39,16 +43,20 @@ public class DragAndDropActivity extends AppCompatActivity {
         imageView.setTag(IMAGEVIEW_TAG);
 
         container = (LinearLayout) findViewById(R.id.container);
-        container.setOnDragListener(new View.OnDragListener() {
+        container.setOnDragListener(new View.OnDragListener()
+        {
             @Override
-            public boolean onDrag(View v, DragEvent event) {
+            public boolean onDrag(View v, DragEvent event)
+            {
 
                 TextView title = (TextView) findViewById(R.id.title);
                 final int action = event.getAction();
-                switch (action) {
+                switch (action)
+                {
                     case DragEvent.ACTION_DRAG_STARTED:
                         if (event.getClipDescription().hasMimeType(ClipDescription
-                                .MIMETYPE_TEXT_PLAIN)) {
+                                .MIMETYPE_TEXT_PLAIN))
+                        {
                             Log.i("Drag", "ACTION_DRAG_STARTED");
                             return true;
                         }
@@ -68,7 +76,7 @@ public class DragAndDropActivity extends AppCompatActivity {
                     case DragEvent.ACTION_DROP:
                         ClipData.Item item = event.getClipData().getItemAt(0);
                         String dragData = (String) item.getText();
-                        title.setText(dragData + " - Location: " +event.getY() + "," + event.getX
+                        title.setText(dragData + " - Location: " + event.getY() + "," + event.getX
                                 ());
                         Log.i("Drag", "ACTION_DROP");
                         return true;
