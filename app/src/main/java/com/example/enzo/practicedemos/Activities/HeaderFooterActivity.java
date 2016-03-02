@@ -2,7 +2,9 @@ package com.example.enzo.practicedemos.Activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.enzo.practicedemos.R;
@@ -13,6 +15,8 @@ public class HeaderFooterActivity extends AppCompatActivity
 
     private LinearLayout header, header_cover;
     private SpringBackScrollView mScrollView;
+    private RelativeLayout relativeLayout;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -29,9 +33,12 @@ public class HeaderFooterActivity extends AppCompatActivity
         TextView title = (TextView) header_cover.findViewById(R.id.title);
         title.setText("Header Cover");
 
+        imageView = (ImageView) findViewById(R.id.image_view);
+
         mScrollView = (SpringBackScrollView) findViewById(R.id.scrollView);
         mScrollView.setSmoothScrollingEnabled(true);
-        mScrollView.setView(header_cover);
+        mScrollView.setTopView(header_cover);
+        mScrollView.setOutsideTopView(imageView);
 //        mScrollView.setOnTouchListener(new View.OnTouchListener()
 //        {
 //            @Override

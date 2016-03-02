@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
 /**
@@ -12,9 +13,10 @@ import android.widget.ScrollView;
  */
 public class SpringBackScrollView extends ScrollView
 {
-    private static final int MAX_Y_OVERSCROLL_DISTANCE = 80;
+    private static final int MAX_Y_OVERSCROLL_DISTANCE = 100;
     private int mMaxYOverscrollDistance;
-    private View view;
+    private View topView;
+    private View outsideTopView;
 
     public SpringBackScrollView(Context context)
     {
@@ -34,16 +36,30 @@ public class SpringBackScrollView extends ScrollView
         initDistance(context);
     }
 
-    public void setView(View view)
+    public void setTopView(View topView)
     {
-        this.view = view;
+        this.topView = topView;
     }
+
+    public void setOutsideTopView(View outsideTopView)
+    {
+        this.outsideTopView = outsideTopView;
+    }
+
 
     private void initDistance(Context context)
     {
         final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         final float density = metrics.density;
         mMaxYOverscrollDistance = (int) (density * MAX_Y_OVERSCROLL_DISTANCE);
+    }
+
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
+    {
+
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
     @Override
@@ -60,16 +76,23 @@ public class SpringBackScrollView extends ScrollView
     {
         super.onOverScrolled(scrollX, scrollY, clampedX, clampedY);
         Log.i("onOverScrolled", "OnOverscrolled-->" + scrollX + "," + scrollY);
-        if (view != null)
+        if (topView != null)
         {
-            if (scrollY < -1)
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams
+                    (outsideTopView.getLayoutParams());
+            if (scrollY <= -2)
             {
-                if (view.getVisibility() != INVISIBLE)
-                    view.setVisibility(INVISIBLE);
+
+                params.setMargins(0, -mMaxYOverscrollDistance - scrollY - 2, 0, 0);
+                outsideTopView.setLayoutParams(params);
+                if (topView.getVisibility() != INVISIBLE)
+                    topView.setVisibility(INVISIBLE);
             } else
             {
-                if (view.getVisibility() != VISIBLE)
-                    view.setVisibility(VISIBLE);
+                params.setMargins(0, -mMaxYOverscrollDistance, 0, 0);
+                outsideTopView.setLayoutParams(params);
+                if (topView.getVisibility() != VISIBLE)
+                    topView.setVisibility(VISIBLE);
             }
         }
     }
