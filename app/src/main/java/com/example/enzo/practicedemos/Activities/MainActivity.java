@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity
     private BootstrapButton btn_swipe_list;
     private BootstrapButton btn_tool_bar;
     private BootstrapButton btn_drawer_layout;
+    private BootstrapButton btn_header_footer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -110,6 +111,17 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v)
             {
                 Intent intent = new Intent(MainActivity.this, DrawerLayoutActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_header_footer = (BootstrapButton) findViewById(R.id.btn_header_footer);
+        btn_header_footer.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(MainActivity.this, HeaderFooterActivity.class);
                 startActivity(intent);
             }
         });
