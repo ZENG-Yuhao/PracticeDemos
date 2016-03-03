@@ -67,7 +67,8 @@ public class SpringBackScrollView extends ScrollView
             scrollRangeX, int scrollRangeY, int maxOverScrollX, int maxOverScrollY, boolean
                                            isTouchEvent)
     {
-        return super.overScrollBy(deltaX, (deltaY + 1) / 2, scrollX, scrollY, scrollRangeX,
+        int newDeltaY = (deltaY + 2) / 2;
+        return super.overScrollBy(deltaX, newDeltaY, scrollX, scrollY, scrollRangeX,
                 scrollRangeY, maxOverScrollX, mMaxYOverscrollDistance, isTouchEvent);
     }
 
@@ -80,16 +81,15 @@ public class SpringBackScrollView extends ScrollView
         {
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams
                     (outsideTopView.getLayoutParams());
-            if (scrollY <= -2)
+            if (scrollY <= 1)
             {
-
-                params.setMargins(0, -mMaxYOverscrollDistance - scrollY - 2, 0, 0);
+                params.setMargins(0, -mMaxYOverscrollDistance - scrollY - 1, 0, 0);
                 outsideTopView.setLayoutParams(params);
                 if (topView.getVisibility() != INVISIBLE)
                     topView.setVisibility(INVISIBLE);
             } else
             {
-                params.setMargins(0, -mMaxYOverscrollDistance, 0, 0);
+                params.setMargins(0, -mMaxYOverscrollDistance, -1, 0);
                 outsideTopView.setLayoutParams(params);
                 if (topView.getVisibility() != VISIBLE)
                     topView.setVisibility(VISIBLE);

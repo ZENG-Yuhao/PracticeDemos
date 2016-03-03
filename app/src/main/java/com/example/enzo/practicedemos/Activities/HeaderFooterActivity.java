@@ -2,6 +2,7 @@ package com.example.enzo.practicedemos.Activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -39,6 +40,8 @@ public class HeaderFooterActivity extends AppCompatActivity
         mScrollView.setSmoothScrollingEnabled(true);
         mScrollView.setTopView(header_cover);
         mScrollView.setOutsideTopView(imageView);
+
+        Log.i("ScrollView", "---->InitScrollY "+ mScrollView.getScaleY());
 //        mScrollView.setOnTouchListener(new View.OnTouchListener()
 //        {
 //            @Override
