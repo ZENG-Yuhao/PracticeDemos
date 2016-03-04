@@ -45,6 +45,10 @@
         </activity>
         <activity android:name=".Activities.HeaderFooterActivity">
         </activity>
+        <activity android:name=".Activities.DataBindingActivity">
+        </activity>
+        <activity android:name=".Activities.DrawerPagerActivity">
+        </activity>
     </application>
 
 </manifest>

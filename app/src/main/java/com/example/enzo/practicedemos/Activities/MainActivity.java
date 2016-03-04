@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity
     private BootstrapButton btn_tool_bar;
     private BootstrapButton btn_drawer_layout;
     private BootstrapButton btn_header_footer;
+    private BootstrapButton btn_data_binding;
+    private BootstrapButton btn_drawer_pager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -125,5 +127,28 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
+
+        btn_data_binding = (BootstrapButton) findViewById(R.id.btn_data_binding);
+        btn_data_binding.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(MainActivity.this, DataBindingActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_drawer_pager = (BootstrapButton) findViewById(R.id.btn_drawer_pager);
+        btn_drawer_pager.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(MainActivity.this, DrawerPagerActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }
