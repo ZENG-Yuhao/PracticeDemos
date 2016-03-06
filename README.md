@@ -1,5 +1,5 @@
 # PracticeDemos
-Some practices when I learn Android, different technical aspects are separated into different part.
+Some practices when I learn Android, different technical aspects are separated into different part. These practices are just personnal drafts, so there are less comment in the codes.
 
 ### Included aspects: ###
 ```
