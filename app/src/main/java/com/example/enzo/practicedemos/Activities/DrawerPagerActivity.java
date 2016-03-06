@@ -8,13 +8,16 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.enzo.practicedemos.Animations.DepthPageTransformer;
+import com.example.enzo.practicedemos.Fragments.PlanetFragment;
 import com.example.enzo.practicedemos.Fragments.SwipeViewFragment;
 import com.example.enzo.practicedemos.R;
 
@@ -32,7 +35,7 @@ public class DrawerPagerActivity extends AppCompatActivity
     /**
      * The number of pages (wizard steps) to show in this demo.
      */
-    private static final int NUM_PAGES = 5;
+    private static final int NUM_PAGES = 3;
 
     /**
      * The pager widget, which handles animation and allows swiping horizontally to access previous
@@ -70,21 +73,47 @@ public class DrawerPagerActivity extends AppCompatActivity
 
     private class SwipeViewPagerAdapter extends FragmentStatePagerAdapter
     {
+        private SwipeViewFragment fragment1, fragment2;
+        private PlanetFragment fragment3;
+
+
         public SwipeViewPagerAdapter(FragmentManager fm)
         {
             super(fm);
+            fragment1 = new SwipeViewFragment();
+            fragment2 = new SwipeViewFragment();
+            fragment3 = new PlanetFragment();
         }
 
         @Override
         public Fragment getItem(int position)
         {
-            return new SwipeViewFragment();
+            switch (position)
+            {
+                case 0:
+                    return fragment1;
+                case 1:
+                    return fragment2;
+                default:
+                    return fragment3;
+            }
+
         }
 
         @Override
         public int getCount()
         {
             return NUM_PAGES;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object)
+        {
+            if (position > 1)
+            {
+                super.destroyItem(container, position, object);
+                Log.i("DestroyItem", "Destroyed - " + position + "::" + object.toString());
+            }
         }
     }
 

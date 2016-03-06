@@ -14,9 +14,12 @@ import android.widget.ScrollView;
 public class SpringBackScrollView extends ScrollView
 {
     private static final int MAX_Y_OVERSCROLL_DISTANCE = 100;
+    private static final String TAG = "SpringBackScrollView";
+    private boolean flag = false, btnClicked = false;
     private int mMaxYOverscrollDistance;
     private View topView;
     private View outsideTopView;
+    private RelativeLayout.LayoutParams params;
 
     public SpringBackScrollView(Context context)
     {
@@ -44,8 +47,15 @@ public class SpringBackScrollView extends ScrollView
     public void setOutsideTopView(View outsideTopView)
     {
         this.outsideTopView = outsideTopView;
+        params = new RelativeLayout.LayoutParams
+                (outsideTopView.getLayoutParams());
+
     }
 
+    public void setButtonClicked(boolean btnClicked)
+    {
+        this.btnClicked = btnClicked;
+    }
 
     private void initDistance(Context context)
     {
@@ -67,20 +77,31 @@ public class SpringBackScrollView extends ScrollView
             scrollRangeX, int scrollRangeY, int maxOverScrollX, int maxOverScrollY, boolean
                                            isTouchEvent)
     {
+        Log.i(TAG, "--overScrollBy-->" + flag);
+        Log.i(TAG, "--overScrollBy-->" + deltaX + " ," + deltaY + " ," + scrollRangeX + " ," +
+                scrollRangeY);
+
         int newDeltaY = (deltaY + 2) / 2;
-        return super.overScrollBy(deltaX, deltaY, scrollX, scrollY, scrollRangeX,
-                scrollRangeY, maxOverScrollX, mMaxYOverscrollDistance, isTouchEvent);
+        if (flag)
+        {
+            return super.overScrollBy(deltaX, 0, scrollX, scrollY, scrollRangeX,
+                    scrollRangeY, maxOverScrollX, mMaxYOverscrollDistance, isTouchEvent);
+        } else
+        {
+            return super.overScrollBy(deltaX, deltaY, scrollX, scrollY, scrollRangeX,
+                    scrollRangeY, maxOverScrollX, mMaxYOverscrollDistance, isTouchEvent);
+        }
     }
 
     @Override
     protected void onOverScrolled(int scrollX, int scrollY, boolean clampedX, boolean clampedY)
     {
-        super.onOverScrolled(scrollX, scrollY, clampedX, clampedY);
-        Log.i("onOverScrolled", "OnOverscrolled-->" + scrollX + "," + scrollY);
+
+        //Log.i(TAG, "--onOverScrolled-->");
+        //Log.i("onOverScrolled", "OnOverscrolled-->" + scrollX + "," + scrollY);
         if (topView != null)
         {
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams
-                    (outsideTopView.getLayoutParams());
+
             if (scrollY < 0)
             {
                 params.setMargins(0, -mMaxYOverscrollDistance - scrollY, 0, 0);
@@ -94,6 +115,13 @@ public class SpringBackScrollView extends ScrollView
                 if (topView.getVisibility() != VISIBLE)
                     topView.setVisibility(VISIBLE);
             }
+
+            if (scrollY < -MAX_Y_OVERSCROLL_DISTANCE - 10 && !btnClicked)
+                flag = true;
+
+            if (btnClicked)
+                flag = false;
         }
+        super.onOverScrolled(scrollX, scrollY, clampedX, clampedY);
     }
 }
