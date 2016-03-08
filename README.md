@@ -14,4 +14,5 @@ Some practices when I learn Android, different technical aspects are separated i
   - ViewPager
   - DrawerLayout
   - Customized ScrollView (that has an spring back effect like those in iOS)
+  - Bootstrap
 ```
