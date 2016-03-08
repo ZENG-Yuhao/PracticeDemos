@@ -120,8 +120,7 @@ public class CreateService extends Service
             if (msg.what == 1)
             {
                 service.stopSelf();
-                Toast.makeText(service.getApplicationContext(), "Download finished!", Toast
-                        .LENGTH_SHORT).show();
+                Toast.makeText(service.getApplicationContext(), "Download finished!", Toast.LENGTH_SHORT).show();
                 Log.i("Service", "---->Task Finished.");
             }
         }

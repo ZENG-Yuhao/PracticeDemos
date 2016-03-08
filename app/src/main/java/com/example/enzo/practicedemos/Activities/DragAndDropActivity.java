@@ -54,8 +54,7 @@ public class DragAndDropActivity extends AppCompatActivity
                 switch (action)
                 {
                     case DragEvent.ACTION_DRAG_STARTED:
-                        if (event.getClipDescription().hasMimeType(ClipDescription
-                                .MIMETYPE_TEXT_PLAIN))
+                        if (event.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN))
                         {
                             Log.i("Drag", "ACTION_DRAG_STARTED");
                             return true;
@@ -76,8 +75,7 @@ public class DragAndDropActivity extends AppCompatActivity
                     case DragEvent.ACTION_DROP:
                         ClipData.Item item = event.getClipData().getItemAt(0);
                         String dragData = (String) item.getText();
-                        title.setText(dragData + " - Location: " + event.getY() + "," + event.getX
-                                ());
+                        title.setText(dragData + " - Location: " + event.getY() + "," + event.getX());
                         Log.i("Drag", "ACTION_DROP");
                         return true;
                     case DragEvent.ACTION_DRAG_ENDED:

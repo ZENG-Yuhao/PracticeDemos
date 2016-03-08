@@ -73,23 +73,22 @@ public class SpringBackScrollView extends ScrollView
     }
 
     @Override
-    protected boolean overScrollBy(int deltaX, int deltaY, int scrollX, int scrollY, int
-            scrollRangeX, int scrollRangeY, int maxOverScrollX, int maxOverScrollY, boolean
+    protected boolean overScrollBy(int deltaX, int deltaY, int scrollX, int scrollY, int scrollRangeX, int
+            scrollRangeY, int maxOverScrollX, int maxOverScrollY, boolean
                                            isTouchEvent)
     {
         Log.i(TAG, "--overScrollBy-->" + flag);
-        Log.i(TAG, "--overScrollBy-->" + deltaX + " ," + deltaY + " ," + scrollRangeX + " ," +
-                scrollRangeY);
+        Log.i(TAG, "--overScrollBy-->" + deltaX + " ," + deltaY + " ," + scrollRangeX + " ," + scrollRangeY);
 
         int newDeltaY = (deltaY + 2) / 2;
         if (flag)
         {
-            return super.overScrollBy(deltaX, 0, scrollX, scrollY, scrollRangeX,
-                    scrollRangeY, maxOverScrollX, mMaxYOverscrollDistance, isTouchEvent);
+            return super.overScrollBy(deltaX, 0, scrollX, scrollY, scrollRangeX, scrollRangeY, maxOverScrollX,
+                    mMaxYOverscrollDistance, isTouchEvent);
         } else
         {
-            return super.overScrollBy(deltaX, deltaY, scrollX, scrollY, scrollRangeX,
-                    scrollRangeY, maxOverScrollX, mMaxYOverscrollDistance, isTouchEvent);
+            return super.overScrollBy(deltaX, deltaY, scrollX, scrollY, scrollRangeX, scrollRangeY, maxOverScrollX,
+                    mMaxYOverscrollDistance, isTouchEvent);
         }
     }
 

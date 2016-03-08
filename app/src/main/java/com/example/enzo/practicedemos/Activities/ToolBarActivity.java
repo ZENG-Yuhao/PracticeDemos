@@ -46,16 +46,14 @@ public class ToolBarActivity extends AppCompatActivity
             @Override
             public boolean onMenuItemActionExpand(MenuItem item)
             {
-                Toast.makeText(ToolBarActivity.this, "Expanded: " + item.getTitle(), Toast
-                        .LENGTH_SHORT).show();
+                Toast.makeText(ToolBarActivity.this, "Expanded: " + item.getTitle(), Toast.LENGTH_SHORT).show();
                 return true;
             }
 
             @Override
             public boolean onMenuItemActionCollapse(MenuItem item)
             {
-                Toast.makeText(ToolBarActivity.this, "Collapsed: " + item.getTitle(), Toast
-                        .LENGTH_SHORT).show();
+                Toast.makeText(ToolBarActivity.this, "Collapsed: " + item.getTitle(), Toast.LENGTH_SHORT).show();
                 return true;
             }
         };

@@ -23,8 +23,8 @@ public class BaseAdapterActivity extends AppCompatActivity
         setContentView(R.layout.activity_base_adapter);
 
         CustomBaseAdapter adapter = new CustomBaseAdapter(this, getData(), R.layout
-                .item_listview_base_adapter, new String[]{"title", "content", "points"}, new
-                int[]{R.id.title, R.id.content, R.id.points});
+                .item_listview_base_adapter, new String[]{"title", "content", "points"}, new int[]{R.id.title, R.id
+                .content, R.id.points});
 
         listView = (ListView) findViewById(R.id.list_view);
         listView.setAdapter(adapter);

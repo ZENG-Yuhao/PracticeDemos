@@ -60,8 +60,7 @@ public class DrawerPagerActivity extends AppCompatActivity
 //                .item_listview_base_adapter, new String[]{"title", "content", "points"}, new
 //                int[]{R.id.title, R.id.content, R.id.points});
 
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.item_drawr_list,
-                mPlanetTitles));
+        mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.item_drawr_list, mPlanetTitles));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
         // Instantiate a ViewPager and a PagerAdapter.

@@ -21,8 +21,7 @@ public class DataBindingActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        DataBindingActivityBinding binding = DataBindingUtil.setContentView(this, R.layout
-                .data_binding_activity);
+        DataBindingActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.data_binding_activity);
 
         // If you are using data binding items inside a ListView or RecyclerView adapter, you may
         // prefer to use:
@@ -43,8 +42,8 @@ public class DataBindingActivity extends AppCompatActivity
             {
                 user.setFirstName("Enzo");
                 user.setLastName("Ikeda");
-                Toast.makeText(DataBindingActivity.this, user.getFirstName() + " . " + user
-                        .getLastName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(DataBindingActivity.this, user.getFirstName() + " . " + user.getLastName(), Toast
+                        .LENGTH_SHORT).show();
             }
         });
     }
