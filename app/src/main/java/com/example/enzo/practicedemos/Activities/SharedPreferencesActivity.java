@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.enzo.practicedemos.R;
 
@@ -16,6 +17,7 @@ public class SharedPreferencesActivity extends AppCompatActivity
     private Button btn_commit, btn_query;
     private EditText editxt_key, editxt_value;
     private SharedPreferences preferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -42,7 +44,15 @@ public class SharedPreferencesActivity extends AppCompatActivity
         @Override
         public void onClick(View v)
         {
-
+            SharedPreferences.Editor editor = preferences.edit();
+            String key = editxt_key.getText().toString();
+            String value = editxt_value.getText().toString();
+            if (!key.equals(""))
+            {
+                editor.putString(key, value);
+                editor.commit();
+            } else
+                Toast.makeText(SharedPreferencesActivity.this, "The key cannot be null.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -52,7 +62,9 @@ public class SharedPreferencesActivity extends AppCompatActivity
         @Override
         public void onClick(View v)
         {
-
+            String key = editxt_key.getText().toString();
+            String value = preferences.getString(key, "The key specified does not exist.");
+            editxt_value.setText(value);
         }
     }
 }
