@@ -1,6 +1,5 @@
 package com.example.enzo.practicedemos.Activities;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -51,6 +50,10 @@ public class SharedPreferencesActivity extends AppCompatActivity
             {
                 editor.putString(key, value);
                 editor.commit();
+                editxt_key.setText("Key");
+                editxt_value.setText("Value");
+                Toast.makeText(SharedPreferencesActivity.this, "key-value has been committed.", Toast.LENGTH_SHORT)
+                        .show();
             } else
                 Toast.makeText(SharedPreferencesActivity.this, "The key cannot be null.", Toast.LENGTH_SHORT).show();
         }
@@ -65,6 +68,7 @@ public class SharedPreferencesActivity extends AppCompatActivity
             String key = editxt_key.getText().toString();
             String value = preferences.getString(key, "The key specified does not exist.");
             editxt_value.setText(value);
+            Toast.makeText(SharedPreferencesActivity.this, "Query finished.", Toast.LENGTH_SHORT).show();
         }
     }
 }
