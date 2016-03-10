@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity
     private BootstrapButton btn_data_binding;
     private BootstrapButton btn_drawer_pager;
     private BootstrapButton btn_content_provider;
+    private BootstrapButton btn_shared_preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -162,5 +163,15 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        btn_shared_preferences = (BootstrapButton) findViewById(R.id.btn_shared_preferences);
+        btn_shared_preferences.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(MainActivity.this, SharedPreferencesActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

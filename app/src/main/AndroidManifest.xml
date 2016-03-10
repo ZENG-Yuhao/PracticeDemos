@@ -51,6 +51,8 @@
         </activity>
         <activity android:name=".Activities.ContentProviderActivity">
         </activity>
+        <activity android:name=".Activities.SharedPreferencesActivity">
+        </activity>
     </application>
 
 </manifest>
