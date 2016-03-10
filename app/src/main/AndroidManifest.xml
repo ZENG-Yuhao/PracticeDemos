@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.example.enzo.practicedemos"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.example.enzo.practicedemos">
 
     <application
         android:name=".Core.MyApplication"
@@ -48,6 +48,8 @@
         <activity android:name=".Activities.DataBindingActivity">
         </activity>
         <activity android:name=".Activities.DrawerPagerActivity">
+        </activity>
+        <activity android:name=".Activities.ContentProviderActivity">
         </activity>
     </application>
 

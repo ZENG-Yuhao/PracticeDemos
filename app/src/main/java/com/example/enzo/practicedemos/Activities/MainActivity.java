@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity
     private BootstrapButton btn_header_footer;
     private BootstrapButton btn_data_binding;
     private BootstrapButton btn_drawer_pager;
+    private BootstrapButton btn_content_provider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -146,6 +147,17 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v)
             {
                 Intent intent = new Intent(MainActivity.this, DrawerPagerActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_content_provider = (BootstrapButton) findViewById(R.id.btn_content_provider);
+        btn_content_provider.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(MainActivity.this, ContentProviderActivity.class);
                 startActivity(intent);
             }
         });
