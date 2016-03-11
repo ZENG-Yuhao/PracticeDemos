@@ -165,6 +165,21 @@
         app:showOutline="false"/>
 
     <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/btn_sqlite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_header_footer"
+        android:layout_toRightOf="@id/btn_drawer_pager"
+        android:text="SQLite"
+        android:layout_margin="5dp"
+        app:bootstrapBrand="success"
+        app:bootstrapSize="lg"
+        app:buttonMode="regular"
+        app:roundedCorners="true"
+        app:showOutline="false"/>
+
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
         android:id="@+id/btn_content_provider"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

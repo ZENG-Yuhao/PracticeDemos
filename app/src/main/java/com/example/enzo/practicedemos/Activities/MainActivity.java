@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity
     private BootstrapButton btn_drawer_pager;
     private BootstrapButton btn_content_provider;
     private BootstrapButton btn_shared_preferences;
+    private BootstrapButton btn_sqlite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -170,6 +171,17 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v)
             {
                 Intent intent = new Intent(MainActivity.this, SharedPreferencesActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_sqlite = (BootstrapButton) findViewById(R.id.btn_sqlite);
+        btn_sqlite.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(MainActivity.this, SQLiteActivity.class);
                 startActivity(intent);
             }
         });
