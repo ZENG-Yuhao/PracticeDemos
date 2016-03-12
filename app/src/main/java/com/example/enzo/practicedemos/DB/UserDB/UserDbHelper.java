@@ -18,7 +18,7 @@ public class UserDbHelper extends SQLiteOpenHelper
                     UserContract.Entry.COLUMN_NAME_ADDRESS + TEXT_TYPE + COMMA_SEP +
                     UserContract.Entry.COLUMN_NAME_EMAIL + TEXT_TYPE + COMMA_SEP +
                     UserContract.Entry.COLUMN_NAME_ACCOUNT + TEXT_TYPE + COMMA_SEP +
-                    UserContract.Entry.COLUMN_NAME_PASSWORD + TEXT_TYPE + COMMA_SEP +
+                    UserContract.Entry.COLUMN_NAME_PASSWORD + TEXT_TYPE +
                     " )";
 
     private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + UserContract.Entry.TABLE_NAME;
