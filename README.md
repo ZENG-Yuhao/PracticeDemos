@@ -15,4 +15,6 @@ Some practices when I learn Android, different technical aspects are separated i
   - DrawerLayout
   - Customized ScrollView (that has an spring back effect like those in iOS)
   - Bootstrap
+  - Shared Preferences
+  - SQLite
 ```
