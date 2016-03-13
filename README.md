@@ -5,15 +5,18 @@ Some practices when I learn Android, different technical aspects are separated i
 ```
   - Fragment
   - Service
+  - BaseAdapter
   - Notification
   - AsynTask
   - Handler 
   - Customized view
   - Animation
-  - BaseAdapter
+  - Drag and Drop
   - ViewPager
+  - Header and footer
   - DrawerLayout
   - Customized ScrollView (that has an spring back effect like those in iOS)
+  - Data Binding
   - Bootstrap
   - Shared Preferences
   - SQLite
