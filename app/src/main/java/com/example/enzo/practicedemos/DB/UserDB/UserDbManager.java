@@ -153,8 +153,8 @@ public class UserDbManager
 
         String selection = UserContract.Entry._ID + " LIKE ?";
         String [] selectionArgs = {String.valueOf(id)};
-        Cursor cursor = db.query(UserContract.Entry.TABLE_NAME, projection, selection, selectionArgs, null, null, null);
-        return cursor;
+        return db.query(UserContract.Entry.TABLE_NAME, projection, selection, selectionArgs, null, null, null);
+
     }
 
     public Cursor getAllUser()

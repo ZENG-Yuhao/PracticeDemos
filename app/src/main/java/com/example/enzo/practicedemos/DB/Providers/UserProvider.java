@@ -60,16 +60,17 @@ public class UserProvider extends ContentProvider
         MatrixCursor cursor;
         User user;
         List pathSegments = uri.getPathSegments();
-        int param_2nd = (int) pathSegments.get(2);
+        int param_2nd = Integer.valueOf((String) pathSegments.get(1));
         int id;
         switch (sURIMatcher.match(uri))
         {
             case ALL_USER:
-                cursor = (MatrixCursor) manager.getAllUser();
-                break;
+                Cursor cursor1 = manager.getAllUser();
+                return cursor1;
             case USER:
-                cursor = (MatrixCursor) manager.getUserCursorById(param_2nd);
-                break;
+                Cursor cursor2;
+                cursor2 = manager.getUserCursorById(param_2nd);
+                return cursor2;
             case USER_NAME:
                 user = manager.getUserById(param_2nd);
                 cursor = new MatrixCursor(new String[]{UserContract.Entry.COLUMN_NAME_USER_NAME}, 1);
@@ -99,7 +100,6 @@ public class UserProvider extends ContentProvider
                 cursor = new MatrixCursor(null);
                 // exception
         }
-        manager.close();
         return cursor;
     }
 
@@ -154,5 +154,11 @@ public class UserProvider extends ContentProvider
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs)
     {
         return 0;
+    }
+
+    @Override
+    public void shutdown()
+    {
+        manager.close();
     }
 }

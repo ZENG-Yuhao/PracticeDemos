@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.example.enzo.practicedemos.DB.UserDB.UserContract;
 import com.example.enzo.practicedemos.R;
 
+import java.util.List;
+
 public class ContentProviderActivity extends AppCompatActivity
 {
     private static final UriMatcher sURIMatcher = new UriMatcher(UriMatcher.NO_MATCH);
@@ -46,8 +48,11 @@ public class ContentProviderActivity extends AppCompatActivity
         txt_3 = (TextView) findViewById(R.id.txt_3);
 
         String str1, str2, str3;
-        str1 = UserContract.Entry.SCHEMA + UserContract.Entry.AUTHORITY + "/user/" + 2;
+        str1 = UserContract.Entry.SCHEMA + UserContract.Entry.AUTHORITY + "/user/2/account";
         Uri uri = Uri.parse(str1);
+        List pathSegments = uri.getPathSegments();
+        int param_2nd = Integer.valueOf((String)pathSegments.get(1));
+        str3 = (String) pathSegments.get(1);
         switch (sURIMatcher.match(uri))
         {
             case ALL_USER:
@@ -77,5 +82,7 @@ public class ContentProviderActivity extends AppCompatActivity
         }
 
         txt_1.setText(str1);
+        txt_2.setText(str2);
+        txt_3.setText(str3);
     }
 }
