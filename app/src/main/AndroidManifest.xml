@@ -59,6 +59,7 @@
         <provider
             android:name=".DB.Providers.UserProvider"
             android:authorities="com.example.enzo.practicedemos.DB.Providers.UserProvider"
+            android:exported="true"
             android:permission="com.example.enzo.practicedemos.DB.Providers.UserProvider.READ_WRITE_USER"/>
     </application>
 

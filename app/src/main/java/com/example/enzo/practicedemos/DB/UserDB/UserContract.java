@@ -1,5 +1,6 @@
 package com.example.enzo.practicedemos.DB.UserDB;
 
+import android.net.Uri;
 import android.provider.BaseColumns;
 
 import com.example.enzo.practicedemos.DB.Contract;
@@ -24,6 +25,28 @@ public final class UserContract
         public static final String COLUMN_NAME_EMAIL = "email";
         public static final String COLUMN_NAME_ACCOUNT = "account";
         public static final String COLUMN_NAME_PASSWORD = "password";
+
+        // Authority
+        public static final String AUTHORITY = "com.example.enzo.practicedemos.DB.Providers.UserProvider";
+
+        // Path
+        public static final String PAHT_ALL_USER = "user";
+        public static final String PAHT_USER = "user/#";
+        public static final String PAHT_USER_NAME = "user/#/name";
+        public static final String PAHT_USER_ADDRESS = "user/#/address";
+        public static final String PAHT_USER_EMAIL = "user/#/email";
+        public static final String PAHT_USER_ACCOUNT = "user/#/account";
+        public static final String PAHT_USER_PASSWORD = "user/#/password";
+
+        // Uri
+        public static final String schema = "content://";
+        public static final Uri URI_ALL_USER = Uri.parse(schema + AUTHORITY + "/" + PAHT_ALL_USER);
+        public static final Uri URI_USER = Uri.parse(schema + AUTHORITY + "/" + PAHT_USER);
+        public static final Uri URI_USER_NAME = Uri.parse(schema + AUTHORITY + "/" + PAHT_USER_NAME);
+        public static final Uri URI_USER_ADDRESS = Uri.parse(schema + AUTHORITY + "/" + PAHT_USER_ADDRESS);
+        public static final Uri URI_USER_EMAIL = Uri.parse(schema + AUTHORITY + "/" + PAHT_USER_EMAIL);
+        public static final Uri URI_USER_ACCOUNT = Uri.parse(schema + AUTHORITY + "/" + PAHT_USER_ACCOUNT);
+        public static final Uri URI_USER_PASSWORD = Uri.parse(schema + AUTHORITY + "/" + PAHT_USER_PASSWORD);
 
     }
 }

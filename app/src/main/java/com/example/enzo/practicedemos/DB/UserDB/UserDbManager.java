@@ -73,14 +73,14 @@ public class UserDbManager
         int num_col_account = cursor.getColumnIndex(UserContract.Entry.COLUMN_NAME_ACCOUNT);
         int num_col_password = cursor.getColumnIndex(UserContract.Entry.COLUMN_NAME_PASSWORD);
 
-        String id = cursor.getString(num_col_id);
+        String user_id = cursor.getString(num_col_id);
         String user_name = cursor.getString(num_col_name);
         String email = cursor.getString(num_col_email);
         String address = cursor.getString(num_col_address);
         String account = cursor.getString(num_col_account);
         String password = cursor.getString(num_col_password);
 
-        User user = new User(id, user_name, address, email, account, password);
+        User user = new User(user_id, user_name, address, email, account, password);
         cursor.close();
         return user;
     }
@@ -99,6 +99,75 @@ public class UserDbManager
         String selection = UserContract.Entry.COLUMN_NAME_USER_NAME + " LIKE ?";
         String[] selectionArgs = {name};
         Cursor cursor = db.query(UserContract.Entry.TABLE_NAME, projection, selection, selectionArgs, null, null, null);
+        return cursor;
+    }
+
+    public User getUserById(int id)
+    {
+        String[] projection = {
+                UserContract.Entry._ID,
+                UserContract.Entry.COLUMN_NAME_USER_NAME,
+                UserContract.Entry.COLUMN_NAME_EMAIL,
+                UserContract.Entry.COLUMN_NAME_ADDRESS,
+                UserContract.Entry.COLUMN_NAME_ACCOUNT,
+                UserContract.Entry.COLUMN_NAME_PASSWORD
+        };
+
+        String selection = UserContract.Entry._ID + " LIKE ?";
+        String[] selectionArgs = {String.valueOf(id)};
+        Cursor cursor = db.query(UserContract.Entry.TABLE_NAME, projection, selection, selectionArgs, null, null, null);
+        if (cursor.getCount() <= 0)
+            return null;
+
+        cursor.moveToFirst();
+        // only get the first one
+        int num_col_id = cursor.getColumnIndex(UserContract.Entry._ID);
+        int num_col_name = cursor.getColumnIndex(UserContract.Entry.COLUMN_NAME_USER_NAME);
+        int num_col_email = cursor.getColumnIndex(UserContract.Entry.COLUMN_NAME_EMAIL);
+        int num_col_address = cursor.getColumnIndex(UserContract.Entry.COLUMN_NAME_ADDRESS);
+        int num_col_account = cursor.getColumnIndex(UserContract.Entry.COLUMN_NAME_ACCOUNT);
+        int num_col_password = cursor.getColumnIndex(UserContract.Entry.COLUMN_NAME_PASSWORD);
+
+        String user_id = cursor.getString(num_col_id);
+        String user_name = cursor.getString(num_col_name);
+        String email = cursor.getString(num_col_email);
+        String address = cursor.getString(num_col_address);
+        String account = cursor.getString(num_col_account);
+        String password = cursor.getString(num_col_password);
+
+        User user = new User(user_id, user_name, address, email, account, password);
+        cursor.close();
+        return user;
+    }
+
+    public Cursor getUserCursorById(int id)
+    {
+        String[] projection = {
+                UserContract.Entry._ID,
+                UserContract.Entry.COLUMN_NAME_USER_NAME,
+                UserContract.Entry.COLUMN_NAME_EMAIL,
+                UserContract.Entry.COLUMN_NAME_ADDRESS,
+                UserContract.Entry.COLUMN_NAME_ACCOUNT,
+                UserContract.Entry.COLUMN_NAME_PASSWORD
+        };
+
+        String selection = UserContract.Entry._ID + " LIKE ?";
+        String [] selectionArgs = {String.valueOf(id)};
+        Cursor cursor = db.query(UserContract.Entry.TABLE_NAME, projection, selection, selectionArgs, null, null, null);
+        return cursor;
+    }
+
+    public Cursor getAllUser()
+    {
+        String[] projection = {
+                UserContract.Entry._ID,
+                UserContract.Entry.COLUMN_NAME_USER_NAME,
+                UserContract.Entry.COLUMN_NAME_EMAIL,
+                UserContract.Entry.COLUMN_NAME_ADDRESS,
+                UserContract.Entry.COLUMN_NAME_ACCOUNT,
+                UserContract.Entry.COLUMN_NAME_PASSWORD
+        };
+        Cursor cursor = db.query(UserContract.Entry.TABLE_NAME, projection, null, null, null, null, null);
         return cursor;
     }
 
