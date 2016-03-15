@@ -55,6 +55,11 @@
         </activity>
         <activity android:name=".Activities.SQLiteActivity">
         </activity>
+
+        <provider
+            android:name=".DB.Providers.UserProvider"
+            android:authorities="com.example.enzo.practicedemos.DB.Providers.UserProvider"
+            android:permission="com.example.enzo.practicedemos.DB.Providers.UserProvider.READ_WRITE_USER"/>
     </application>
 
 </manifest>

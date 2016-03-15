@@ -10,8 +10,8 @@ import android.database.sqlite.SQLiteDatabase;
  */
 public class UserDbManager
 {
-    private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "example.db";
+    public static final int DATABASE_VERSION = 1;
+    public static final String DATABASE_NAME = "example.db";
 
     private SQLiteDatabase db;
     private UserDbHelper mHelper;
@@ -85,6 +85,23 @@ public class UserDbManager
         return user;
     }
 
+    public Cursor getUserCursorByName(String name)
+    {
+        String[] projection = {
+                UserContract.Entry._ID,
+                UserContract.Entry.COLUMN_NAME_USER_NAME,
+                UserContract.Entry.COLUMN_NAME_EMAIL,
+                UserContract.Entry.COLUMN_NAME_ADDRESS,
+                UserContract.Entry.COLUMN_NAME_ACCOUNT,
+                UserContract.Entry.COLUMN_NAME_PASSWORD
+        };
+
+        String selection = UserContract.Entry.COLUMN_NAME_USER_NAME + " LIKE ?";
+        String[] selectionArgs = {name};
+        Cursor cursor = db.query(UserContract.Entry.TABLE_NAME, projection, selection, selectionArgs, null, null, null);
+        return cursor;
+    }
+
     public int deleteUserByName(String name)
     {
         String selection = UserContract.Entry.COLUMN_NAME_USER_NAME + " LIKE ?";
@@ -100,5 +117,10 @@ public class UserDbManager
         String[] selectionArgs = {name};
 
         return db.update(UserContract.Entry.TABLE_NAME, values, selection, selectionArgs);
+    }
+
+    public Cursor query(String uri, String[] projection, String selection, String[] selectionArgs, String sortOrder)
+    {
+        return db.query(uri, projection, selection, selectionArgs, null, null, sortOrder);
     }
 }
