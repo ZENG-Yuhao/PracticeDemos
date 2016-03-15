@@ -121,6 +121,7 @@ public class UserProvider extends ContentProvider
                 break;
             case USER_ADDRESS:
                 type = "vnd.android.cursor.item/com.example.enzo.practicedemos.user_address";
+                break;
             case USER_EMAIL:
                 type = "vnd.android.cursor.item/com.example.enzo.practicedemos.user_email";
                 break;

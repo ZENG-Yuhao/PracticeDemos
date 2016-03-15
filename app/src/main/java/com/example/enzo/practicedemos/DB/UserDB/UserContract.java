@@ -39,14 +39,14 @@ public final class UserContract
         public static final String PAHT_USER_PASSWORD = "user/#/password";
 
         // Uri
-        public static final String schema = "content://";
-        public static final Uri URI_ALL_USER = Uri.parse(schema + AUTHORITY + "/" + PAHT_ALL_USER);
-        public static final Uri URI_USER = Uri.parse(schema + AUTHORITY + "/" + PAHT_USER);
-        public static final Uri URI_USER_NAME = Uri.parse(schema + AUTHORITY + "/" + PAHT_USER_NAME);
-        public static final Uri URI_USER_ADDRESS = Uri.parse(schema + AUTHORITY + "/" + PAHT_USER_ADDRESS);
-        public static final Uri URI_USER_EMAIL = Uri.parse(schema + AUTHORITY + "/" + PAHT_USER_EMAIL);
-        public static final Uri URI_USER_ACCOUNT = Uri.parse(schema + AUTHORITY + "/" + PAHT_USER_ACCOUNT);
-        public static final Uri URI_USER_PASSWORD = Uri.parse(schema + AUTHORITY + "/" + PAHT_USER_PASSWORD);
+        public static final String SCHEMA = "content://";
+        public static final Uri URI_ALL_USER = Uri.parse(SCHEMA + AUTHORITY + "/" + PAHT_ALL_USER);
+        public static final Uri URI_USER = Uri.parse(SCHEMA + AUTHORITY + "/" + PAHT_USER);
+        public static final Uri URI_USER_NAME = Uri.parse(SCHEMA + AUTHORITY + "/" + PAHT_USER_NAME);
+        public static final Uri URI_USER_ADDRESS = Uri.parse(SCHEMA + AUTHORITY + "/" + PAHT_USER_ADDRESS);
+        public static final Uri URI_USER_EMAIL = Uri.parse(SCHEMA + AUTHORITY + "/" + PAHT_USER_EMAIL);
+        public static final Uri URI_USER_ACCOUNT = Uri.parse(SCHEMA + AUTHORITY + "/" + PAHT_USER_ACCOUNT);
+        public static final Uri URI_USER_PASSWORD = Uri.parse(SCHEMA + AUTHORITY + "/" + PAHT_USER_PASSWORD);
 
     }
 }
