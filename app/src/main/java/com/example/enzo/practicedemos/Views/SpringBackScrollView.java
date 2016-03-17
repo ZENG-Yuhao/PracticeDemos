@@ -77,8 +77,8 @@ public class SpringBackScrollView extends ScrollView
             scrollRangeY, int maxOverScrollX, int maxOverScrollY, boolean
                                            isTouchEvent)
     {
-        Log.i(TAG, "--overScrollBy-->" + flag);
-        Log.i(TAG, "--overScrollBy-->" + deltaX + " ," + deltaY + " ," + scrollRangeX + " ," + scrollRangeY);
+//        Log.i(TAG, "--overScrollBy-->" + flag);
+//        Log.i(TAG, "--overScrollBy-->" + deltaX + " ," + deltaY + " ," + scrollRangeX + " ," + scrollRangeY);
 
         int newDeltaY = (deltaY + 2) / 2;
         if (flag)
@@ -97,7 +97,9 @@ public class SpringBackScrollView extends ScrollView
     {
 
         //Log.i(TAG, "--onOverScrolled-->");
-        //Log.i("onOverScrolled", "OnOverscrolled-->" + scrollX + "," + scrollY);
+        Log.i("onOverScrolled", "OnOverscrolled-->" + scrollX + "," + scrollY + "; " + MAX_Y_OVERSCROLL_DISTANCE + "," +
+                " " + mMaxYOverscrollDistance);
+        Log.i("onOverScrolled", "OnOverscrolled-->" + clampedX + "," + clampedY + "; ");
         if (topView != null)
         {
 
@@ -115,12 +117,18 @@ public class SpringBackScrollView extends ScrollView
                     topView.setVisibility(VISIBLE);
             }
 
-            if (scrollY < -MAX_Y_OVERSCROLL_DISTANCE - 10 && !btnClicked)
+            if (scrollY < -mMaxYOverscrollDistance + 5 && !btnClicked)
                 flag = true;
 
             if (btnClicked)
                 flag = false;
         }
         super.onOverScrolled(scrollX, scrollY, clampedX, clampedY);
+    }
+
+    @Override
+    public void fling(int velocityY)
+    {
+        super.fling(velocityY);
     }
 }
