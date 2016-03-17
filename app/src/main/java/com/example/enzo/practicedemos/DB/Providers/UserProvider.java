@@ -66,10 +66,12 @@ public class UserProvider extends ContentProvider
         {
             case ALL_USER:
                 Cursor cursor1 = manager.getAllUser();
+                cursor1.setNotificationUri(getContext().getContentResolver(), uri);
                 return cursor1;
             case USER:
                 Cursor cursor2;
                 cursor2 = manager.getUserCursorById(param_2nd);
+                cursor2.setNotificationUri(getContext().getContentResolver(), uri);
                 return cursor2;
             case USER_NAME:
                 user = manager.getUserById(param_2nd);
@@ -100,6 +102,7 @@ public class UserProvider extends ContentProvider
                 cursor = new MatrixCursor(null);
                 // exception
         }
+        cursor.setNotificationUri(getContext().getContentResolver(), uri);
         return cursor;
     }
 
@@ -141,6 +144,7 @@ public class UserProvider extends ContentProvider
     @Override
     public Uri insert(Uri uri, ContentValues values)
     {
+        // getContext().getContentResolver().notifyChange(uri, null);
         return null;
     }
 
@@ -153,7 +157,13 @@ public class UserProvider extends ContentProvider
     @Override
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs)
     {
-        return 0;
+        if (sURIMatcher.match(uri) == USER)
+        {
+            int c = manager.update(UserContract.Entry.TABLE_NAME, values, selection, selectionArgs);
+            getContext().getContentResolver().notifyChange(uri, null);
+            return c;
+        } else
+            return 0;
     }
 
     @Override

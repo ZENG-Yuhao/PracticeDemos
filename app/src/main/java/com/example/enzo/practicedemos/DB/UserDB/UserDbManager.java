@@ -213,4 +213,9 @@ public class UserDbManager
     {
         return db.query(uri, projection, selection, selectionArgs, null, null, sortOrder);
     }
+
+    public int update(String table, ContentValues values, String selection, String[] selectionArgs)
+    {
+        return db.update(table, values, selection, selectionArgs);
+    }
 }
