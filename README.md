@@ -20,4 +20,5 @@ Some practices when I learn Android, different technical aspects are separated i
   - Bootstrap
   - Shared Preferences
   - SQLite
+  - Content Provider & Content Resolver
 ```
