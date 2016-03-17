@@ -160,6 +160,7 @@ public class UserProvider extends ContentProvider
         if (sURIMatcher.match(uri) == USER)
         {
             int c = manager.update(UserContract.Entry.TABLE_NAME, values, selection, selectionArgs);
+            // notify change
             getContext().getContentResolver().notifyChange(uri, null);
             return c;
         } else
