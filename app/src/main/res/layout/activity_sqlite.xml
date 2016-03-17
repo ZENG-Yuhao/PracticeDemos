@@ -7,104 +7,142 @@
     android:orientation="vertical"
     tools:context="com.example.enzo.practicedemos.Activities.SQLiteActivity">
 
-    <TextView
-        android:id="@+id/txt_id"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="ID"/>
+        android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/editxt_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/txt_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Name"/>
+            <TextView
+                android:id="@+id/txt_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ID"/>
 
-    <EditText
-        android:id="@+id/editxt_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+            <EditText
+                android:id="@+id/editxt_id"
+                android:inputType="number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-    <TextView
-        android:id="@+id/txt_address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Address"/>
+            <TextView
+                android:id="@+id/txt_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Name"/>
 
-    <EditText
-        android:id="@+id/editxt_address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+            <EditText
+                android:id="@+id/editxt_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-    <TextView
-        android:id="@+id/txt_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Email"/>
+            <TextView
+                android:id="@+id/txt_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Address"/>
 
-    <EditText
-        android:id="@+id/editxt_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+            <EditText
+                android:id="@+id/editxt_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-    <TextView
-        android:id="@+id/txt_account"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Account"/>
+            <TextView
+                android:id="@+id/txt_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Email"/>
 
-    <EditText
-        android:id="@+id/editxt_account"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+            <EditText
+                android:id="@+id/editxt_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"/>
 
-    <TextView
-        android:id="@+id/txt_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Password"/>
+            <TextView
+                android:id="@+id/txt_account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Account"/>
 
-    <EditText
-        android:id="@+id/editxt_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+            <EditText
+                android:id="@+id/editxt_account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-    <Button
-        android:id="@+id/btn_add_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Add user"/>
+            <TextView
+                android:id="@+id/txt_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Password"/>
 
-    <Button
-        android:id="@+id/btn_get_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Get user"/>
+            <EditText
+                android:id="@+id/editxt_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textVisiblePassword"/>
 
-    <Button
-        android:id="@+id/btn_delete_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Delete user"/>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/btn_modify_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Modify password"/>
+                <Button
+                    android:id="@+id/btn_add_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add user"/>
 
-    <Button
-        android:id="@+id/btn_clear_all"
-        android:text="Clear All"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+                <Button
+                    android:id="@+id/btn_get_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/btn_add_user"
+                    android:layout_toRightOf="@id/btn_add_user"
+                    android:text="Get user"/>
+
+                <Button
+                    android:id="@+id/btn_delete_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/btn_get_user"
+                    android:layout_toRightOf="@id/btn_get_user"
+                    android:text="Delete user"/>
+
+                <Button
+                    android:id="@+id/btn_modify_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/btn_add_user"
+                    android:text="Modify password"/>
+
+                <Button
+                    android:id="@+id/btn_list_users"
+                    android:text="List Users"
+                    android:layout_below="@id/btn_add_user"
+                    android:layout_toRightOf="@id/btn_modify_password"
+                    android:layout_toEndOf="@id/btn_modify_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <Button
+                    android:id="@+id/btn_clear_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/btn_modify_password"
+                    android:text="Clear All"/>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/txt_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Content"
+                android:textSize="18sp"/>
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

@@ -5,16 +5,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.enzo.practicedemos.DB.UserDB.User;
 import com.example.enzo.practicedemos.DB.UserDB.UserDbManager;
 import com.example.enzo.practicedemos.R;
 
+import org.w3c.dom.Text;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class SQLiteActivity extends AppCompatActivity
 {
     private EditText editxt_id, editxt_name, editxt_address, editxt_email, editxt_account, editxt_password;
-    private Button btn_add_user, btn_get_user, btn_delete_user, btn_modify_password, btn_clear_all;
+    private Button btn_add_user, btn_get_user, btn_delete_user, btn_modify_password, btn_clear_all, btn_list_users;
+    private TextView txt_content;
     private UserDbManager manager;
 
     @Override
@@ -30,6 +37,8 @@ public class SQLiteActivity extends AppCompatActivity
         editxt_account = (EditText) findViewById(R.id.editxt_account);
         editxt_password = (EditText) findViewById(R.id.editxt_password);
 
+        txt_content = (TextView) findViewById(R.id.txt_content);
+
         btn_add_user = (Button) findViewById(R.id.btn_add_user);
         btn_add_user.setOnClickListener(new addUserOnClickListener());
 
@@ -41,6 +50,9 @@ public class SQLiteActivity extends AppCompatActivity
 
         btn_modify_password = (Button) findViewById(R.id.btn_modify_password);
         btn_modify_password.setOnClickListener(new modifyPasswordOnClickListener());
+
+        btn_list_users = (Button) findViewById(R.id.btn_list_users);
+        btn_list_users.setOnClickListener(new getListUsersOnClickListener());
 
         btn_clear_all = (Button) findViewById(R.id.btn_clear_all);
         btn_clear_all.setOnClickListener(new View.OnClickListener()
@@ -93,14 +105,15 @@ public class SQLiteActivity extends AppCompatActivity
         @Override
         public void onClick(View v)
         {
-            User user = manager.getUserByName(editxt_name.getText().toString());
+            User user = manager.getUserById(Integer.valueOf(editxt_id.getText().toString()));
             if (user == null)
             {
                 Toast.makeText(SQLiteActivity.this, "User not found.", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            editxt_id.setText(user.getId());
+            //editxt_id.setText(user.getId());
+            editxt_name.setText(user.getName());
             editxt_address.setText(user.getAddress());
             editxt_email.setText(user.getEmail());
             editxt_account.setText(user.getAccount());
@@ -116,11 +129,34 @@ public class SQLiteActivity extends AppCompatActivity
         @Override
         public void onClick(View v)
         {
-            int c = manager.deleteUserByName(editxt_name.getText().toString());
+            //int c = manager.deleteUserByName(editxt_name.getText().toString());
+            int c = manager.deleteUserById(Integer.valueOf(editxt_id.getText().toString()));
             Toast.makeText(SQLiteActivity.this, "--> " + c + "rows deleted.", Toast.LENGTH_SHORT).show();
         }
     }
 
+    private class getListUsersOnClickListener implements View.OnClickListener
+    {
+
+        @Override
+        public void onClick(View v)
+        {
+            ArrayList<User> list = manager.getUserList();
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < list.size(); i++)
+            {
+                User user = list.get(i);
+                sb.append("ID: " + user.getId() + "\n");
+                sb.append("NAME: " + user.getName() + "\n");
+                sb.append("EMAIL: " + user.getEmail() + "\n");
+                sb.append("ADDRESS: " + user.getAddress() + "\n");
+                sb.append("ACCOUNT: " + user.getAccount() + "\n");
+                sb.append("PASSWORD: " + user.getPassword() + "\n");
+                sb.append("=============================\n");
+            }
+            txt_content.setText(sb.toString());
+        }
+    }
 
     private class modifyPasswordOnClickListener implements View.OnClickListener
     {
@@ -129,8 +165,8 @@ public class SQLiteActivity extends AppCompatActivity
         public void onClick(View v)
         {
             String newPassword = editxt_password.getText().toString();
-            String name = editxt_name.getText().toString();
-            int c = manager.modifyPassword(name, newPassword);
+            int id = Integer.valueOf(editxt_id.getText().toString());
+            int c = manager.modifyPasswordById(id, newPassword);
             Toast.makeText(SQLiteActivity.this, "--> " + c + "rows updated.", Toast.LENGTH_SHORT).show();
         }
     }
