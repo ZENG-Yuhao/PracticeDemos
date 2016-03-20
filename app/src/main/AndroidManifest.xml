@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.enzo.practicedemos">
+<manifest package="com.example.enzo.practicedemos"
+          xmlns:android="http://schemas.android.com/apk/res/android">
+
     <permission
         android:name="com.example.enzo.practicedemos.DB.Providers.UserProvider.READ_WRITE_USER"
-        android:protectionLevel="signature" />
+        android:protectionLevel="signature"/>
 
-    <uses-permission android:name="com.example.enzo.practicedemos.DB.Providers.UserProvider.READ_WRITE_USER" />
+    <uses-permission android:name="com.example.enzo.practicedemos.DB.Providers.UserProvider.READ_WRITE_USER"/>
 
     <application
         android:name=".Core.MyApplication"
@@ -68,7 +69,10 @@
             android:grantUriPermissions="true"
             android:permission="com.example.enzo.practicedemos.DB.Providers.UserProvider.READ_WRITE_USER"/>
 
+        <activity android:name=".Activities.TransitionActivity1">
+        </activity>
+        <activity android:name=".Activities.TransitionActivity2">
+        </activity>
     </application>
-
 
 </manifest>

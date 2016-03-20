@@ -204,4 +204,18 @@
         app:buttonMode="regular"
         app:roundedCorners="true"
         app:showOutline="false"/>
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/btn_activity_translate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_shared_preferences"
+        android:text="Activity Translate"
+        android:layout_margin="5dp"
+        app:bootstrapBrand="success"
+        app:bootstrapSize="lg"
+        app:buttonMode="regular"
+        app:roundedCorners="true"
+        app:showOutline="false"/>
+
 </RelativeLayout>

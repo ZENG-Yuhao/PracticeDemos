@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity
     private BootstrapButton btn_content_provider;
     private BootstrapButton btn_shared_preferences;
     private BootstrapButton btn_sqlite;
+    private BootstrapButton btn_activity_translate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -182,6 +183,17 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v)
             {
                 Intent intent = new Intent(MainActivity.this, SQLiteActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_activity_translate = (BootstrapButton) findViewById(R.id.btn_activity_translate);
+        btn_activity_translate.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(MainActivity.this, TransitionActivity1.class);
                 startActivity(intent);
             }
         });
