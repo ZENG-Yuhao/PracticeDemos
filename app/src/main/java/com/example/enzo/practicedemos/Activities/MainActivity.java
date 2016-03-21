@@ -15,7 +15,6 @@ public class MainActivity extends AppCompatActivity
     private BootstrapButton btn_base_adapter;
     private BootstrapButton btn_animation;
     private BootstrapButton btn_swipe_view;
-    private BootstrapButton btn_swipe_list;
     private BootstrapButton btn_tool_bar;
     private BootstrapButton btn_drawer_layout;
     private BootstrapButton btn_header_footer;
@@ -84,17 +83,6 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v)
             {
                 Intent intent = new Intent(MainActivity.this, SwipeViewActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        btn_swipe_list = (BootstrapButton) findViewById(R.id.btn_swipe_list);
-        btn_swipe_list.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(MainActivity.this, SwipeListActivity.class);
                 startActivity(intent);
             }
         });

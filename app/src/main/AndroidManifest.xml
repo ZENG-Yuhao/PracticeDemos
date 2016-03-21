@@ -36,8 +36,6 @@
         </activity>
         <activity android:name=".Activities.SwipeViewActivity">
         </activity>
-        <activity android:name=".Activities.SwipeListActivity">
-        </activity>
         <activity
             android:name=".Activities.ToolBarActivity"
             android:parentActivityName=".Activities.MainActivity">

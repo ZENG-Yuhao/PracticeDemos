@@ -118,7 +118,8 @@ public class SpringBackScrollView extends ScrollView
             }
 
             if (scrollY < -mMaxYOverscrollDistance + 5 && !btnClicked)
-                flag = true;
+                //flag = true;
+            ;
 
             if (btnClicked)
                 flag = false;
