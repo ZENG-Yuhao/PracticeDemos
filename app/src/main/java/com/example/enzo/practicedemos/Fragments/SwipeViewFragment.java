@@ -1,8 +1,5 @@
 package com.example.enzo.practicedemos.Fragments;
 
-import android.animation.IntEvaluator;
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -10,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -52,6 +48,7 @@ public class SwipeViewFragment extends Fragment
         mScrollView.setSmoothScrollingEnabled(true);
         mScrollView.setTopView(header_cover);
         mScrollView.setOutsideTopView(imageView);
+        //mScrollView.slowScrollTo(0, 30, 1000);
         //mScrollView.scrollTo(0, 200);
         //mScrollView.setOverScrollMode(View.OVER_SCROLL_NEVER);
 
@@ -74,9 +71,9 @@ public class SwipeViewFragment extends Fragment
     private String getText()
     {
         String str = "";
-        for (int i = 0; i < 1000; i++)
+        for (int i = 0; i < 100; i++)
         {
-            str += "TEXT ";
+            str += "TEXT TEXT TEXT TEXT " + i + " \n";
         }
         return str;
     }
@@ -89,8 +86,9 @@ public class SwipeViewFragment extends Fragment
             if (msg.what == 1)
             {
                 mScrollView.setButtonClicked(true);
-                mScrollView.smoothScrollTo(0, 0);
-
+                mScrollView.slowScrollTo(0, 0, 1000);
+                //mScrollView.smoothScrollTo(0, 0);
+                //mScrollView.invokeOverScrollBy();
 
 //                ValueAnimator valueAnimator = ValueAnimator.ofInt(1, 100);
 //                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener()

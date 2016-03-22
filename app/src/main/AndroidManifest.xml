@@ -71,6 +71,8 @@
         </activity>
         <activity android:name=".Activities.TransitionActivity2">
         </activity>
+        <activity android:name=".Activities.OverScrollerActivity">
+        </activity>
     </application>
 
 </manifest>
