@@ -4,15 +4,15 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.enzo.practicedemos.Core.Toolkit.TextInflator;
 import com.example.enzo.practicedemos.R;
+import com.example.enzo.practicedemos.Views.SlowScrollView;
 
 public class OverScrollerActivity extends AppCompatActivity
 {
-    private ScrollView scrollView;
+    private SlowScrollView scrollView;
     private Button btn_up, btn_down;
     private TextView txtview;
 
@@ -23,16 +23,16 @@ public class OverScrollerActivity extends AppCompatActivity
         setContentView(R.layout.activity_over_scroller);
 
         txtview = (TextView) findViewById(R.id.txtview);
-        txtview.setText(TextInflator.inflate());
+        txtview.setText(TextInflator.inflate(800));
 
-        scrollView = (ScrollView) findViewById(R.id.scrollview);
+        scrollView = (SlowScrollView) findViewById(R.id.scrollview);
         btn_up = (Button) findViewById(R.id.btn_up);
         btn_up.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-
+                scrollView.slowScrollTo(0, scrollView.getScrollY() - 700, 500);
             }
         });
 
@@ -42,7 +42,7 @@ public class OverScrollerActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-
+                scrollView.slowScrollTo(0, scrollView.getScrollY() + 700, 500);
             }
         });
     }

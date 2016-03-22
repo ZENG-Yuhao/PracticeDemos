@@ -96,7 +96,7 @@ public class SpringBackScrollView extends ScrollView
         if (mScroller.computeScrollOffset())
         {
             smoothScrollTo(mScroller.getCurrX(), mScroller.getCurrY());
-            Log.i("onOverScrolled", "MyScroller-->" + mScroller.getCurrX() + "," + mScroller.getCurrY());
+            Log.i("computeScroll", "MyScroller-->" + mScroller.getCurrX() + "," + mScroller.getCurrY());
             // postInvalidate() must be called, otherwise scrolling may not be visible
             invalidate();
         }
@@ -153,7 +153,7 @@ public class SpringBackScrollView extends ScrollView
                 flag = false;
         }
 //        Log.i(TAG, "--overScrollBy-->" + flag);
-        Log.i(TAG, "--overScrollBy-->" + deltaX + " ," + deltaY + " ," + scrollRangeX + " ," + scrollRangeY);
+        Log.i(TAG, "--overScrollBy-->" + deltaX + " ," + deltaY + " ," + getX() + " ," + getY());
 
         int newDeltaY = (deltaY + 2) / 2;
         if (flag)

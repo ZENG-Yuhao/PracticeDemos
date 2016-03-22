@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity
     private BootstrapButton btn_base_adapter;
     private BootstrapButton btn_animation;
     private BootstrapButton btn_swipe_view;
+    private BootstrapButton btn_OverScroller;
     private BootstrapButton btn_tool_bar;
     private BootstrapButton btn_drawer_layout;
     private BootstrapButton btn_header_footer;
@@ -83,6 +84,17 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v)
             {
                 Intent intent = new Intent(MainActivity.this, SwipeViewActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_OverScroller = (BootstrapButton) findViewById(R.id.btn_OverScroller);
+        btn_OverScroller.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(MainActivity.this, OverScrollerActivity.class);
                 startActivity(intent);
             }
         });

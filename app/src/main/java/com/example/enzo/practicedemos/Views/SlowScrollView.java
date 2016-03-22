@@ -2,6 +2,8 @@ package com.example.enzo.practicedemos.Views;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.widget.OverScroller;
 import android.widget.ScrollView;
 
@@ -10,6 +12,9 @@ import android.widget.ScrollView;
  */
 public class SlowScrollView extends ScrollView
 {
+    private static final int MAX_Y_OVERSCROLL_DISTANCE = 100;
+    private int mMaxYOverscrollDistance;
+
     private OverScroller mScroller;
 
     public SlowScrollView(Context context)
@@ -32,6 +37,9 @@ public class SlowScrollView extends ScrollView
 
     private void init(Context context)
     {
+        final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        final float density = metrics.density;
+        mMaxYOverscrollDistance = (int) (density * MAX_Y_OVERSCROLL_DISTANCE);
         mScroller = new OverScroller(context);
     }
 
@@ -58,7 +66,21 @@ public class SlowScrollView extends ScrollView
     public void computeScroll()
     {
         super.computeScroll();
+        // if the scrolling has not finished yet.
+        if (mScroller.computeScrollOffset())
+        {
+            smoothScrollTo(mScroller.getCurrX(), mScroller.getCurrY());
+            Log.i("computeScroll", "MyScroller-->" + mScroller.getCurrX() + "," + mScroller.getCurrY());
+            // postInvalidate() must be called, otherwise scrolling may not be visible
+            invalidate();
+        }
     }
 
-
+    @Override
+    protected boolean overScrollBy(int deltaX, int deltaY, int scrollX, int scrollY, int scrollRangeX, int
+            scrollRangeY, int maxOverScrollX, int maxOverScrollY, boolean isTouchEvent)
+    {
+        return super.overScrollBy(deltaX, deltaY, scrollX, scrollY, scrollRangeX, scrollRangeY, maxOverScrollX,
+                mMaxYOverscrollDistance, isTouchEvent);
+    }
 }

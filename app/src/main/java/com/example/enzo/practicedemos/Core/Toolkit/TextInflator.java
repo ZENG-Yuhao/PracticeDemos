@@ -16,6 +16,11 @@ public class TextInflator
         return inflate("TEXT TEXT TEXT TEXT ", 100, MODE_LINE_NUM);
     }
 
+    public static String inflate(int repeat)
+    {
+        return inflate("TEXT TEXT TEXT TEXT ", repeat, MODE_LINE_NUM);
+    }
+
     public static String inflate(String textToInflate, int repeat)
     {
         return inflate(textToInflate, repeat, MODE_LINE_NUM);
