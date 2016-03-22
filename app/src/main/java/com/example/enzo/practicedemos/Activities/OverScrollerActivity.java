@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.example.enzo.practicedemos.Core.Toolkit.TextInflator;
 import com.example.enzo.practicedemos.R;
 
 public class OverScrollerActivity extends AppCompatActivity
@@ -21,6 +22,8 @@ public class OverScrollerActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_over_scroller);
 
+        txtview = (TextView) findViewById(R.id.txtview);
+        txtview.setText(TextInflator.inflate());
 
         scrollView = (ScrollView) findViewById(R.id.scrollview);
         btn_up = (Button) findViewById(R.id.btn_up);

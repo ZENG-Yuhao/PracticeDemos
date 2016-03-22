@@ -73,7 +73,7 @@ public class SpringBackScrollView extends ScrollView
     {
         // replace getScrollX() to mScroller.getFinalX() if it's a normal view
         int dx = fx - getScrollX();
-        int dy = fx - getScrollY();
+        int dy = fy - getScrollY();
 //        int dx = fx - mScroller.getFinalX();
 //        int dy = fy - mScroller.getFinalY();
         slowScrollBy(dx, dy, duration);
