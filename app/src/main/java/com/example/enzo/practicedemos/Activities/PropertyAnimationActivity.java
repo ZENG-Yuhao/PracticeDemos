@@ -13,14 +13,12 @@ import android.widget.Button;
 
 import com.example.enzo.practicedemos.R;
 
-public class PropertyAnimationActivity extends AppCompatActivity
-{
+public class PropertyAnimationActivity extends AppCompatActivity {
 
     private Button btn_value_animator, btn_property_animator, btn_customized_animator;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_property_animation);
 
@@ -36,23 +34,19 @@ public class PropertyAnimationActivity extends AppCompatActivity
 
     }
 
-    private class ValueAnimatorOnClickListener implements View.OnClickListener
-    {
+    private class ValueAnimatorOnClickListener implements View.OnClickListener {
 
         @Override
-        public void onClick(View v)
-        {
+        public void onClick(View v) {
             btn_value_animator.setEnabled(false);
             ValueAnimator valueAnimator = ValueAnimator.ofInt(1, 100);
-            valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener()
-            {
+            valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 
                 private IntEvaluator evaluator = new IntEvaluator();
                 private AccelerateInterpolator interpolator = new AccelerateInterpolator();
 
                 @Override
-                public void onAnimationUpdate(ValueAnimator animation)
-                {
+                public void onAnimationUpdate(ValueAnimator animation) {
                     int currentValue = (Integer) animation.getAnimatedValue();
                     float fraction = currentValue / 100f;
                     float fraction_trans = interpolator.getInterpolation(fraction);
@@ -66,11 +60,9 @@ public class PropertyAnimationActivity extends AppCompatActivity
         }
     }
 
-    private class PropertyAnimatorOnClickListener implements View.OnClickListener
-    {
+    private class PropertyAnimatorOnClickListener implements View.OnClickListener {
         @Override
-        public void onClick(View v)
-        {
+        public void onClick(View v) {
             btn_property_animator.setEnabled(false);
             ViewWrapper wrapper = new ViewWrapper(btn_property_animator);
             int init_width = wrapper.getWidth();
@@ -86,33 +78,27 @@ public class PropertyAnimationActivity extends AppCompatActivity
         }
     }
 
-    private class CustomizedAnimatorOnClickListener implements View.OnClickListener
-    {
+    private class CustomizedAnimatorOnClickListener implements View.OnClickListener {
 
         @Override
-        public void onClick(android.view.View v)
-        {
+        public void onClick(android.view.View v) {
 
         }
     }
 
 
-    private class ViewWrapper
-    {
+    private class ViewWrapper {
         private View target;
 
-        public ViewWrapper(View target)
-        {
+        public ViewWrapper(View target) {
             this.target = target;
         }
 
-        public int getWidth()
-        {
+        public int getWidth() {
             return target.getLayoutParams().width;
         }
 
-        public void setWidth(int width)
-        {
+        public void setWidth(int width) {
             target.getLayoutParams().width = width;
 
             /*

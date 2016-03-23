@@ -17,8 +17,7 @@ import com.example.enzo.practicedemos.R;
 import com.example.enzo.practicedemos.Views.SpringBackScrollView;
 
 
-public class SwipeViewFragment extends Fragment
-{
+public class SwipeViewFragment extends Fragment {
     private Button btn;
     private SpringBackScrollView mScrollView;
     private MyHandler myHandler;
@@ -26,11 +25,10 @@ public class SwipeViewFragment extends Fragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
-            savedInstanceState)
-    {
-//        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_swipe_view,
-//                container, false);
-//        return rootView;
+            savedInstanceState) {
+        //        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_swipe_view,
+        //                container, false);
+        //        return rootView;
         View view = inflater.inflate(R.layout.activity_header_footer, null);
         TextView textView = (TextView) view.findViewById(R.id.text_view);
         textView.setText(getText());
@@ -54,11 +52,9 @@ public class SwipeViewFragment extends Fragment
 
         myHandler = new MyHandler();
         Button btn = (Button) view.findViewById(R.id.btn_profile);
-        btn.setOnClickListener(new View.OnClickListener()
-        {
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 Toast.makeText(getActivity(), "setButtonClicked - true", Toast.LENGTH_SHORT).show();
                 MyThread myThread = new MyThread();
                 myThread.start();
@@ -68,65 +64,54 @@ public class SwipeViewFragment extends Fragment
     }
 
 
-    private String getText()
-    {
+    private String getText() {
         String str = "";
-        for (int i = 0; i < 100; i++)
-        {
+        for (int i = 0; i < 100; i++) {
             str += "TEXT TEXT TEXT TEXT " + i + " \n";
         }
         return str;
     }
 
-    private class MyHandler extends Handler
-    {
+    private class MyHandler extends Handler {
         @Override
-        public void handleMessage(Message msg)
-        {
-            if (msg.what == 1)
-            {
+        public void handleMessage(Message msg) {
+            if (msg.what == 1) {
                 mScrollView.setButtonClicked(true);
                 mScrollView.slowScrollTo(0, 0, 1000);
                 //mScrollView.smoothScrollTo(0, 0);
                 //mScrollView.invokeOverScrollBy();
 
-//                ValueAnimator valueAnimator = ValueAnimator.ofInt(1, 100);
-//                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener()
-//                {
-//
-//                    private IntEvaluator evaluator = new IntEvaluator();
-//                    private AccelerateInterpolator interpolator = new AccelerateInterpolator();
-//
-//                    @Override
-//                    public void onAnimationUpdate(ValueAnimator animation)
-//                    {
-//                        int currentValue = (Integer) animation.getAnimatedValue();
-//                        float fraction = currentValue / 100f;
-//                        float fraction_trans = interpolator.getInterpolation(fraction);
-//                        mScrollView.setScrollY(evaluator.evaluate(fraction_trans, -200, 0));
-//                        mScrollView.invalidate();
-//                    }
-//                });
-//                valueAnimator.setDuration(1000).start();
+                //                ValueAnimator valueAnimator = ValueAnimator.ofInt(1, 100);
+                //                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener()
+                //                {
+                //
+                //                    private IntEvaluator evaluator = new IntEvaluator();
+                //                    private AccelerateInterpolator interpolator = new AccelerateInterpolator();
+                //
+                //                    @Override
+                //                    public void onAnimationUpdate(ValueAnimator animation)
+                //                    {
+                //                        int currentValue = (Integer) animation.getAnimatedValue();
+                //                        float fraction = currentValue / 100f;
+                //                        float fraction_trans = interpolator.getInterpolation(fraction);
+                //                        mScrollView.setScrollY(evaluator.evaluate(fraction_trans, -200, 0));
+                //                        mScrollView.invalidate();
+                //                    }
+                //                });
+                //                valueAnimator.setDuration(1000).start();
             }
         }
     }
 
-    private class MyThread extends Thread
-    {
+    private class MyThread extends Thread {
         @Override
-        public void run()
-        {
+        public void run() {
             int duration = 15;
-            for (int i = 1; i <= duration; i++)
-            {
-                synchronized (this)
-                {
-                    try
-                    {
+            for (int i = 1; i <= duration; i++) {
+                synchronized (this) {
+                    try {
                         wait(100);
-                    } catch (InterruptedException e)
-                    {
+                    } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }

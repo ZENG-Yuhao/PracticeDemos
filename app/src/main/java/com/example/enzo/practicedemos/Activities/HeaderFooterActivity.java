@@ -11,8 +11,7 @@ import android.widget.TextView;
 import com.example.enzo.practicedemos.R;
 import com.example.enzo.practicedemos.Views.SpringBackScrollView;
 
-public class HeaderFooterActivity extends AppCompatActivity
-{
+public class HeaderFooterActivity extends AppCompatActivity {
 
     private LinearLayout header, header_cover;
     private SpringBackScrollView mScrollView;
@@ -20,8 +19,7 @@ public class HeaderFooterActivity extends AppCompatActivity
     private ImageView imageView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_header_footer);
 
@@ -41,39 +39,37 @@ public class HeaderFooterActivity extends AppCompatActivity
         mScrollView.setTopView(header_cover);
         mScrollView.setOutsideTopView(imageView);
 
-        Log.i("ScrollView", "---->InitScrollY "+ mScrollView.getScaleY());
-//        mScrollView.setOnTouchListener(new View.OnTouchListener()
-//        {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event)
-//            {
-//                if (event.getAction() == MotionEvent.ACTION_MOVE)
-//                {
-//
-//                    if (mScrollView.getScrollY() <= 0)
-//                    {
-////                        Log.i("TOP", "------->Reached top." + mScrollView.getScrollY());
-//                        if (header_cover.getVisibility() != View.INVISIBLE)
-//                            header_cover.setVisibility(View.INVISIBLE);
-//                    } else
-//                    {
-////                        Log.i("TOP", "------->Did not reach top." + mScrollView.getScrollY());
-//                        if (header_cover.getVisibility() != View.VISIBLE)
-//                            header_cover.setVisibility(View.VISIBLE);
-//                    }
-//                }
-//                return false;
-//            }
-//        });
+        Log.i("ScrollView", "---->InitScrollY " + mScrollView.getScaleY());
+        //        mScrollView.setOnTouchListener(new View.OnTouchListener()
+        //        {
+        //            @Override
+        //            public boolean onTouch(View v, MotionEvent event)
+        //            {
+        //                if (event.getAction() == MotionEvent.ACTION_MOVE)
+        //                {
+        //
+        //                    if (mScrollView.getScrollY() <= 0)
+        //                    {
+        ////                        Log.i("TOP", "------->Reached top." + mScrollView.getScrollY());
+        //                        if (header_cover.getVisibility() != View.INVISIBLE)
+        //                            header_cover.setVisibility(View.INVISIBLE);
+        //                    } else
+        //                    {
+        ////                        Log.i("TOP", "------->Did not reach top." + mScrollView.getScrollY());
+        //                        if (header_cover.getVisibility() != View.VISIBLE)
+        //                            header_cover.setVisibility(View.VISIBLE);
+        //                    }
+        //                }
+        //                return false;
+        //            }
+        //        });
 
 
     }
 
-    private String getText()
-    {
+    private String getText() {
         String str = "";
-        for (int i = 0; i < 1000; i++)
-        {
+        for (int i = 0; i < 1000; i++) {
             str += "TEXT ";
         }
         return str;

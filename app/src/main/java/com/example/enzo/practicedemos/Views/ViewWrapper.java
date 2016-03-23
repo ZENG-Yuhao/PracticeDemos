@@ -5,22 +5,18 @@ import android.view.ViewGroup;
 /**
  * Created by Enzo(ZENG Yuhao) on 16/3/2.
  */
-public class ViewWrapper
-{
+public class ViewWrapper {
     private ViewGroup target;
 
-    public ViewWrapper(ViewGroup target)
-    {
+    public ViewWrapper(ViewGroup target) {
         this.target = target;
     }
 
-    public int getWidth()
-    {
+    public int getWidth() {
         return target.getLayoutParams().width;
     }
 
-    public void setWidth(int width)
-    {
+    public void setWidth(int width) {
         target.getLayoutParams().width = width;
 
             /*
@@ -43,7 +39,7 @@ public class ViewWrapper
         target.requestLayout();
     }
 
-    public void setMargin(int l, int t, int r, int b){
+    public void setMargin(int l, int t, int r, int b) {
         ViewGroup.MarginLayoutParams source = new ViewGroup.MarginLayoutParams(target.getLayoutParams());
         source.setMargins(l, t, r, b);
     }

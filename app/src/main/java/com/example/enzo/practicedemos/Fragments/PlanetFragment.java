@@ -10,14 +10,12 @@ import android.view.ViewGroup;
 import com.example.enzo.practicedemos.R;
 
 
-public class PlanetFragment extends Fragment
-{
+public class PlanetFragment extends Fragment {
     public final static String ARG_PLANET_NUMBER = "number";
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable
-    Bundle savedInstanceState)
-    {
+    Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_planet, null);
     }
 }

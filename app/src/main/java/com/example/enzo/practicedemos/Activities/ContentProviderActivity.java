@@ -1,10 +1,9 @@
 package com.example.enzo.practicedemos.Activities;
 
 import android.content.UriMatcher;
-import android.database.MatrixCursor;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.example.enzo.practicedemos.DB.UserDB.UserContract;
@@ -12,8 +11,7 @@ import com.example.enzo.practicedemos.R;
 
 import java.util.List;
 
-public class ContentProviderActivity extends AppCompatActivity
-{
+public class ContentProviderActivity extends AppCompatActivity {
     private static final UriMatcher sURIMatcher = new UriMatcher(UriMatcher.NO_MATCH);
     // UriMatcher
     private static final String AUTHORITY = "com.example.enzo.practicedemos.DB.Providers.UserProvider";
@@ -25,8 +23,7 @@ public class ContentProviderActivity extends AppCompatActivity
     private static final int USER_ACCOUNT = 5;
     private static final int USER_PASSWORD = 6;
 
-    static
-    {
+    static {
         sURIMatcher.addURI(AUTHORITY, "user", ALL_USER);
         sURIMatcher.addURI(AUTHORITY, "user/#", USER);
         sURIMatcher.addURI(AUTHORITY, "user/#/name", USER_NAME);
@@ -37,8 +34,7 @@ public class ContentProviderActivity extends AppCompatActivity
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_content_provider);
 
@@ -51,10 +47,9 @@ public class ContentProviderActivity extends AppCompatActivity
         str1 = UserContract.Entry.SCHEMA + UserContract.Entry.AUTHORITY + "/user/2/account";
         Uri uri = Uri.parse(str1);
         List pathSegments = uri.getPathSegments();
-        int param_2nd = Integer.valueOf((String)pathSegments.get(1));
+        int param_2nd = Integer.valueOf((String) pathSegments.get(1));
         str3 = (String) pathSegments.get(1);
-        switch (sURIMatcher.match(uri))
-        {
+        switch (sURIMatcher.match(uri)) {
             case ALL_USER:
                 str2 = "ALL_USER";
                 break;

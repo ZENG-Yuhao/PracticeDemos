@@ -12,21 +12,16 @@ import com.example.enzo.practicedemos.DB.UserDB.User;
 import com.example.enzo.practicedemos.DB.UserDB.UserDbManager;
 import com.example.enzo.practicedemos.R;
 
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class SQLiteActivity extends AppCompatActivity
-{
+public class SQLiteActivity extends AppCompatActivity {
     private EditText editxt_id, editxt_name, editxt_address, editxt_email, editxt_account, editxt_password;
     private Button btn_add_user, btn_get_user, btn_delete_user, btn_modify_password, btn_clear_all, btn_list_users;
     private TextView txt_content;
     private UserDbManager manager;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sqlite);
 
@@ -55,11 +50,9 @@ public class SQLiteActivity extends AppCompatActivity
         btn_list_users.setOnClickListener(new getListUsersOnClickListener());
 
         btn_clear_all = (Button) findViewById(R.id.btn_clear_all);
-        btn_clear_all.setOnClickListener(new View.OnClickListener()
-        {
+        btn_clear_all.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 clearAllEditText();
             }
         });
@@ -69,8 +62,7 @@ public class SQLiteActivity extends AppCompatActivity
     }
 
 
-    public void clearAllEditText()
-    {
+    public void clearAllEditText() {
         editxt_id.setText("");
         editxt_name.setText("");
         editxt_address.setText("");
@@ -79,12 +71,10 @@ public class SQLiteActivity extends AppCompatActivity
         editxt_password.setText("");
     }
 
-    private class addUserOnClickListener implements View.OnClickListener
-    {
+    private class addUserOnClickListener implements View.OnClickListener {
 
         @Override
-        public void onClick(View v)
-        {
+        public void onClick(View v) {
             String id = editxt_id.getText().toString();
             String name = editxt_name.getText().toString();
             String address = editxt_address.getText().toString();
@@ -99,15 +89,12 @@ public class SQLiteActivity extends AppCompatActivity
     }
 
 
-    private class getUserOnClickListener implements View.OnClickListener
-    {
+    private class getUserOnClickListener implements View.OnClickListener {
 
         @Override
-        public void onClick(View v)
-        {
+        public void onClick(View v) {
             User user = manager.getUserById(Integer.valueOf(editxt_id.getText().toString()));
-            if (user == null)
-            {
+            if (user == null) {
                 Toast.makeText(SQLiteActivity.this, "User not found.", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -123,28 +110,23 @@ public class SQLiteActivity extends AppCompatActivity
     }
 
 
-    private class deleteUserOnClickListener implements View.OnClickListener
-    {
+    private class deleteUserOnClickListener implements View.OnClickListener {
 
         @Override
-        public void onClick(View v)
-        {
+        public void onClick(View v) {
             //int c = manager.deleteUserByName(editxt_name.getText().toString());
             int c = manager.deleteUserById(Integer.valueOf(editxt_id.getText().toString()));
             Toast.makeText(SQLiteActivity.this, "--> " + c + "rows deleted.", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private class getListUsersOnClickListener implements View.OnClickListener
-    {
+    private class getListUsersOnClickListener implements View.OnClickListener {
 
         @Override
-        public void onClick(View v)
-        {
+        public void onClick(View v) {
             ArrayList<User> list = manager.getUserList();
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < list.size(); i++)
-            {
+            for (int i = 0; i < list.size(); i++) {
                 User user = list.get(i);
                 sb.append("ID: " + user.getId() + "\n");
                 sb.append("NAME: " + user.getName() + "\n");
@@ -158,12 +140,10 @@ public class SQLiteActivity extends AppCompatActivity
         }
     }
 
-    private class modifyPasswordOnClickListener implements View.OnClickListener
-    {
+    private class modifyPasswordOnClickListener implements View.OnClickListener {
 
         @Override
-        public void onClick(View v)
-        {
+        public void onClick(View v) {
             String newPassword = editxt_password.getText().toString();
             int id = Integer.valueOf(editxt_id.getText().toString());
             int c = manager.modifyPasswordById(id, newPassword);
@@ -172,8 +152,7 @@ public class SQLiteActivity extends AppCompatActivity
     }
 
     @Override
-    protected void onDestroy()
-    {
+    protected void onDestroy() {
         manager.close();
         super.onDestroy();
     }

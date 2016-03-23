@@ -25,8 +25,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DrawerPagerActivity extends AppCompatActivity
-{
+public class DrawerPagerActivity extends AppCompatActivity {
 
     private String[] mPlanetTitles = {"AAAA", "BBBB", "CCCC", "DDDD", "EEEE"};
     private DrawerLayout mDrawerLayout;
@@ -49,16 +48,15 @@ public class DrawerPagerActivity extends AppCompatActivity
     private PagerAdapter mPagerAdapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer_pager);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
-//        CustomBaseAdapter adapter = new CustomBaseAdapter(this, getData(), R.layout
-//                .item_listview_base_adapter, new String[]{"title", "content", "points"}, new
-//                int[]{R.id.title, R.id.content, R.id.points});
+        //        CustomBaseAdapter adapter = new CustomBaseAdapter(this, getData(), R.layout
+        //                .item_listview_base_adapter, new String[]{"title", "content", "points"}, new
+        //                int[]{R.id.title, R.id.content, R.id.points});
 
         mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.item_drawer_list, mPlanetTitles));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
@@ -70,14 +68,12 @@ public class DrawerPagerActivity extends AppCompatActivity
         mPager.setAdapter(mPagerAdapter);
     }
 
-    private class SwipeViewPagerAdapter extends FragmentStatePagerAdapter
-    {
+    private class SwipeViewPagerAdapter extends FragmentStatePagerAdapter {
         private SwipeViewFragment fragment1, fragment2;
         private PlanetFragment fragment3;
 
 
-        public SwipeViewPagerAdapter(FragmentManager fm)
-        {
+        public SwipeViewPagerAdapter(FragmentManager fm) {
             super(fm);
             fragment1 = new SwipeViewFragment();
             fragment2 = new SwipeViewFragment();
@@ -85,10 +81,8 @@ public class DrawerPagerActivity extends AppCompatActivity
         }
 
         @Override
-        public Fragment getItem(int position)
-        {
-            switch (position)
-            {
+        public Fragment getItem(int position) {
+            switch (position) {
                 case 0:
                     return fragment1;
                 case 1:
@@ -100,27 +94,22 @@ public class DrawerPagerActivity extends AppCompatActivity
         }
 
         @Override
-        public int getCount()
-        {
+        public int getCount() {
             return NUM_PAGES;
         }
 
         @Override
-        public void destroyItem(ViewGroup container, int position, Object object)
-        {
-            if (position > 1)
-            {
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            if (position > 1) {
                 super.destroyItem(container, position, object);
                 Log.i("DestroyItem", "Destroyed - " + position + "::" + object.toString());
             }
         }
     }
 
-    public ArrayList<Map<String, Object>> getData()
-    {
+    public ArrayList<Map<String, Object>> getData() {
         ArrayList<Map<String, Object>> list = new ArrayList<>();
-        for (int i = 0; i < 100; i++)
-        {
+        for (int i = 0; i < 100; i++) {
             Map<String, Object> listItem = new HashMap<>();
             listItem.put("title", "user " + i);
             listItem.put("content", "this is content " + i);
@@ -130,28 +119,25 @@ public class DrawerPagerActivity extends AppCompatActivity
         return list;
     }
 
-    private class DrawerItemClickListener implements ListView.OnItemClickListener
-    {
+    private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-        {
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             selectItem(position);
         }
     }
 
-    private void selectItem(int position)
-    {
-//        Fragment fragment = new PlanetFragment();
-//        Bundle args = new Bundle();
-//        args.putInt(PlanetFragment.ARG_PLANET_NUMBER, position);
-//        fragment.setArguments(args);
-//
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
-//
-//        mDrawerList.setItemChecked(position, true);
-//
-//        mDrawerLayout.closeDrawer(mDrawerList);
+    private void selectItem(int position) {
+        //        Fragment fragment = new PlanetFragment();
+        //        Bundle args = new Bundle();
+        //        args.putInt(PlanetFragment.ARG_PLANET_NUMBER, position);
+        //        fragment.setArguments(args);
+        //
+        //        FragmentManager fragmentManager = getSupportFragmentManager();
+        //        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+        //
+        //        mDrawerList.setItemChecked(position, true);
+        //
+        //        mDrawerLayout.closeDrawer(mDrawerList);
 
         Toast.makeText(this, "position clicked:" + position, Toast.LENGTH_SHORT).show();
     }

@@ -17,8 +17,7 @@ import java.util.List;
 /**
  * Created by enzoz on 2016/3/15.
  */
-public class UserProvider extends ContentProvider
-{
+public class UserProvider extends ContentProvider {
     UserDbManager manager;
 
     // UriMatcher
@@ -34,8 +33,7 @@ public class UserProvider extends ContentProvider
 
     private static final UriMatcher sURIMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
-    static
-    {
+    static {
         sURIMatcher.addURI(AUTHORITY, "user", ALL_USER);
         sURIMatcher.addURI(AUTHORITY, "user/#", USER);
         sURIMatcher.addURI(AUTHORITY, "user/#/name", USER_NAME);
@@ -46,24 +44,21 @@ public class UserProvider extends ContentProvider
     }
 
     @Override
-    public boolean onCreate()
-    {
+    public boolean onCreate() {
         manager = new UserDbManager(getContext());
         return true;
     }
 
     @Nullable
     @Override
-    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder)
-    {
+    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         manager.open();
         MatrixCursor cursor;
         User user;
         List pathSegments = uri.getPathSegments();
         int param_2nd = Integer.valueOf((String) pathSegments.get(1));
         int id;
-        switch (sURIMatcher.match(uri))
-        {
+        switch (sURIMatcher.match(uri)) {
             case ALL_USER:
                 Cursor cursor1 = manager.getAllUser();
                 cursor1.setNotificationUri(getContext().getContentResolver(), uri);
@@ -108,11 +103,9 @@ public class UserProvider extends ContentProvider
 
     @Nullable
     @Override
-    public String getType(Uri uri)
-    {
+    public String getType(Uri uri) {
         String type = "";
-        switch (sURIMatcher.match(uri))
-        {
+        switch (sURIMatcher.match(uri)) {
             case ALL_USER:
                 type = "vnd.android.cursor.dir/com.example.enzo.practicedemos.all_user";
                 break;
@@ -142,23 +135,19 @@ public class UserProvider extends ContentProvider
 
     @Nullable
     @Override
-    public Uri insert(Uri uri, ContentValues values)
-    {
+    public Uri insert(Uri uri, ContentValues values) {
         // getContext().getContentResolver().notifyChange(uri, null);
         return null;
     }
 
     @Override
-    public int delete(Uri uri, String selection, String[] selectionArgs)
-    {
+    public int delete(Uri uri, String selection, String[] selectionArgs) {
         return 0;
     }
 
     @Override
-    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs)
-    {
-        if (sURIMatcher.match(uri) == USER)
-        {
+    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+        if (sURIMatcher.match(uri) == USER) {
             int c = manager.update(UserContract.Entry.TABLE_NAME, values, selection, selectionArgs);
             // notify change
             getContext().getContentResolver().notifyChange(uri, null);
@@ -168,8 +157,7 @@ public class UserProvider extends ContentProvider
     }
 
     @Override
-    public void shutdown()
-    {
+    public void shutdown() {
         manager.close();
     }
 }

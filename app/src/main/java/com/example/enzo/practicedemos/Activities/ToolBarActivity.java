@@ -11,14 +11,12 @@ import android.widget.Toast;
 
 import com.example.enzo.practicedemos.R;
 
-public class ToolBarActivity extends AppCompatActivity
-{
+public class ToolBarActivity extends AppCompatActivity {
 
     private Toolbar toolBar;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tool_bar);
         toolBar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -31,8 +29,7 @@ public class ToolBarActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_tool_bar, menu);
 
         // get the reference and configure it
@@ -41,18 +38,15 @@ public class ToolBarActivity extends AppCompatActivity
 
         // do something when the action is expanded or collapsed
         MenuItemCompat.OnActionExpandListener expandListener = new MenuItemCompat
-                .OnActionExpandListener()
-        {
+                .OnActionExpandListener() {
             @Override
-            public boolean onMenuItemActionExpand(MenuItem item)
-            {
+            public boolean onMenuItemActionExpand(MenuItem item) {
                 Toast.makeText(ToolBarActivity.this, "Expanded: " + item.getTitle(), Toast.LENGTH_SHORT).show();
                 return true;
             }
 
             @Override
-            public boolean onMenuItemActionCollapse(MenuItem item)
-            {
+            public boolean onMenuItemActionCollapse(MenuItem item) {
                 Toast.makeText(ToolBarActivity.this, "Collapsed: " + item.getTitle(), Toast.LENGTH_SHORT).show();
                 return true;
             }
@@ -66,10 +60,8 @@ public class ToolBarActivity extends AppCompatActivity
 
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        switch (item.getItemId())
-        {
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
             case R.id.action_favorite:
                 Toast.makeText(this, "Favorite clicked.", Toast.LENGTH_SHORT).show();
                 return true;

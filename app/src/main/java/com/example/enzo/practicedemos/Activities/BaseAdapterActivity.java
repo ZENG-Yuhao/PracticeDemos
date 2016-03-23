@@ -11,14 +11,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BaseAdapterActivity extends AppCompatActivity
-{
+public class BaseAdapterActivity extends AppCompatActivity {
 
     private ListView listView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base_adapter);
 
@@ -30,11 +28,9 @@ public class BaseAdapterActivity extends AppCompatActivity
         listView.setAdapter(adapter);
     }
 
-    public ArrayList<Map<String, Object>> getData()
-    {
+    public ArrayList<Map<String, Object>> getData() {
         ArrayList<Map<String, Object>> list = new ArrayList<>();
-        for (int i = 0; i < 100; i++)
-        {
+        for (int i = 0; i < 100; i++) {
             Map<String, Object> listItem = new HashMap<>();
             listItem.put("title", "user " + i);
             listItem.put("content", "this is content " + i);

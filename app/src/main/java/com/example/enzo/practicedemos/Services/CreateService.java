@@ -14,20 +14,17 @@ import com.example.enzo.practicedemos.R;
 
 import java.lang.ref.WeakReference;
 
-public class CreateService extends Service
-{
+public class CreateService extends Service {
 
     private StopHandler handler;
     private NotificationManager manager;
     private NotificationCompat.Builder builder;
 
-    public CreateService()
-    {
+    public CreateService() {
     }
 
     @Override
-    public void onCreate()
-    {
+    public void onCreate() {
         super.onCreate();
         Log.i("Service", "----> onCreate");
         manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
@@ -40,57 +37,48 @@ public class CreateService extends Service
     }
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId)
-    {
+    public int onStartCommand(Intent intent, int flags, int startId) {
         Log.i("Service", "----> onStartCommand");
         new Thread(new MyRunnable()).start();
         return Service.START_REDELIVER_INTENT;
     }
 
     @Override
-    public void onDestroy()
-    {
+    public void onDestroy() {
         Log.i("Service", "----> onDestroy");
         super.onDestroy();
     }
 
     @Override
-    public IBinder onBind(Intent intent)
-    {
+    public IBinder onBind(Intent intent) {
         return null;
     }
 
-    public class MyRunnable implements Runnable
-    {
+    public class MyRunnable implements Runnable {
         @Override
-        public void run()
-        {
+        public void run() {
             //Sleep for 5 seconds
-//            long startTime = System.currentTimeMillis();
-//            long endTime = startTime + 5 * 1000;
-//            while (System.currentTimeMillis() < endTime) {
-//                synchronized (this) {
-//                    try {
-//                        wait(endTime - System.currentTimeMillis());
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
+            //            long startTime = System.currentTimeMillis();
+            //            long endTime = startTime + 5 * 1000;
+            //            while (System.currentTimeMillis() < endTime) {
+            //                synchronized (this) {
+            //                    try {
+            //                        wait(endTime - System.currentTimeMillis());
+            //                    } catch (InterruptedException e) {
+            //                        e.printStackTrace();
+            //                    }
+            //                }
+            //            }
             int duration = 50;
-            for (int i = 1; i <= duration; i++)
-            {
-                synchronized (this)
-                {
-                    try
-                    {
+            for (int i = 1; i <= duration; i++) {
+                synchronized (this) {
+                    try {
                         int value = (int) (i / (float) duration * 100);
                         Message msg = Message.obtain();
                         msg.arg1 = value;
                         handler.sendMessage(msg);
                         wait(100);
-                    } catch (InterruptedException e)
-                    {
+                    } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
@@ -100,25 +88,21 @@ public class CreateService extends Service
         }
     }
 
-    public static class StopHandler extends Handler
-    {
+    public static class StopHandler extends Handler {
         private WeakReference<CreateService> refSender = null;
 
-        public StopHandler(CreateService sender)
-        {
+        public StopHandler(CreateService sender) {
             this.refSender = new WeakReference<>(sender);
         }
 
         @Override
-        public void handleMessage(Message msg)
-        {
+        public void handleMessage(Message msg) {
             super.handleMessage(msg);
             CreateService service = refSender.get();
             if (service == null) return;
             service.builder.setProgress(100, msg.arg1, false);
             service.manager.notify(1001, service.builder.build());
-            if (msg.what == 1)
-            {
+            if (msg.what == 1) {
                 service.stopSelf();
                 Toast.makeText(service.getApplicationContext(), "Download finished!", Toast.LENGTH_SHORT).show();
                 Log.i("Service", "---->Task Finished.");

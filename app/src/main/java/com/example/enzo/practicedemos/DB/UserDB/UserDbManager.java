@@ -4,40 +4,32 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.media.session.PlaybackState;
-import android.text.Selection;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
  * Created by enzoz on 2016/3/11.
  */
-public class UserDbManager
-{
+public class UserDbManager {
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "example.db";
 
     private SQLiteDatabase db;
     private UserDbHelper mHelper;
 
-    public UserDbManager(Context context)
-    {
+    public UserDbManager(Context context) {
         mHelper = new UserDbHelper(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    public void open()
-    {
+    public void open() {
         db = mHelper.getWritableDatabase();
     }
 
-    public void close()
-    {
+    public void close() {
         db.close();
     }
 
-    public long addUser(User user)
-    {
+    public long addUser(User user) {
         if (user == null) return 0;
 
         ContentValues values = new ContentValues();
@@ -52,36 +44,31 @@ public class UserDbManager
         return db.insert(UserContract.Entry.TABLE_NAME, null, values);
     }
 
-    public User getUserByName(String name)
-    {
+    public User getUserByName(String name) {
         Cursor cursor = getUserCursorByName(name);
         return getFirstUser(cursor);
     }
 
-    public Cursor getUserCursorByName(String name)
-    {
+    public Cursor getUserCursorByName(String name) {
         String selection = UserContract.Entry.COLUMN_NAME_USER_NAME + " LIKE ?";
         String[] selectionArgs = {name};
 
         return getUserCursor(selection, selectionArgs);
     }
 
-    public User getUserById(int id)
-    {
+    public User getUserById(int id) {
         Cursor cursor = getUserCursorById(id);
         return getFirstUser(cursor);
     }
 
-    public Cursor getUserCursorById(int id)
-    {
+    public Cursor getUserCursorById(int id) {
         String selection = UserContract.Entry._ID + " LIKE ?";
         String[] selectionArgs = {String.valueOf(id)};
 
         return getUserCursor(selection, selectionArgs);
     }
 
-    public Cursor getUserCursor(String selection, String[] selectionArgs)
-    {
+    public Cursor getUserCursor(String selection, String[] selectionArgs) {
         String[] projection = {
                 UserContract.Entry._ID,
                 UserContract.Entry.COLUMN_NAME_USER_NAME,
@@ -94,8 +81,7 @@ public class UserDbManager
         return db.query(UserContract.Entry.TABLE_NAME, projection, selection, selectionArgs, null, null, null);
     }
 
-    public User getFirstUser(Cursor cursor)
-    {
+    public User getFirstUser(Cursor cursor) {
         if (cursor.getCount() <= 0)
             return null;
 
@@ -120,8 +106,7 @@ public class UserDbManager
         return user;
     }
 
-    public Cursor getAllUser()
-    {
+    public Cursor getAllUser() {
         String[] projection = {
                 UserContract.Entry._ID,
                 UserContract.Entry.COLUMN_NAME_USER_NAME,
@@ -134,13 +119,11 @@ public class UserDbManager
         return cursor;
     }
 
-    public ArrayList<User> getUserList()
-    {
+    public ArrayList<User> getUserList() {
         return convertCursorToList(getAllUser());
     }
 
-    public ArrayList<User> convertCursorToList(Cursor cursor)
-    {
+    public ArrayList<User> convertCursorToList(Cursor cursor) {
         if (cursor == null) return null;
         ArrayList<User> list = new ArrayList<>(cursor.getCount());
         // Determine the column index by their names
@@ -152,8 +135,7 @@ public class UserDbManager
         int num_col_password = cursor.getColumnIndex(UserContract.Entry.COLUMN_NAME_PASSWORD);
 
         String user_id, user_name, email, address, account, password;
-        while (cursor.moveToNext())
-        {
+        while (cursor.moveToNext()) {
             user_id = cursor.getString(num_col_id);
             user_name = cursor.getString(num_col_name);
             email = cursor.getString(num_col_email);
@@ -167,27 +149,23 @@ public class UserDbManager
         return list;
     }
 
-    public int deleteUserByName(String name)
-    {
+    public int deleteUserByName(String name) {
         String selection = UserContract.Entry.COLUMN_NAME_USER_NAME + " LIKE ?";
         String[] selectionArgs = {name};
         return deleteUser(selection, selectionArgs);
     }
 
-    public int deleteUserById(int id)
-    {
+    public int deleteUserById(int id) {
         String selection = UserContract.Entry._ID + " LIKE ?";
         String[] selectionArgs = {String.valueOf(id)};
         return deleteUser(selection, selectionArgs);
     }
 
-    public int deleteUser(String selection, String[] selectionArgs)
-    {
+    public int deleteUser(String selection, String[] selectionArgs) {
         return db.delete(UserContract.Entry.TABLE_NAME, selection, selectionArgs);
     }
 
-    public int modifyPasswordByName(String name, String newPassword)
-    {
+    public int modifyPasswordByName(String name, String newPassword) {
         ContentValues values = new ContentValues();
         values.put(UserContract.Entry.COLUMN_NAME_PASSWORD, newPassword);
         String selection = UserContract.Entry.COLUMN_NAME_USER_NAME + " LIKE ?";
@@ -195,8 +173,7 @@ public class UserDbManager
         return modifyPassword(selection, selectionArgs, values);
     }
 
-    public int modifyPasswordById(int id, String newPassword)
-    {
+    public int modifyPasswordById(int id, String newPassword) {
         ContentValues values = new ContentValues();
         values.put(UserContract.Entry.COLUMN_NAME_PASSWORD, newPassword);
         String selection = UserContract.Entry._ID + " LIKE ?";
@@ -204,18 +181,15 @@ public class UserDbManager
         return modifyPassword(selection, selectionArgs, values);
     }
 
-    public int modifyPassword(String selection, String[] selectionArgs, ContentValues values)
-    {
+    public int modifyPassword(String selection, String[] selectionArgs, ContentValues values) {
         return db.update(UserContract.Entry.TABLE_NAME, values, selection, selectionArgs);
     }
 
-    public Cursor query(String uri, String[] projection, String selection, String[] selectionArgs, String sortOrder)
-    {
+    public Cursor query(String uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         return db.query(uri, projection, selection, selectionArgs, null, null, sortOrder);
     }
 
-    public int update(String table, ContentValues values, String selection, String[] selectionArgs)
-    {
+    public int update(String table, ContentValues values, String selection, String[] selectionArgs) {
         return db.update(table, values, selection, selectionArgs);
     }
 }

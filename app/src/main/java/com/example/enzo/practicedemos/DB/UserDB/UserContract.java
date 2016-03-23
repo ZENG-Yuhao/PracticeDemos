@@ -6,16 +6,13 @@ import android.provider.BaseColumns;
 /**
  * Created by enzoz on 2016/3/11.
  */
-public final class UserContract
-{
-    public UserContract()
-    {
+public final class UserContract {
+    public UserContract() {
         // To prevent someone from accidentally instantiating the contract class,
         // give it an empty constructor.
     }
 
-    public static abstract class Entry implements BaseColumns
-    {
+    public static abstract class Entry implements BaseColumns {
         public static final String TABLE_NAME = "User";
         //public static final String COLUMN_NAME_USER_ID = "user_id";
         public static final String COLUMN_NAME_USER_NAME = "user_name";
