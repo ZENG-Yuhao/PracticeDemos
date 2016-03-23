@@ -13,7 +13,10 @@ import android.widget.OverScroller;
  */
 public class PullToRefreshListView extends ListView {
 
+    private final static int SCROLL_DURATION = 800;
     private OverScroller mScroller;
+
+
     private HeaderView mHeader;
     private int mHeaderHeight;
 
@@ -75,6 +78,17 @@ public class PullToRefreshListView extends ListView {
             finalHeight = mHeaderHeight;
         }
 
+        mScroller.startScroll(0, currHeight, 0, finalHeight, SCROLL_DURATION);
+        invalidate();
+    }
 
+    @Override
+    public void computeScroll() {
+        if (mScroller.computeScrollOffset()) {
+            // there is only header, no need if statement
+            mHeader.setVisibleHeight(mScroller.getCurrY());
+            postInvalidate();
+        }
+        super.computeScroll();
     }
 }

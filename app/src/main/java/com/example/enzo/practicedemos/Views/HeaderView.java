@@ -41,7 +41,7 @@ public class HeaderView extends LinearLayout {
         LinearLayout.LayoutParams layout_param = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
         layoutContainer = (LinearLayout) LayoutInflater.from(context).inflate(resId, null);
         addView(layoutContainer, layout_param);
-        setGravity(Gravity.CENTER);
+        setGravity(Gravity.BOTTOM);
     }
 
     public void setVisibleHeight(int height) {
