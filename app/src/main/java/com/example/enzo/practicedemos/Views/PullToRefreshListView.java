@@ -3,6 +3,7 @@ package com.example.enzo.practicedemos.Views;
 import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ListView;
@@ -14,11 +15,15 @@ import android.widget.OverScroller;
 public class PullToRefreshListView extends ListView {
 
     private final static int SCROLL_DURATION = 800;
+    private final static float OFFSET_RATIO = 1.8f;
     private OverScroller mScroller;
 
 
     private HeaderView mHeader;
     private int mHeaderHeight;
+    private int FIRST_VISIBLE = 0;
+
+    private float lastPosY = -1;
 
     public PullToRefreshListView(Context context) {
         super(context);
@@ -78,7 +83,7 @@ public class PullToRefreshListView extends ListView {
             finalHeight = mHeaderHeight;
         }
 
-        mScroller.startScroll(0, currHeight, 0, finalHeight, SCROLL_DURATION);
+        mScroller.startScroll(0, currHeight, 0, finalHeight - currHeight, SCROLL_DURATION);
         invalidate();
     }
 
@@ -90,5 +95,29 @@ public class PullToRefreshListView extends ListView {
             postInvalidate();
         }
         super.computeScroll();
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent ev) {
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                lastPosY = ev.getRawY();
+                break;
+
+            case MotionEvent.ACTION_MOVE:
+                final float deltaY = ev.getRawY() - lastPosY;
+                lastPosY = ev.getRawY();
+
+                if (getFirstVisiblePosition() == FIRST_VISIBLE && deltaY > 0) {
+                    updateHeaderHeight(deltaY / OFFSET_RATIO);
+                }
+                break;
+
+            default:
+                resetHeaderHeight();
+
+        }
+
+        return super.onTouchEvent(ev);
     }
 }

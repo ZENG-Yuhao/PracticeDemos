@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private BootstrapButton btn_shared_preferences;
     private BootstrapButton btn_sqlite;
     private BootstrapButton btn_activity_translate;
+    private BootstrapButton btn_pulltorefresh_listview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,5 +166,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        btn_pulltorefresh_listview = (BootstrapButton) findViewById(R.id.btn_pulltorefresh_listview);
+        btn_pulltorefresh_listview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, PullToRefreshListviewActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }
