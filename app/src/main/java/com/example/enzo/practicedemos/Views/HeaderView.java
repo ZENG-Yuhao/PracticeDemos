@@ -5,7 +5,10 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.enzo.practicedemos.R;
 
@@ -13,8 +16,14 @@ import com.example.enzo.practicedemos.R;
  * Created by Enzo(ZENG Yuhao) on 16/3/23.
  */
 public class HeaderView extends LinearLayout {
-    private int resId = R.layout.header; // default ressource id to inflate.
+    public final static int STATE_PULLING = 0;
+    public final static int STATE_REFRESHING = 1;
+
+    private int resId = R.layout.header_view; // default ressource id to inflate.
     private LinearLayout layoutContainer;
+    private ImageView img_arrow;
+    private ProgressBar progressBar;
+    private TextView txtvw_hint;
 
     public HeaderView(Context context) {
         super(context);
@@ -31,11 +40,11 @@ public class HeaderView extends LinearLayout {
         init(context);
     }
 
-    public HeaderView(Context context, int resId) {
-        super(context);
-        this.resId = resId;
-        init(context);
-    }
+//    public HeaderView(Context context, int resId) {
+//        super(context);
+//        this.resId = resId;
+//        init(context);
+//    }
 
     public void init(Context context) {
         LinearLayout.LayoutParams layout_param = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
