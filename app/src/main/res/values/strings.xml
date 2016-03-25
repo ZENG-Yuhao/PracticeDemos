@@ -6,4 +6,6 @@
     <string name="action_favorite">favorite</string>
     <string name="action_settings">settings</string>
     <string name="action_search">search</string>
+    <string name="header_hint_refresh_normal">Release to refresh</string>
+    <string name="header_hint_refresh_time">Time</string>
 </resources>
