@@ -21,9 +21,15 @@ public class PullToRefreshListView extends ListView {
 
     private HeaderView mHeader;
     private int mHeaderHeight;
-    private int FIRST_VISIBLE = 0;
+    private int FIRST_VISIBLE_POSITION = 0;
 
     private float lastPosY = -1;
+
+    private boolean mEnableRefresh = true;
+    private OnRefreshListener onRefreshListener;
+
+    private boolean mEnableLoad = true;
+    private OnLoadMoreListener onLoadMoreListener;
 
     public PullToRefreshListView(Context context) {
         super(context);
@@ -68,6 +74,22 @@ public class PullToRefreshListView extends ListView {
         }
     }
 
+    public void setOnRefreshListener(OnRefreshListener listener) {
+        onRefreshListener = listener;
+    }
+
+    public void setOnLoadMoreListner(OnLoadMoreListener listner) {
+        onLoadMoreListener = listner;
+    }
+
+    public void setEnableRefresh(boolean state) {
+        mEnableRefresh = state;
+    }
+
+    public void setEnableLoad(boolean state) {
+        mEnableLoad = state;
+    }
+
     private void updateHeaderHeight(float delta) {
         mHeader.setVisibleHeight((int) delta + mHeader.getVisibleHeight());
         // set the currently selected item
@@ -108,7 +130,7 @@ public class PullToRefreshListView extends ListView {
                 final float deltaY = ev.getRawY() - lastPosY;
                 lastPosY = ev.getRawY();
 
-                if (getFirstVisiblePosition() == FIRST_VISIBLE && deltaY > 0) {
+                if (getFirstVisiblePosition() == FIRST_VISIBLE_POSITION && deltaY > 0) {
                     updateHeaderHeight(deltaY / OFFSET_RATIO);
                 }
                 break;
@@ -119,5 +141,13 @@ public class PullToRefreshListView extends ListView {
         }
 
         return super.onTouchEvent(ev);
+    }
+
+    public interface OnRefreshListener {
+        void onRefresh();
+    }
+
+    public interface OnLoadMoreListener {
+        void onLoadMore();
     }
 }

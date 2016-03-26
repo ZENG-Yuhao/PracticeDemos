@@ -90,6 +90,10 @@ public class HeaderView extends LinearLayout {
         currState = state;
     }
 
+    public void setDate(String str_date) {
+        txtvw_date.setText(str_date);
+    }
+
     public void setVisibleHeight(int height) {
         if (height < 0) height = 0;
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) layoutContainer.getLayoutParams();
