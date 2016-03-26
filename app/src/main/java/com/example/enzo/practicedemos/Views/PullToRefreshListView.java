@@ -16,20 +16,22 @@ public class PullToRefreshListView extends ListView {
 
     private final static int SCROLL_DURATION = 800;
     private final static float OFFSET_RATIO = 1.8f;
-    private OverScroller mScroller;
 
+    private OverScroller xScroller;
+    private boolean xEnableScroll = true;
 
-    private HeaderView mHeader;
-    private int mHeaderHeight;
+    private HeaderView xHeader;
+    private int xHeaderHeight;
     private int FIRST_VISIBLE_POSITION = 0;
+    private boolean isRefreshing = false;
 
     private float lastPosY = -1;
 
-    private boolean mEnableRefresh = true;
-    private OnRefreshListener onRefreshListener;
+    private boolean xEnableRefresh = true;
+    private OnRefreshListener xRefreshListener;
 
-    private boolean mEnableLoad = true;
-    private OnLoadMoreListener onLoadMoreListener;
+    private boolean xEnableLoad = true;
+    private OnLoadMoreListener xLoadMoreListener;
 
     public PullToRefreshListView(Context context) {
         super(context);
@@ -47,19 +49,19 @@ public class PullToRefreshListView extends ListView {
     }
 
     public void init(Context context) {
-        mScroller = new OverScroller(context, new DecelerateInterpolator());
+        xScroller = new OverScroller(context, new DecelerateInterpolator());
 
         // initialize header
-        mHeader = new HeaderView(context);
-        addHeaderView(mHeader);
+        xHeader = new HeaderView(context);
+        addHeaderView(xHeader);
 
         // init header height, this method used to avoid getting 0 values of view's width and height when onCreate()
-        ViewTreeObserver observer = mHeader.getViewTreeObserver();
+        ViewTreeObserver observer = xHeader.getViewTreeObserver();
         if (null != observer) {
             observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                 @Override
                 public void onGlobalLayout() {
-                    mHeaderHeight = mHeader.getHeight();
+                    xHeaderHeight = xHeader.getHeight();
                     ViewTreeObserver observerLocal = getViewTreeObserver();
 
                     if (null != observerLocal) {
@@ -75,45 +77,45 @@ public class PullToRefreshListView extends ListView {
     }
 
     public void setOnRefreshListener(OnRefreshListener listener) {
-        onRefreshListener = listener;
+        xRefreshListener = listener;
     }
 
-    public void setOnLoadMoreListner(OnLoadMoreListener listner) {
-        onLoadMoreListener = listner;
+    public void setOnLoadMoreListner(OnLoadMoreListener listener) {
+        xLoadMoreListener = listener;
     }
 
     public void setEnableRefresh(boolean state) {
-        mEnableRefresh = state;
+        xEnableRefresh = state;
     }
 
     public void setEnableLoad(boolean state) {
-        mEnableLoad = state;
+        xEnableLoad = state;
     }
 
     private void updateHeaderHeight(float delta) {
-        mHeader.setVisibleHeight((int) delta + mHeader.getVisibleHeight());
+        xHeader.setVisibleHeight((int) delta + xHeader.getVisibleHeight());
         // set the currently selected item
         setSelection(0);
     }
 
     private void resetHeaderHeight() {
-        int currHeight = mHeader.getVisibleHeight();
+        int currHeight = xHeader.getVisibleHeight();
         if (currHeight == 0) return;
 
         int finalHeight = 0;
-        if (currHeight > mHeaderHeight) {
-            finalHeight = mHeaderHeight;
+        if (isRefreshing && currHeight > xHeaderHeight) {
+            finalHeight = xHeaderHeight;
         }
 
-        mScroller.startScroll(0, currHeight, 0, finalHeight - currHeight, SCROLL_DURATION);
+        xScroller.startScroll(0, currHeight, 0, finalHeight - currHeight, SCROLL_DURATION);
         invalidate();
     }
 
     @Override
     public void computeScroll() {
-        if (mScroller.computeScrollOffset()) {
+        if (xScroller.computeScrollOffset()) {
             // there is only header, no need if statement
-            mHeader.setVisibleHeight(mScroller.getCurrY());
+            xHeader.setVisibleHeight(xScroller.getCurrY());
             postInvalidate();
         }
         super.computeScroll();
@@ -130,17 +132,43 @@ public class PullToRefreshListView extends ListView {
                 final float deltaY = ev.getRawY() - lastPosY;
                 lastPosY = ev.getRawY();
 
-                if (getFirstVisiblePosition() == FIRST_VISIBLE_POSITION && deltaY > 0) {
+                if (getFirstVisiblePosition() == FIRST_VISIBLE_POSITION && deltaY > 0 && !isRefreshing) {
                     updateHeaderHeight(deltaY / OFFSET_RATIO);
                 }
                 break;
 
             default:
+                if (getFirstVisiblePosition() == FIRST_VISIBLE_POSITION) {
+                    if (xEnableRefresh && xHeader.getVisibleHeight() > xHeaderHeight) {
+                        isRefreshing = true;
+                        xHeader.setState(HeaderView.STATE_REFRESHING);
+                        refresh();
+                    }
+                }
                 resetHeaderHeight();
 
         }
 
         return super.onTouchEvent(ev);
+    }
+
+    public void refresh() {
+        if (null != xRefreshListener) {
+            xRefreshListener.onRefresh();
+        }
+    }
+
+    public void stopRefresh() {
+        if (isRefreshing) {
+            isRefreshing = false;
+            resetHeaderHeight();
+        }
+    }
+
+    public void loadMore() {
+        if (null != xLoadMoreListener) {
+            xLoadMoreListener.onLoadMore();
+        }
     }
 
     public interface OnRefreshListener {
