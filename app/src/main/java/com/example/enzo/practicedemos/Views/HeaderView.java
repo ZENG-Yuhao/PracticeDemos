@@ -16,7 +16,7 @@ import com.example.enzo.practicedemos.R;
  * Created by Enzo(ZENG Yuhao) on 16/3/23.
  */
 public class HeaderView extends LinearLayout {
-    public final static int STATE_PULLING = 0;
+    public final static int STATE_STAND_BY = 0;
     public final static int STATE_READY = 1;
     public final static int STATE_REFRESHING = 2;
 
@@ -24,9 +24,9 @@ public class HeaderView extends LinearLayout {
     private LinearLayout layoutContainer;
     private ImageView img_arrow;
     private ProgressBar progressBar;
-    private TextView txtvw_hint;
+    private TextView txtvw_info, txtvw_date;
 
-    private int currState = STATE_PULLING;
+    private int currState = STATE_STAND_BY;
 
     public HeaderView(Context context) {
         super(context);
@@ -54,6 +54,40 @@ public class HeaderView extends LinearLayout {
         layoutContainer = (LinearLayout) LayoutInflater.from(context).inflate(resId, null);
         addView(layoutContainer, layout_param);
         setGravity(Gravity.BOTTOM);
+
+        img_arrow = (ImageView) findViewById(R.id.header_view_img_arrow);
+        txtvw_info = (TextView) findViewById(R.id.header_view_txtvw_info);
+        txtvw_date = (TextView) findViewById(R.id.header_view_txtvw_date);
+        progressBar = (ProgressBar) findViewById(R.id.header_view_progressbar);
+    }
+
+    public void setState(int state) {
+        if (state == currState) return;
+
+        switch (state) {
+            case STATE_STAND_BY:
+                img_arrow.setVisibility(VISIBLE);
+                progressBar.setVisibility(INVISIBLE);
+                txtvw_info.setText(R.string.header_view_hint_standby);
+                break;
+
+            case STATE_READY:
+                img_arrow.setVisibility(INVISIBLE);
+                progressBar.setVisibility(INVISIBLE);
+                txtvw_info.setText(R.string.header_view_hint_ready);
+                break;
+
+            case STATE_REFRESHING:
+                img_arrow.setVisibility(INVISIBLE);
+                progressBar.setVisibility(VISIBLE);
+                txtvw_info.setText(R.string.header_view_hint_refreshing);
+                break;
+
+            default:
+                // Error Exception
+        }
+
+        currState = state;
     }
 
     public void setVisibleHeight(int height) {
