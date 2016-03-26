@@ -3,7 +3,6 @@ package com.example.enzo.practicedemos.Views;
 import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
@@ -123,7 +122,8 @@ public class PullToRefreshListView extends ListView {
         if (isRefreshing && currHeight > xHeaderHeight) {
             finalHeight = xHeaderHeight;
         }
-        Log.i("resetHeaderHeight", "--resetHeaderHeight-->" + currHeight + "," + xHeaderHeight);
+        setSelection(0);
+        //Log.i("resetHeaderHeight", "--resetHeaderHeight-->" + currHeight + "," + xHeaderHeight);
         xScroller.startScroll(0, currHeight, 0, finalHeight - currHeight, SCROLL_DURATION);
         invalidate();
     }
@@ -143,15 +143,19 @@ public class PullToRefreshListView extends ListView {
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 lastPosY = ev.getRawY();
+                //Log.i("ACTION_DOWN", "--ACTION_DOWN-->" + lastPosY);
                 break;
 
             case MotionEvent.ACTION_MOVE:
                 final float deltaY = ev.getRawY() - lastPosY;
                 lastPosY = ev.getRawY();
 
-                if (getFirstVisiblePosition() == FIRST_VISIBLE_POSITION && deltaY > 0 && !isRefreshing) {
+                // when getVisibleHeight()>0, deltaY can <0 or >0, otherwise deltaY must >0
+                if (getFirstVisiblePosition() == FIRST_VISIBLE_POSITION && (xHeader.getVisibleHeight() > 0 || deltaY >
+                        0)) {
                     updateHeaderHeight(deltaY / OFFSET_RATIO);
                 }
+                //Log.i("ACTION_DOWN", "----ACTION_MOVE-->" + lastPosY + "," + deltaY);
                 break;
 
             default:
@@ -159,9 +163,10 @@ public class PullToRefreshListView extends ListView {
                     if (xEnableRefresh && xHeader.getVisibleHeight() > xHeaderHeight) {
                         isRefreshing = true;
                         xHeader.setState(HeaderView.STATE_REFRESHING);
-                        resetHeaderHeight();
                         refresh();
+                        resetHeaderHeight();
                     }
+                    resetHeaderHeight();
                 }
                 break;
         }
