@@ -3,11 +3,15 @@ package com.example.enzo.practicedemos.Views;
 import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ListView;
 import android.widget.OverScroller;
+import android.widget.RelativeLayout;
+
+import com.example.enzo.practicedemos.R;
 
 /**
  * Created by Enzo(ZENG Yuhao) on 16/3/23.
@@ -21,6 +25,7 @@ public class PullToRefreshListView extends ListView {
     private boolean xEnableScroll = true;
 
     private HeaderView xHeader;
+    private RelativeLayout xHeaderContent;
     private int xHeaderHeight;
     private int FIRST_VISIBLE_POSITION = 0;
     private boolean isRefreshing = false;
@@ -54,6 +59,7 @@ public class PullToRefreshListView extends ListView {
         // initialize header
         xHeader = new HeaderView(context);
         addHeaderView(xHeader);
+        xHeaderContent = (RelativeLayout) xHeader.findViewById(R.id.header_view_content);
 
         // init header height, this method used to avoid getting 0 values of view's width and height when onCreate()
         ViewTreeObserver observer = xHeader.getViewTreeObserver();
@@ -61,7 +67,7 @@ public class PullToRefreshListView extends ListView {
             observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                 @Override
                 public void onGlobalLayout() {
-                    xHeaderHeight = xHeader.getHeight();
+                    xHeaderHeight = xHeaderContent.getHeight();
                     ViewTreeObserver observerLocal = getViewTreeObserver();
 
                     if (null != observerLocal) {
@@ -94,6 +100,15 @@ public class PullToRefreshListView extends ListView {
 
     private void updateHeaderHeight(float delta) {
         xHeader.setVisibleHeight((int) delta + xHeader.getVisibleHeight());
+
+        if (xEnableRefresh && !isRefreshing) {
+            if (xHeader.getVisibleHeight() > xHeaderHeight) {
+                xHeader.setState(HeaderView.STATE_READY);
+            } else {
+                xHeader.setState(HeaderView.STATE_STAND_BY);
+            }
+        }
+
         // set the currently selected item
         setSelection(0);
     }
@@ -102,11 +117,13 @@ public class PullToRefreshListView extends ListView {
         int currHeight = xHeader.getVisibleHeight();
         if (currHeight == 0) return;
 
+        if (isRefreshing && currHeight <= xHeaderHeight) return;
+
         int finalHeight = 0;
         if (isRefreshing && currHeight > xHeaderHeight) {
             finalHeight = xHeaderHeight;
         }
-
+        Log.i("resetHeaderHeight", "--resetHeaderHeight-->" + currHeight + "," + xHeaderHeight);
         xScroller.startScroll(0, currHeight, 0, finalHeight - currHeight, SCROLL_DURATION);
         invalidate();
     }
@@ -142,10 +159,11 @@ public class PullToRefreshListView extends ListView {
                     if (xEnableRefresh && xHeader.getVisibleHeight() > xHeaderHeight) {
                         isRefreshing = true;
                         xHeader.setState(HeaderView.STATE_REFRESHING);
+                        resetHeaderHeight();
                         refresh();
                     }
-                    resetHeaderHeight();
                 }
+                break;
         }
 
         return super.onTouchEvent(ev);

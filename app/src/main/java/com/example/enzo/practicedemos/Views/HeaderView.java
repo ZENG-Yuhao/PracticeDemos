@@ -55,6 +55,8 @@ public class HeaderView extends LinearLayout {
         addView(layoutContainer, layout_param);
         setGravity(Gravity.BOTTOM);
 
+        setState(STATE_STAND_BY);
+
         img_arrow = (ImageView) findViewById(R.id.header_view_img_arrow);
         txtvw_info = (TextView) findViewById(R.id.header_view_txtvw_info);
         txtvw_date = (TextView) findViewById(R.id.header_view_txtvw_date);
