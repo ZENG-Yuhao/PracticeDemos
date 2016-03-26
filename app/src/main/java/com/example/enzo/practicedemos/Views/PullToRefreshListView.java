@@ -144,9 +144,8 @@ public class PullToRefreshListView extends ListView {
                         xHeader.setState(HeaderView.STATE_REFRESHING);
                         refresh();
                     }
+                    resetHeaderHeight();
                 }
-                resetHeaderHeight();
-
         }
 
         return super.onTouchEvent(ev);
@@ -163,6 +162,10 @@ public class PullToRefreshListView extends ListView {
             isRefreshing = false;
             resetHeaderHeight();
         }
+    }
+
+    public void setUpdateTime(String updateTime) {
+        xHeader.setUpdateTime(updateTime);
     }
 
     public void loadMore() {

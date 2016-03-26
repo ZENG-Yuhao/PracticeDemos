@@ -9,6 +9,10 @@ import com.example.enzo.practicedemos.Core.Toolkit.ListItemInflator;
 import com.example.enzo.practicedemos.R;
 import com.example.enzo.practicedemos.Views.PullToRefreshListView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class PullToRefreshListviewActivity extends AppCompatActivity {
 
     PullToRefreshListView listview;
@@ -30,10 +34,16 @@ public class PullToRefreshListviewActivity extends AppCompatActivity {
                     public void run() {
                         Toast.makeText(PullToRefreshListviewActivity.this, "Refresh finished.", Toast.LENGTH_LONG)
                                 .show();
-                        ;
+                        listview.setUpdateTime(getTime());
+                        listview.stopRefresh();
                     }
                 }, 2000);
+
             }
         });
+    }
+
+    private String getTime() {
+        return new SimpleDateFormat("MM-dd HH:mm", Locale.FRANCE).format(new Date());
     }
 }

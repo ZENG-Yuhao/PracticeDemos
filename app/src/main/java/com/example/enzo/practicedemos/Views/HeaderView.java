@@ -90,7 +90,7 @@ public class HeaderView extends LinearLayout {
         currState = state;
     }
 
-    public void setDate(String str_date) {
+    public void setUpdateTime(String str_date) {
         txtvw_date.setText(str_date);
     }
 
