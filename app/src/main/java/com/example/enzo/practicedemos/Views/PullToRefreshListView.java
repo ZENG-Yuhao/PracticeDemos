@@ -126,6 +126,8 @@ public class PullToRefreshListView extends ListView {
         //Log.i("resetHeaderHeight", "--resetHeaderHeight-->" + currHeight + "," + xHeaderHeight);
         xScroller.startScroll(0, currHeight, 0, finalHeight - currHeight, SCROLL_DURATION);
         invalidate();
+
+        setSelection(0);
     }
 
     @Override
