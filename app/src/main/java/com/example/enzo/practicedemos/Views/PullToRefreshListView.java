@@ -126,7 +126,7 @@ public class PullToRefreshListView extends ListView {
         //Log.i("resetHeaderHeight", "--resetHeaderHeight-->" + currHeight + "," + xHeaderHeight);
         xScroller.startScroll(0, currHeight, 0, finalHeight - currHeight, SCROLL_DURATION);
         invalidate();
-
+        //setAdapter(this.getAdapter());
         setSelection(0);
     }
 
@@ -184,6 +184,7 @@ public class PullToRefreshListView extends ListView {
     public void stopRefresh() {
         if (isRefreshing) {
             isRefreshing = false;
+            smoothScrollToPosition(0);
             resetHeaderHeight();
         }
     }

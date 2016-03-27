@@ -5,6 +5,8 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -20,11 +22,15 @@ public class HeaderView extends LinearLayout {
     public final static int STATE_READY = 1;
     public final static int STATE_REFRESHING = 2;
 
+    public final static int ROTATE_ANIM_DURATION = 180;
+
     private int resId = R.layout.header_view; // default ressource id to inflate.
-    private LinearLayout layoutContainer;
-    private ImageView img_arrow;
-    private ProgressBar progressBar;
-    private TextView txtvw_info, txtvw_date;
+    private LinearLayout xLayoutContainer;
+    private ImageView xImgArrow;
+    private ProgressBar xProgressBar;
+    private TextView xTextViewInfo, xTextViewDate;
+
+    private RotateAnimation xAnimUptoDown, xAnimDownToUp;
 
     private int currState = STATE_STAND_BY;
 
@@ -51,16 +57,26 @@ public class HeaderView extends LinearLayout {
 
     public void init(Context context) {
         LinearLayout.LayoutParams layout_param = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
-        layoutContainer = (LinearLayout) LayoutInflater.from(context).inflate(resId, null);
-        addView(layoutContainer, layout_param);
+        xLayoutContainer = (LinearLayout) LayoutInflater.from(context).inflate(resId, null);
+        addView(xLayoutContainer, layout_param);
         setGravity(Gravity.BOTTOM);
 
         setState(STATE_STAND_BY);
 
-        img_arrow = (ImageView) findViewById(R.id.header_view_img_arrow);
-        txtvw_info = (TextView) findViewById(R.id.header_view_txtvw_info);
-        txtvw_date = (TextView) findViewById(R.id.header_view_txtvw_date);
-        progressBar = (ProgressBar) findViewById(R.id.header_view_progressbar);
+        xImgArrow = (ImageView) findViewById(R.id.header_view_img_arrow);
+        xTextViewInfo = (TextView) findViewById(R.id.header_view_txtvw_info);
+        xTextViewDate = (TextView) findViewById(R.id.header_view_txtvw_date);
+        xProgressBar = (ProgressBar) findViewById(R.id.header_view_progressbar);
+
+        xAnimDownToUp = new RotateAnimation(0.0f, -180.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation
+                .RELATIVE_TO_SELF, 0.5f);
+        xAnimDownToUp.setDuration(ROTATE_ANIM_DURATION);
+        xAnimDownToUp.setFillAfter(true);
+        xAnimUptoDown = new RotateAnimation(-180.0f, 0.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation
+                .RELATIVE_TO_SELF, 0.5f);
+        xAnimUptoDown.setDuration(ROTATE_ANIM_DURATION);
+        xAnimUptoDown.setFillAfter(true);
+
     }
 
     public void setState(int state) {
@@ -68,21 +84,32 @@ public class HeaderView extends LinearLayout {
 
         switch (state) {
             case STATE_STAND_BY:
-                img_arrow.setVisibility(VISIBLE);
-                progressBar.setVisibility(INVISIBLE);
-                txtvw_info.setText(R.string.header_view_hint_standby);
+                xImgArrow.setVisibility(VISIBLE);
+                //xImgArrow.setImageResource(R.drawable.arrow_down);
+                if (currState == STATE_READY) {
+                    xImgArrow.clearAnimation();
+                    xImgArrow.startAnimation(xAnimUptoDown);
+                }
+                xProgressBar.setVisibility(INVISIBLE);
+                xTextViewInfo.setText(R.string.header_view_hint_standby);
                 break;
 
             case STATE_READY:
-                img_arrow.setVisibility(INVISIBLE);
-                progressBar.setVisibility(INVISIBLE);
-                txtvw_info.setText(R.string.header_view_hint_ready);
+                xImgArrow.setVisibility(VISIBLE);
+                //xImgArrow.setImageResource(R.drawable.arrow_up);
+                if (currState == STATE_STAND_BY) {
+                    xImgArrow.clearAnimation();
+                    xImgArrow.startAnimation(xAnimDownToUp);
+                }
+                xProgressBar.setVisibility(INVISIBLE);
+                xTextViewInfo.setText(R.string.header_view_hint_ready);
                 break;
 
             case STATE_REFRESHING:
-                img_arrow.setVisibility(INVISIBLE);
-                progressBar.setVisibility(VISIBLE);
-                txtvw_info.setText(R.string.header_view_hint_refreshing);
+                xImgArrow.clearAnimation();
+                xImgArrow.setVisibility(INVISIBLE);
+                xProgressBar.setVisibility(VISIBLE);
+                xTextViewInfo.setText(R.string.header_view_hint_refreshing);
                 break;
 
             default:
@@ -93,17 +120,17 @@ public class HeaderView extends LinearLayout {
     }
 
     public void setUpdateTime(String str_date) {
-        txtvw_date.setText(str_date);
+        xTextViewDate.setText(str_date);
     }
 
     public void setVisibleHeight(int height) {
         if (height < 0) height = 0;
-        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) layoutContainer.getLayoutParams();
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) xLayoutContainer.getLayoutParams();
         layoutParams.height = height;
-        layoutContainer.setLayoutParams(layoutParams);
+        xLayoutContainer.setLayoutParams(layoutParams);
     }
 
     public int getVisibleHeight() {
-        return layoutContainer.getHeight();
+        return xLayoutContainer.getHeight();
     }
 }
