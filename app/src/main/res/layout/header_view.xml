@@ -58,7 +58,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="25dp"
             android:layout_toLeftOf="@id/header_view_layout_texts"
-            android:src="@drawable/ic_refresh_black_48dp"
+            android:src="@drawable/ic_action_replay"
             android:visibility="gone"/>
 
         <ImageView

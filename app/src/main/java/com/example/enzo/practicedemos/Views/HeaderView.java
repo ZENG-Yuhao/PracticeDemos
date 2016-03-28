@@ -77,8 +77,8 @@ public class HeaderView extends LinearLayout {
         xAnimUptoDown.setDuration(ROTATE_ANIM_DURATION);
         xAnimUptoDown.setFillAfter(true);
 
-        xAnimRotate = new RotateAnimation(0.0f, 360.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
-                0.5f);
+        xAnimRotate = new RotateAnimation(0.0f, -360.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
+                0.57f);
         xAnimRotate.setDuration(700);
         xAnimRotate.setRepeatCount(-1);
         xAnimRotate.setInterpolator(new LinearInterpolator());

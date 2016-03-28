@@ -25,7 +25,7 @@
             android:layout_centerInParent="true"
             android:layout_marginRight="15dp"
             android:layout_toLeftOf="@id/footer_view_txtvw_loading"
-            android:src="@drawable/ic_refresh_black_48dp"
+            android:src="@drawable/ic_action_replay"
             android:textSize="12sp"/>
     </RelativeLayout>
 
