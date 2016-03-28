@@ -5,6 +5,8 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,7 +20,7 @@ public class FooterView extends LinearLayout {
 
     private LinearLayout xLayoutContainer;
     private ImageView xImgRefreshIcon;
-    private RotateAnimation xRotateAnim;
+    private RotateAnimation xAnimRotate;
 
     public FooterView(Context context) {
         super(context);
@@ -43,6 +45,14 @@ public class FooterView extends LinearLayout {
 
         xImgRefreshIcon = (ImageView) findViewById(R.id.footer_view_img_refresh_icon);
 
+        xAnimRotate = new RotateAnimation(0.0f, 360.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
+                0.5f);
+        xAnimRotate.setDuration(700);
+        xAnimRotate.setRepeatCount(-1);
+        xAnimRotate.setInterpolator(new LinearInterpolator());
+        xAnimRotate.setFillAfter(true);
+
+        startAnimation();
     }
 
     public int getMarginBottom() {
@@ -75,11 +85,11 @@ public class FooterView extends LinearLayout {
         setVisibleHeight(0);
     }
 
-    public void startLoading() {
-
+    public void startAnimation() {
+        xImgRefreshIcon.startAnimation(xAnimRotate);
     }
 
-    public void stopLoading() {
-
+    public void stopAnimation() {
+        xImgRefreshIcon.clearAnimation();
     }
 }

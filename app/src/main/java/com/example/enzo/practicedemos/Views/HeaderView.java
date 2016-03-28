@@ -2,16 +2,13 @@ package com.example.enzo.practicedemos.Views;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.enzo.practicedemos.R;
@@ -33,7 +30,7 @@ public class HeaderView extends LinearLayout {
     //private ProgressBar xProgressBar;
     private TextView xTextViewInfo, xTextViewDate;
 
-    private RotateAnimation xAnimUptoDown, xAnimDownToUp, xAnimRepeat;
+    private RotateAnimation xAnimUptoDown, xAnimDownToUp, xAnimRotate;
 
     private int currState = STATE_STAND_BY;
 
@@ -80,12 +77,12 @@ public class HeaderView extends LinearLayout {
         xAnimUptoDown.setDuration(ROTATE_ANIM_DURATION);
         xAnimUptoDown.setFillAfter(true);
 
-        xAnimRepeat = new RotateAnimation(0.0f, 360.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
+        xAnimRotate = new RotateAnimation(0.0f, 360.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
                 0.5f);
-        xAnimRepeat.setDuration(700);
-        xAnimRepeat.setRepeatCount(-1);
-        xAnimRepeat.setInterpolator(new LinearInterpolator());
-        xAnimRepeat.setFillAfter(true);
+        xAnimRotate.setDuration(700);
+        xAnimRotate.setRepeatCount(-1);
+        xAnimRotate.setInterpolator(new LinearInterpolator());
+        xAnimRotate.setFillAfter(true);
 
     }
 
@@ -121,7 +118,7 @@ public class HeaderView extends LinearLayout {
                 break;
 
             case STATE_REFRESHING:
-                xImgRefreshIcon.startAnimation(xAnimRepeat);
+                xImgRefreshIcon.startAnimation(xAnimRotate);
                 xTextViewInfo.setText(R.string.header_view_hint_refreshing);
                 break;
 
