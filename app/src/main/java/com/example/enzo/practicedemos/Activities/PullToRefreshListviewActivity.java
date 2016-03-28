@@ -9,14 +9,10 @@ import com.example.enzo.practicedemos.Core.Toolkit.ListItemInflator;
 import com.example.enzo.practicedemos.R;
 import com.example.enzo.practicedemos.Views.PullToRefreshListView;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 public class PullToRefreshListviewActivity extends AppCompatActivity {
 
     PullToRefreshListView listview;
-    Handler xHandler;
+    Handler xHandlerHeader, xHandlerFooter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,20 +21,35 @@ public class PullToRefreshListviewActivity extends AppCompatActivity {
 
         listview = (PullToRefreshListView) findViewById(R.id.listview_pulltorefresh);
         ListItemInflator.inflate(this, listview);
-        xHandler = new Handler();
+        xHandlerHeader = new Handler();
+        xHandlerFooter = new Handler();
         listview.setOnRefreshListener(new PullToRefreshListView.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                xHandler.postDelayed(new Runnable() {
+                xHandlerHeader.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(PullToRefreshListviewActivity.this, "Refresh finished.", Toast.LENGTH_LONG)
+                        Toast.makeText(PullToRefreshListviewActivity.this, "Refreshing finished.", Toast.LENGTH_SHORT)
                                 .show();
                         listview.setUpdateTime();
-                        listview.stopRefresh();
+                        listview.stopRefreshing();
                     }
                 }, 2000);
 
+            }
+        });
+
+        listview.setOnLoadMoreListner(new PullToRefreshListView.OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                xHandlerFooter.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(PullToRefreshListviewActivity.this, "Loading finished.", Toast.LENGTH_SHORT)
+                                .show();
+                        listview.stopLoading();
+                    }
+                }, 2000);
             }
         });
     }

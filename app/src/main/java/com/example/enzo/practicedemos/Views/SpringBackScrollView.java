@@ -14,9 +14,10 @@ import android.widget.ScrollView;
  */
 public class SpringBackScrollView extends ScrollView {
     private static final int MAX_Y_OVERSCROLL_DISTANCE = 100;
+    private int mMaxYOverscrollDistance;
     private static final String TAG = "SpringBackScrollView";
     private boolean flag = false, btnClicked = false;
-    private int mMaxYOverscrollDistance;
+
     private View topView;
     private View outsideTopView;
     private RelativeLayout.LayoutParams params;
@@ -91,11 +92,6 @@ public class SpringBackScrollView extends ScrollView {
 
     }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-    }
 
     public void invokeOverScrollBy() {
         mScrollByRecorder.invokeOverScrollBy();
@@ -139,7 +135,7 @@ public class SpringBackScrollView extends ScrollView {
 
         int newDeltaY = (deltaY + 2) / 2;
         if (flag) {
-            return super.overScrollBy(deltaX, 0, scrollX, scrollY, scrollRangeX, scrollRangeY, maxOverScrollX,
+            return super.overScrollBy(deltaX, deltaY, scrollX, scrollY, scrollRangeX, scrollRangeY, maxOverScrollX,
                     mMaxYOverscrollDistance, isTouchEvent);
         } else {
             return super.overScrollBy(deltaX, deltaY, scrollX, scrollY, scrollRangeX, scrollRangeY, maxOverScrollX,
