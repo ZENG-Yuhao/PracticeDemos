@@ -34,16 +34,12 @@ public class PullToRefreshListviewActivity extends AppCompatActivity {
                     public void run() {
                         Toast.makeText(PullToRefreshListviewActivity.this, "Refresh finished.", Toast.LENGTH_LONG)
                                 .show();
-                        listview.setUpdateTime(getTime());
+                        listview.setUpdateTime();
                         listview.stopRefresh();
                     }
                 }, 2000);
 
             }
         });
-    }
-
-    private String getTime() {
-        return new SimpleDateFormat("MM-dd HH:mm", Locale.FRANCE).format(new Date());
     }
 }

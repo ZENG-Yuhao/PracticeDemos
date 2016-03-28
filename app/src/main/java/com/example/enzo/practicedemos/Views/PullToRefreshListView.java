@@ -6,11 +6,16 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.OverScroller;
 import android.widget.RelativeLayout;
 
 import com.example.enzo.practicedemos.R;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by Enzo(ZENG Yuhao) on 16/3/23.
@@ -19,21 +24,27 @@ public class PullToRefreshListView extends ListView {
 
     private final static int SCROLL_DURATION = 800;
     private final static float OFFSET_RATIO = 1.8f;
-
-    private OverScroller xScroller;
-    private boolean xEnableScroll = true;
-
-    private HeaderView xHeader;
-    private RelativeLayout xHeaderContent;
-    private int xHeaderHeight;
-    private int FIRST_VISIBLE_POSITION = 0;
-    private boolean isRefreshing = false;
+    private final static int SCROLL_TARGET_HEADER = 0;
+    private final static int SCROLL_TARGET_FOOTER = 1;
+    private final static int FIRST_VISIBLE_POSITION = 0;
 
     private float lastPosY = -1;
 
+    private OverScroller xScroller;
+    private boolean xEnableScroll = true;
+    private ListAdapter xAdapter;
+
+    // header config
+    private HeaderView xHeader;
+    private RelativeLayout xHeaderContent;
+    private int xHeaderHeight;
+    private boolean isRefreshing = false;
     private boolean xEnableRefresh = true;
     private OnRefreshListener xRefreshListener;
 
+    // footer config
+    private FooterView xFooter;
+    private boolean isLoading = false;
     private boolean xEnableLoad = true;
     private OnLoadMoreListener xLoadMoreListener;
 
@@ -57,10 +68,12 @@ public class PullToRefreshListView extends ListView {
 
         // initialize header
         xHeader = new HeaderView(context);
+        setUpdateTime();
         addHeaderView(xHeader);
         xHeaderContent = (RelativeLayout) xHeader.findViewById(R.id.header_view_content);
 
         // init header height, this method used to avoid getting 0 values of view's width and height when onCreate()
+        // in OnCreate(), height and width have not been valued yet.
         ViewTreeObserver observer = xHeader.getViewTreeObserver();
         if (null != observer) {
             observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -130,6 +143,25 @@ public class PullToRefreshListView extends ListView {
         setSelection(0);
     }
 
+    private void updateFooterHeight(float delta) {
+        xFooter.setVisibleHeight(xFooter.getVisibleHeight() + (int) delta);
+    }
+
+    private void resetFooterHeight() {
+        int currHeight = xFooter.getVisibleHeight();
+        if (currHeight == 0) return;
+
+        if (isLoading) {
+
+        }
+    }
+
+    @Override
+    public void setAdapter(ListAdapter adapter) {
+        super.setAdapter(adapter);
+        this.xAdapter = adapter;
+    }
+
     @Override
     public void computeScroll() {
         if (xScroller.computeScrollOffset()) {
@@ -189,8 +221,12 @@ public class PullToRefreshListView extends ListView {
         }
     }
 
-    public void setUpdateTime(String updateTime) {
-        xHeader.setUpdateTime(updateTime);
+    public void setUpdateTime() {
+        xHeader.setUpdateTime(getTime());
+    }
+
+    private String getTime() {
+        return new SimpleDateFormat("MM-dd HH:mm", Locale.FRANCE).format(new Date());
     }
 
     public void loadMore() {

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -27,7 +28,8 @@ public class HeaderView extends LinearLayout {
     private int resId = R.layout.header_view; // default ressource id to inflate.
     private LinearLayout xLayoutContainer;
     private ImageView xImgArrow;
-    private ProgressBar xProgressBar;
+    private ImageView xImgRefreshIcon;
+    //private ProgressBar xProgressBar;
     private TextView xTextViewInfo, xTextViewDate;
 
     private RotateAnimation xAnimUptoDown, xAnimDownToUp;
@@ -59,20 +61,19 @@ public class HeaderView extends LinearLayout {
         LinearLayout.LayoutParams layout_param = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
         xLayoutContainer = (LinearLayout) LayoutInflater.from(context).inflate(resId, null);
         addView(xLayoutContainer, layout_param);
-        setGravity(Gravity.BOTTOM);
-
         setState(STATE_STAND_BY);
 
         xImgArrow = (ImageView) findViewById(R.id.header_view_img_arrow);
         xTextViewInfo = (TextView) findViewById(R.id.header_view_txtvw_info);
         xTextViewDate = (TextView) findViewById(R.id.header_view_txtvw_date);
-        xProgressBar = (ProgressBar) findViewById(R.id.header_view_progressbar);
+        //xProgressBar = (ProgressBar) findViewById(R.id.header_view_progressbar);
+        xImgRefreshIcon = (ImageView) findViewById(R.id.header_view_img_refresh_icon);
 
         xAnimDownToUp = new RotateAnimation(0.0f, -180.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation
                 .RELATIVE_TO_SELF, 0.5f);
         xAnimDownToUp.setDuration(ROTATE_ANIM_DURATION);
         xAnimDownToUp.setFillAfter(true);
-        xAnimUptoDown = new RotateAnimation(-180.0f, 0.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation
+        xAnimUptoDown = new RotateAnimation(-180.0f, -360.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation
                 .RELATIVE_TO_SELF, 0.5f);
         xAnimUptoDown.setDuration(ROTATE_ANIM_DURATION);
         xAnimUptoDown.setFillAfter(true);
@@ -90,7 +91,8 @@ public class HeaderView extends LinearLayout {
                     xImgArrow.clearAnimation();
                     xImgArrow.startAnimation(xAnimUptoDown);
                 }
-                xProgressBar.setVisibility(INVISIBLE);
+                //xProgressBar.setVisibility(INVISIBLE);
+                xImgRefreshIcon.setVisibility(INVISIBLE);
                 xTextViewInfo.setText(R.string.header_view_hint_standby);
                 break;
 
@@ -101,14 +103,16 @@ public class HeaderView extends LinearLayout {
                     xImgArrow.clearAnimation();
                     xImgArrow.startAnimation(xAnimDownToUp);
                 }
-                xProgressBar.setVisibility(INVISIBLE);
+                //xProgressBar.setVisibility(INVISIBLE);
+                xImgRefreshIcon.setVisibility(INVISIBLE);
                 xTextViewInfo.setText(R.string.header_view_hint_ready);
                 break;
 
             case STATE_REFRESHING:
                 xImgArrow.clearAnimation();
                 xImgArrow.setVisibility(INVISIBLE);
-                xProgressBar.setVisibility(VISIBLE);
+                //xProgressBar.setVisibility(VISIBLE);
+                xImgRefreshIcon.setVisibility(VISIBLE);
                 xTextViewInfo.setText(R.string.header_view_hint_refreshing);
                 break;
 
