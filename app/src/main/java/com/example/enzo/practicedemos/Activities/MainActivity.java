@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private BootstrapButton btn_sqlite;
     private BootstrapButton btn_activity_translate;
     private BootstrapButton btn_pulltorefresh_listview;
+    private BootstrapButton btn_digital_indicator;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -176,5 +178,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btn_digital_indicator = (BootstrapButton) findViewById(R.id.btn_digital_indicator);
+        btn_digital_indicator.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, DigitalIndicatorActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
