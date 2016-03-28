@@ -190,8 +190,8 @@ public class PullToRefreshListView extends ListView {
             }
         }
 
-        // set the currently selected item
-        //setSelection(0);
+        // select the header, otherwise when we scroll to top, part of the header will be hidden by scrolling.
+        setSelection(0);
     }
 
     private void resetHeaderHeight() {
@@ -215,6 +215,7 @@ public class PullToRefreshListView extends ListView {
 
     private void updateFooterHeight(float delta) {
         xFooter.setVisibleHeight(xFooter.getVisibleHeight() + (int) delta);
+        //setSelection(xTotalItems + 1);
     }
 
     private void resetFooterHeight() {

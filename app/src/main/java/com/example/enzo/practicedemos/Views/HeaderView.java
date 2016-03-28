@@ -6,6 +6,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -32,7 +33,7 @@ public class HeaderView extends LinearLayout {
     //private ProgressBar xProgressBar;
     private TextView xTextViewInfo, xTextViewDate;
 
-    private RotateAnimation xAnimUptoDown, xAnimDownToUp;
+    private RotateAnimation xAnimUptoDown, xAnimDownToUp, xAnimRepeat;
 
     private int currState = STATE_STAND_BY;
 
@@ -63,6 +64,7 @@ public class HeaderView extends LinearLayout {
         addView(xLayoutContainer, layout_param);
         setState(STATE_STAND_BY);
 
+        xImgRefreshIcon = (ImageView) findViewById(R.id.footer_view_img_refresh_icon);
         xImgArrow = (ImageView) findViewById(R.id.header_view_img_arrow);
         xTextViewInfo = (TextView) findViewById(R.id.header_view_txtvw_info);
         xTextViewDate = (TextView) findViewById(R.id.header_view_txtvw_date);
@@ -78,41 +80,48 @@ public class HeaderView extends LinearLayout {
         xAnimUptoDown.setDuration(ROTATE_ANIM_DURATION);
         xAnimUptoDown.setFillAfter(true);
 
+        xAnimRepeat = new RotateAnimation(0.0f, 360.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
+                0.5f);
+        xAnimRepeat.setDuration(700);
+        xAnimRepeat.setRepeatCount(-1);
+        xAnimRepeat.setInterpolator(new LinearInterpolator());
+        xAnimRepeat.setFillAfter(true);
+
     }
 
     public void setState(int state) {
         if (state == currState) return;
 
+        if (state == STATE_REFRESHING) {
+            xImgArrow.setVisibility(INVISIBLE);
+            xImgArrow.clearAnimation();
+            xImgRefreshIcon.setVisibility(VISIBLE);
+        } else {
+            xImgArrow.setVisibility(VISIBLE);
+            xImgRefreshIcon.setVisibility(INVISIBLE);
+            xImgRefreshIcon.clearAnimation();
+        }
+
         switch (state) {
             case STATE_STAND_BY:
-                xImgArrow.setVisibility(VISIBLE);
-                //xImgArrow.setImageResource(R.drawable.arrow_down);
                 if (currState == STATE_READY) {
                     xImgArrow.clearAnimation();
                     xImgArrow.startAnimation(xAnimUptoDown);
                 }
-                //xProgressBar.setVisibility(INVISIBLE);
-                xImgRefreshIcon.setVisibility(INVISIBLE);
                 xTextViewInfo.setText(R.string.header_view_hint_standby);
                 break;
 
             case STATE_READY:
-                xImgArrow.setVisibility(VISIBLE);
                 //xImgArrow.setImageResource(R.drawable.arrow_up);
                 if (currState == STATE_STAND_BY) {
                     xImgArrow.clearAnimation();
                     xImgArrow.startAnimation(xAnimDownToUp);
                 }
-                //xProgressBar.setVisibility(INVISIBLE);
-                xImgRefreshIcon.setVisibility(INVISIBLE);
                 xTextViewInfo.setText(R.string.header_view_hint_ready);
                 break;
 
             case STATE_REFRESHING:
-                xImgArrow.clearAnimation();
-                xImgArrow.setVisibility(INVISIBLE);
-                //xProgressBar.setVisibility(VISIBLE);
-                xImgRefreshIcon.setVisibility(VISIBLE);
+                xImgRefreshIcon.startAnimation(xAnimRepeat);
                 xTextViewInfo.setText(R.string.header_view_hint_refreshing);
                 break;
 
