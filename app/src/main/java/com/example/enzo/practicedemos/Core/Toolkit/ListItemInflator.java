@@ -26,9 +26,9 @@ public class ListItemInflator {
         ArrayList<Map<String, Object>> list = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
             Map<String, Object> listItem = new HashMap<>();
-            listItem.put("title", "user " + i);
-            listItem.put("content", "this is content " + i);
-            listItem.put("points", "points" + i);
+            listItem.put("title", "User " + i);
+            listItem.put("content", "Content text " + i);
+            listItem.put("points", "points: " + i);
             list.add(listItem);
         }
         return list;
