@@ -16,6 +16,8 @@ public class PullToRefreshListviewActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        overridePendingTransition(R.anim.activity_translate_in_r2l, R.anim.activity_translate_out_r2l);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pull_to_refresh_listview);
 
@@ -52,5 +54,11 @@ public class PullToRefreshListviewActivity extends AppCompatActivity {
                 }, 2000);
             }
         });
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.activity_translate_in_l2r, R.anim.activity_translate_out_l2r);
     }
 }
