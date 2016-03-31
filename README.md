@@ -2,9 +2,9 @@
 Some practices when learning Android, different technical aspects are separated into different part. These practices are just personnal drafts, so there are few comments in the codes.
 
 ### Included aspects: ###
-```
+
   - Fragment
-  - Service
+  - [Service](#service)
   - BaseAdapter
   - Notification
   - AsynTask
@@ -21,4 +21,15 @@ Some practices when learning Android, different technical aspects are separated 
   - Shared Preferences
   - SQLite
   - ContentProvider & ContentResolver & CursorLoader & ContentObserver
-```
+  - [PullToRefreshListView](#pulltorefreshlistview)
+
+
+
+#### Service
+  <img src="https://github.com/ZENG-Yuhao/PracticeDemos/blob/master/Screenshots/service_ui.png" width="300" height="525">
+  <img src="https://github.com/ZENG-Yuhao/PracticeDemos/blob/master/Screenshots/service_start.png" width="300" height="525">
+  
+#### PullToRefreshListView
+  <img src="https://github.com/ZENG-Yuhao/PracticeDemos/blob/master/Screenshots/pulltorefreshlistview_pull.png" width="250" height="437"> 
+  <img src="https://github.com/ZENG-Yuhao/PracticeDemos/blob/master/Screenshots/pulltorefreshlistview_ready.png" width="250" height="437"> 
+  <img src="https://github.com/ZENG-Yuhao/PracticeDemos/blob/master/Screenshots/pulltorefreshlistview_loading.png" width="250" height="437"> 
