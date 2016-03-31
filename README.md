@@ -30,6 +30,7 @@ Some practices when learning Android, different technical aspects are separated 
   <img src="https://github.com/ZENG-Yuhao/PracticeDemos/blob/master/Screenshots/service_start.png" width="300" height="525">
   
 #### PullToRefreshListView
-  <img src="https://github.com/ZENG-Yuhao/PracticeDemos/blob/master/Screenshots/pulltorefreshlistview_pull.png" width="250" height="437"> 
-  <img src="https://github.com/ZENG-Yuhao/PracticeDemos/blob/master/Screenshots/pulltorefreshlistview_ready.png" width="250" height="437"> 
-  <img src="https://github.com/ZENG-Yuhao/PracticeDemos/blob/master/Screenshots/pulltorefreshlistview_loading.png" width="250" height="437"> 
+  <img src="https://github.com/ZENG-Yuhao/PracticeDemos/blob/master/Screenshots/pulltorefreshlistview_pull.png" width="300" height="525"> 
+  <img src="https://github.com/ZENG-Yuhao/PracticeDemos/blob/master/Screenshots/pulltorefreshlistview_ready.png" width="300" height="525"> 
+  <img src="https://github.com/ZENG-Yuhao/PracticeDemos/blob/master/Screenshots/pulltorefreshlistview_refreshing.png" width="300" height="525"> 
+  <img src="https://github.com/ZENG-Yuhao/PracticeDemos/blob/master/Screenshots/pulltorefreshlistview_loading.png" width="300" height="525">
