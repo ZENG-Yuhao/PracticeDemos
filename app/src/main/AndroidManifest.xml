@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.enzo.practicedemos">
+    package="com.example.enzo.practicedemos">
 
     <permission
         android:name="com.example.enzo.practicedemos.DB.Providers.UserProvider.READ_WRITE_USER"
-        android:protectionLevel="signature"/>
+        android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.example.enzo.practicedemos.DB.Providers.UserProvider.READ_WRITE_USER"/>
+    <uses-permission android:name="com.example.enzo.practicedemos.DB.Providers.UserProvider.READ_WRITE_USER" />
 
     <application
         android:name=".Core.MyApplication"
@@ -17,25 +17,22 @@
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity android:name=".Activities.MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.CreateServiceActivity"/>
+        <activity android:name=".Activities.CreateServiceActivity" />
 
         <service
             android:name=".Services.CreateService"
             android:enabled="true"
-            android:exported="true"/>
+            android:exported="true" />
 
-        <activity android:name=".Activities.DragAndDropActivity"/>
-        <activity android:name=".Activities.BaseAdapterActivity">
-        </activity>
-        <activity android:name=".Activities.PropertyAnimationActivity">
-        </activity>
-        <activity android:name=".Activities.SwipeViewActivity">
-        </activity>
+        <activity android:name=".Activities.DragAndDropActivity" />
+        <activity android:name=".Activities.BaseAdapterActivity"></activity>
+        <activity android:name=".Activities.PropertyAnimationActivity"></activity>
+        <activity android:name=".Activities.SwipeViewActivity"></activity>
         <activity
             android:name=".Activities.ToolBarActivity"
             android:parentActivityName=".Activities.MainActivity">
@@ -43,40 +40,29 @@
             <!-- Parent Activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.enzo.practicedemos.Activities.MainActivity"/>
+                android:value="com.example.enzo.practicedemos.Activities.MainActivity" />
         </activity>
-        <activity android:name=".Activities.DrawerLayoutActivity">
-        </activity>
-        <activity android:name=".Activities.HeaderFooterActivity">
-        </activity>
-        <activity android:name=".Activities.DataBindingActivity">
-        </activity>
-        <activity android:name=".Activities.DrawerPagerActivity">
-        </activity>
-        <activity android:name=".Activities.ContentProviderActivity">
-        </activity>
-        <activity android:name=".Activities.SharedPreferencesActivity">
-        </activity>
-        <activity android:name=".Activities.SQLiteActivity">
-        </activity>
+        <activity android:name=".Activities.DrawerLayoutActivity"></activity>
+        <activity android:name=".Activities.HeaderFooterActivity"></activity>
+        <activity android:name=".Activities.DataBindingActivity"></activity>
+        <activity android:name=".Activities.DrawerPagerActivity"></activity>
+        <activity android:name=".Activities.ContentProviderActivity"></activity>
+        <activity android:name=".Activities.SharedPreferencesActivity"></activity>
+        <activity android:name=".Activities.SQLiteActivity"></activity>
 
         <provider
             android:name=".DB.Providers.UserProvider"
             android:authorities="com.example.enzo.practicedemos.DB.Providers.UserProvider"
             android:exported="true"
             android:grantUriPermissions="true"
-            android:permission="com.example.enzo.practicedemos.DB.Providers.UserProvider.READ_WRITE_USER"/>
+            android:permission="com.example.enzo.practicedemos.DB.Providers.UserProvider.READ_WRITE_USER" />
 
-        <activity android:name=".Activities.TransitionActivity1">
-        </activity>
-        <activity android:name=".Activities.TransitionActivity2">
-        </activity>
-        <activity android:name=".Activities.OverScrollerActivity">
-        </activity>
-        <activity android:name=".Activities.PullToRefreshListviewActivity">
-        </activity>
-        <activity android:name=".Activities.DigitalIndicatorActivity">
-        </activity>
+        <activity android:name=".Activities.TransitionActivity1"></activity>
+        <activity android:name=".Activities.TransitionActivity2"></activity>
+        <activity android:name=".Activities.OverScrollerActivity"></activity>
+        <activity android:name=".Activities.PullToRefreshListviewActivity"></activity>
+        <activity android:name=".Activities.DigitalIndicatorActivity"></activity>
+        <activity android:name=".Activities.Main2Activity"></activity>
     </application>
 
 </manifest>
