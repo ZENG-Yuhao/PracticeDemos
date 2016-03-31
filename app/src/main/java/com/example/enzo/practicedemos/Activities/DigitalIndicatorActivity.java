@@ -3,9 +3,11 @@ package com.example.enzo.practicedemos.Activities;
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -20,12 +22,37 @@ public class DigitalIndicatorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_digital_indicator);
 
+
+
         img = (ImageView) findViewById(R.id.image_view);
+        Animator alphaAnim = ObjectAnimator.ofFloat(img, "alpha", 1f, 0f);
+        alphaAnim.setDuration(0);
 
-        in = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.card_flip_left_out);
-        out = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.card_flip_left_in);
+        Animator rotationXAnim = ObjectAnimator.ofFloat(img, "rotationX", -90f, 0f);
+        rotationXAnim.setDuration(250);
+        rotationXAnim.setInterpolator(new DecelerateInterpolator());
 
-        in.setTarget(img);
+        Animator rotationXAnim2 = ObjectAnimator.ofFloat(img, "rotationX", 0f, 90f);
+        rotationXAnim2.setDuration(250);
+        rotationXAnim2.setInterpolator(new DecelerateInterpolator());
+
+        Animator alphaAnim2 = ObjectAnimator.ofFloat(img, "alpha", 0f, 1f);
+        alphaAnim2.setDuration(125);
+
+
+        Animator alphaAnim3 = ObjectAnimator.ofFloat(img, "alpha", 1f, 0f);
+        alphaAnim2.setDuration(125);
+
+        in = new AnimatorSet();
+        in.play(rotationXAnim2).with(alphaAnim3);
+        out = new AnimatorSet();
+        out.play(alphaAnim).with(rotationXAnim).with(alphaAnim2);
+
+
+//        in = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.card_flip_left_out);
+//        out = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.card_flip_left_in);
+//
+//        in.setTarget(img);
         in.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
@@ -35,7 +62,6 @@ public class DigitalIndicatorActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animator animation) {
                 img.setImageResource(R.drawable.ic_number_green_5);
-                out.setTarget(img);
                 out.start();
             }
 
@@ -49,9 +75,9 @@ public class DigitalIndicatorActivity extends AppCompatActivity {
 
             }
         });
-        set = new AnimatorSet();
-        set.play(in).before(out);
-        set.setTarget(img);
+//        set = new AnimatorSet();
+//        set.play(in).before(out);
+//        set.setTarget(img);
 
 
 
@@ -59,7 +85,7 @@ public class DigitalIndicatorActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //img.setImageResource(R.drawable.ic_number_green_1);
+                img.setImageResource(R.drawable.ic_number_green_1);
                 in.start();
             }
         });

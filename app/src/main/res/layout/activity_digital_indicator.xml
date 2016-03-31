@@ -8,7 +8,6 @@
     <ImageView
         android:id="@+id/image_view"
         android:src="@drawable/ic_number_green_1"
-        android:background="@color/colorPrimary"
         android:layout_width="50dp"
         android:layout_height="50dp"/>
 
