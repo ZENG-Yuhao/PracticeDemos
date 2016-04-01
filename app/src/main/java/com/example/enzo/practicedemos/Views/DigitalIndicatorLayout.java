@@ -4,8 +4,10 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -134,11 +136,31 @@ public class DigitalIndicatorLayout extends LinearLayout {
         // from high bit to low bit
         // result in layout: L (high bit --- low bit) R
         for (int i = xNumDecimal - 1; i >= 0; i--) {
-            ImageView img = new ImageView(context);
+            final ImageView img = new ImageView(context);
             img.setId(i);
             img.setImageResource(IMG_SRC[0]);
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(60, 60);
-            img.setLayoutParams(lp);
+            ViewTreeObserver observer_header = this.getViewTreeObserver();
+            if (null != observer_header) {
+                observer_header.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        int height = getHeight();
+                        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(height, height);
+                        img.setLayoutParams(lp);
+                        ViewTreeObserver observerLocal = getViewTreeObserver();
+
+                        if (null != observerLocal) {
+                            // removeOnGlobalLayoutListener() is only supported by SDK later than JELLY_BEAN
+                            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN)
+                                observerLocal.removeGlobalOnLayoutListener(this);
+                            else
+                                observerLocal.removeOnGlobalLayoutListener(this);
+                        }
+                    }
+                });
+            }
+//            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(60, 60);
+//            img.setLayoutParams(lp);
             xDigitalImgs[i] = img;
             this.addView(img);
         }
