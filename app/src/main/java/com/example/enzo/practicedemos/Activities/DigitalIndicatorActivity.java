@@ -1,7 +1,6 @@
 package com.example.enzo.practicedemos.Activities;
 
 import android.animation.Animator;
-import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.support.v7.app.AppCompatActivity;
@@ -12,16 +11,18 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.enzo.practicedemos.R;
+import com.example.enzo.practicedemos.Views.DigitalIndicatorLayout;
 
 public class DigitalIndicatorActivity extends AppCompatActivity {
     private ImageView img;
     private AnimatorSet in, out;
     private AnimatorSet set;
+    private int count = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_digital_indicator);
-
 
 
         img = (ImageView) findViewById(R.id.image_view);
@@ -80,7 +81,6 @@ public class DigitalIndicatorActivity extends AppCompatActivity {
 //        set.setTarget(img);
 
 
-
         Button btn = (Button) findViewById(R.id.btn_digital_indicator_start);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +95,19 @@ public class DigitalIndicatorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 img.setImageResource(R.drawable.ic_number_green_1);
+            }
+        });
+
+
+        final DigitalIndicatorLayout layout = (DigitalIndicatorLayout) findViewById(R.id.my_layout);
+
+
+        Button btn_add_img = (Button) findViewById(R.id.btn_add_img);
+        btn_add_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                layout.configure(count, DigitalIndicatorLayout.REFRESH_MODE_NO_ANIMATION);
+                count++;
             }
         });
     }
