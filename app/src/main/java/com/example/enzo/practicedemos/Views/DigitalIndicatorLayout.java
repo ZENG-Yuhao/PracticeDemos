@@ -1,8 +1,12 @@
 package com.example.enzo.practicedemos.Views;
 
+import android.animation.Animator;
 import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -12,6 +16,7 @@ import com.example.enzo.practicedemos.R;
  * Created by enzoz on 2016/3/28.
  */
 public class DigitalIndicatorLayout extends LinearLayout {
+    private final static String TAG = "DigitalIndicatorLayout";
 
     private final static int[] IMG_SRC = new int[]{
             R.drawable.ic_number_green_0, R.drawable.ic_number_green_1, R.drawable.ic_number_green_2, R.drawable
@@ -29,13 +34,43 @@ public class DigitalIndicatorLayout extends LinearLayout {
     private final static int ANIM_DURATION = 200;
     private final static int INTERVAL_DURATION = 100;
 
-    private int xRefreshMode = REFRESH_MODE_NO_ANIMATION;
-    private AnimatorSet xRefreshAnimIn, xRefreshAnimOut;
+    private int xRefreshMode = REFRESH_MODE_TOGETHER;
+    private AnimatorSet xAnimIn, xAnimOut;
 
-    private int xNumDecimal = 3; // total number of decimals
-    private int[] xCurrDecimals = new int[xNumDecimal];
+    private int xCurrNumber = 0;
+    private int xNumDecimal = 6; // total number of decimals
+    private int[] xCodeDecimals = new int[xNumDecimal];
     private boolean[] hasChanged = new boolean[xNumDecimal];
-    private ImageView[] xImgDigitals;
+    private ImageView[] xDigitalImgs;
+
+    // init default animations
+    {
+        // flip_in
+        Animator alphaAnim = ObjectAnimator.ofFloat(null, "alpha", 1f, 0f);
+        alphaAnim.setDuration(0);
+
+        Animator rotationXAnim = ObjectAnimator.ofFloat(null, "rotationX", -90f, 0f);
+        rotationXAnim.setDuration(250);
+        rotationXAnim.setInterpolator(new DecelerateInterpolator());
+
+
+        Animator alphaAnim2 = ObjectAnimator.ofFloat(null, "alpha", 0f, 1f);
+        alphaAnim2.setDuration(175);
+
+        xAnimIn = new AnimatorSet();
+        xAnimIn.play(alphaAnim).with(rotationXAnim).with(alphaAnim2);
+
+        // flip out
+        Animator rotationXAnim2 = ObjectAnimator.ofFloat(null, "rotationX", 0f, 90f);
+        rotationXAnim2.setDuration(250);
+        rotationXAnim2.setInterpolator(new DecelerateInterpolator());
+
+        Animator alphaAnim3 = ObjectAnimator.ofFloat(null, "alpha", 1f, 0f);
+        alphaAnim2.setDuration(175);
+
+        xAnimOut = new AnimatorSet();
+        xAnimOut.play(rotationXAnim2).with(alphaAnim3);
+    }
 
     public DigitalIndicatorLayout(Context context) {
         super(context);
@@ -65,20 +100,26 @@ public class DigitalIndicatorLayout extends LinearLayout {
         init(getContext());
     }
 
-    public void refreshDigitals(int number) {
+    public void setNumber(int number) {
+        //Log.i(TAG, "--setNumber--> " + number + ", " + xNumDecimal);
         if (number > RANGE[xNumDecimal]) return;
+
+        if (number == xCurrNumber) return;
 
         int[] decimals = convertNumberToDecimals(number);
 
-        if (compare(xCurrDecimals, decimals) == 0) return;
+        compare(decimals, xCodeDecimals);
 
-        refresh();
+        // refresh decimal codes
+        xCodeDecimals = decimals;
+        displayAnimation();
+
     }
 
     private void init(Context context) {
-        xCurrDecimals = new int[xNumDecimal];
+        xCodeDecimals = new int[xNumDecimal];
         hasChanged = new boolean[xNumDecimal];
-        xImgDigitals = new ImageView[xNumDecimal];
+        xDigitalImgs = new ImageView[xNumDecimal];
         // configuration layout
 //        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup
 //                .LayoutParams.WRAP_CONTENT);
@@ -90,18 +131,21 @@ public class DigitalIndicatorLayout extends LinearLayout {
     }
 
     private void initImgs(Context context) {
+        // from high bit to low bit
+        // result in layout: L (high bit --- low bit) R
         for (int i = xNumDecimal - 1; i >= 0; i--) {
             ImageView img = new ImageView(context);
             img.setId(i);
             img.setImageResource(IMG_SRC[0]);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(60, 60);
             img.setLayoutParams(lp);
-            xImgDigitals[i] = img;
+            xDigitalImgs[i] = img;
             this.addView(img);
         }
 
         //requestLayout();
     }
+
 
     private int[] convertNumberToDecimals(int number) {
         int[] decimals = new int[xNumDecimal];
@@ -112,15 +156,16 @@ public class DigitalIndicatorLayout extends LinearLayout {
             lastDecimal = rest % 10;
             rest /= 10;
             decimals[pos] = lastDecimal;
+            //Log.i(TAG, "--convertNumberToDecimals--> " + decimals[pos]);
             pos++;
-        } while (rest == 0);
+        } while (rest != 0);
         return decimals;
     }
 
-    private int compare(int[] currDecimals, int[] decimals) {
+    private int compare(int[] decimals1, int[] decimals2) {
         int count = 0;
         for (int i = 0; i < xNumDecimal; i++) {
-            if (currDecimals[i] != decimals[i]) {
+            if (decimals1[i] != decimals2[i]) {
                 count++;
                 hasChanged[i] = true;
             }
@@ -128,7 +173,31 @@ public class DigitalIndicatorLayout extends LinearLayout {
         return count;
     }
 
-    private void refresh() {
+    private void displayAnimation() {
 
+        // low bit to high bit
+        for (int i = 0; i < xNumDecimal; i++) {
+            if (hasChanged[i]) {
+
+                if (xRefreshMode == REFRESH_MODE_TOGETHER) {
+                    Animator animChangeImg = new ObjectAnimator().ofInt(xDigitalImgs[i], "imageResource", IMG_SRC[0],
+                            IMG_SRC[xCodeDecimals[i]]);
+                    animChangeImg.setDuration(0);
+                    AnimatorSet animIn, animOut;
+                    animIn = xAnimIn.clone();
+                    animOut = xAnimOut.clone();
+                    animIn.setTarget(xDigitalImgs[i]);
+                    animOut.setTarget(xDigitalImgs[i]);
+                    AnimatorSet animSet = new AnimatorSet();
+                    animSet.play(animOut).before(animChangeImg).before(animIn);
+                    animSet.start();
+                } else if (xRefreshMode == REFRESH_MODE_NO_ANIMATION) {
+                    //Log.i(TAG, "--displayAnimation--> " + i + "," + xCodeDecimals[i]);
+                    xDigitalImgs[i].setImageResource(IMG_SRC[xCodeDecimals[i]]);
+                }
+                // reset state
+                hasChanged[i] = false;
+            }
+        }
     }
 }

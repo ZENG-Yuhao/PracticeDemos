@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.enzo.practicedemos.R;
@@ -49,33 +50,39 @@ public class DigitalIndicatorActivity extends AppCompatActivity {
         out = new AnimatorSet();
         out.play(alphaAnim).with(rotationXAnim).with(alphaAnim2);
 
+        Animator animChangeImg = new ObjectAnimator().ofInt(img, "imageResource", R.drawable.ic_number_green_0,
+                R.drawable.ic_number_green_5);
+        animChangeImg.setDuration(0);
+
+        final AnimatorSet combineSet = new AnimatorSet();
+        combineSet.play(in).before(animChangeImg).before(out);
 
 //        in = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.card_flip_left_out);
 //        out = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.card_flip_left_in);
 //
 //        in.setTarget(img);
-        in.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                img.setImageResource(R.drawable.ic_number_green_5);
-                out.start();
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-
-            }
-        });
+//        in.addListener(new Animator.AnimatorListener() {
+//            @Override
+//            public void onAnimationStart(Animator animation) {
+//
+//            }
+//
+//            @Override
+//            public void onAnimationEnd(Animator animation) {
+//                img.setImageResource(R.drawable.ic_number_green_5);
+//                out.start();
+//            }
+//
+//            @Override
+//            public void onAnimationCancel(Animator animation) {
+//
+//            }
+//
+//            @Override
+//            public void onAnimationRepeat(Animator animation) {
+//
+//            }
+//        });
 //        set = new AnimatorSet();
 //        set.play(in).before(out);
 //        set.setTarget(img);
@@ -85,8 +92,9 @@ public class DigitalIndicatorActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                img.setImageResource(R.drawable.ic_number_green_1);
-                in.start();
+//                img.setImageResource(R.drawable.ic_number_green_1);
+//                in.start();
+                combineSet.start();
             }
         });
 
@@ -108,6 +116,16 @@ public class DigitalIndicatorActivity extends AppCompatActivity {
             public void onClick(View v) {
                 layout.configure(count, DigitalIndicatorLayout.REFRESH_MODE_NO_ANIMATION);
                 count++;
+            }
+        });
+
+        final DigitalIndicatorLayout img_layout = (DigitalIndicatorLayout) findViewById(R.id.image_layout);
+        final EditText editText = (EditText) findViewById(R.id.editText);
+        Button btn_change = (Button) findViewById(R.id.btn_change);
+        btn_change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                img_layout.setNumber(Integer.valueOf(editText.getText().toString()));
             }
         });
     }
