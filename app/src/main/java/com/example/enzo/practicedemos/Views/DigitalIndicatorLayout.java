@@ -7,6 +7,7 @@ import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
@@ -44,6 +45,8 @@ public class DigitalIndicatorLayout extends LinearLayout {
     private int[] xCodeDecimals = new int[xNumDecimal];
     private boolean[] hasChanged = new boolean[xNumDecimal];
     private ImageView[] xDigitalImgs;
+
+    private int xLayoutHeight;
 
     // init default animations
     {
@@ -127,6 +130,20 @@ public class DigitalIndicatorLayout extends LinearLayout {
 //                .LayoutParams.WRAP_CONTENT);
 //        setLayoutParams(lp);
 
+        ViewTreeObserver observer = this.getViewTreeObserver();
+        if (null != observer) {
+            observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    // refresh height
+                    xLayoutHeight = getHeight();
+
+                    // refresh images' layout
+                    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(xLayoutHeight, xLayoutHeight);
+                    for (int i = 0; i < xDigitalImgs.length; i++) xDigitalImgs[i].setLayoutParams(lp);
+                }
+            });
+        }
         // initialize images
         initImgs(context);
 
@@ -139,28 +156,8 @@ public class DigitalIndicatorLayout extends LinearLayout {
             final ImageView img = new ImageView(context);
             img.setId(i);
             img.setImageResource(IMG_SRC[0]);
-            ViewTreeObserver observer_header = this.getViewTreeObserver();
-            if (null != observer_header) {
-                observer_header.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                    @Override
-                    public void onGlobalLayout() {
-                        int height = getHeight();
-                        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(height, height);
-                        img.setLayoutParams(lp);
-                        ViewTreeObserver observerLocal = getViewTreeObserver();
-
-                        if (null != observerLocal) {
-                            // removeOnGlobalLayoutListener() is only supported by SDK later than JELLY_BEAN
-                            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN)
-                                observerLocal.removeGlobalOnLayoutListener(this);
-                            else
-                                observerLocal.removeOnGlobalLayoutListener(this);
-                        }
-                    }
-                });
-            }
-//            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(60, 60);
-//            img.setLayoutParams(lp);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(xLayoutHeight, xLayoutHeight);
+            img.setLayoutParams(lp);
             xDigitalImgs[i] = img;
             this.addView(img);
         }
