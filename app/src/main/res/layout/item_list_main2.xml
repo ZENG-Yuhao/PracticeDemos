@@ -1,7 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="75dp"
+              android:orientation="horizontal">
 
+
+    <com.example.enzo.practicedemos.Views.DigitalIndicatorLayout
+        android:id="@+id/digital_indicator"
+        android:layout_width="50dp"
+        android:layout_height="25dp"
+        android:layout_gravity="center"/>
+    <TextView
+        android:id="@+id/txtvw_demo_name"
+        android:layout_width="0dp"
+        android:layout_height="75dp"
+        android:layout_weight="5"
+        android:gravity="center"
+        android:text="Demo Name"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/txtvw_index"
+        android:layout_width="0dp"
+        android:layout_height="75dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="1/40"
+        android:textSize="14sp"/>
 </LinearLayout>

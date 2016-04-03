@@ -16,11 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity android:name=".Activities.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Activities.CreateServiceActivity" />
 
@@ -62,7 +57,13 @@
         <activity android:name=".Activities.OverScrollerActivity"></activity>
         <activity android:name=".Activities.PullToRefreshListviewActivity"></activity>
         <activity android:name=".Activities.DigitalIndicatorActivity"></activity>
-        <activity android:name=".Activities.Main2Activity"></activity>
+        <activity android:name=".Activities.Main2Activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
