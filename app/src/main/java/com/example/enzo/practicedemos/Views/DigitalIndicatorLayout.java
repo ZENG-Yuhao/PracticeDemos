@@ -153,7 +153,7 @@ public class DigitalIndicatorLayout extends LinearLayout {
         // from high bit to low bit
         // result in layout: L (high bit --- low bit) R
         for (int i = xNumDecimal - 1; i >= 0; i--) {
-            final ImageView img = new ImageView(context);
+            ImageView img = new ImageView(context);
             img.setId(i);
             img.setImageResource(IMG_SRC[0]);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(xLayoutHeight, xLayoutHeight);
