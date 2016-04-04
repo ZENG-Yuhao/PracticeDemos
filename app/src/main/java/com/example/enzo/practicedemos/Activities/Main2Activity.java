@@ -100,13 +100,17 @@ public class Main2Activity extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View view = null;
+            DigitalIndicatorLayout indicator;
             if (convertView == null) {
                 view = LayoutInflater.from(xContext).inflate(R.layout.item_list_main2, null);
+                // the first time we get the view, must init indicator
+                indicator = (DigitalIndicatorLayout) view.findViewById(R.id.digital_indicator);
+                indicator.configure(2, DigitalIndicatorLayout.REFRESH_MODE_NO_ANIMATION);
             } else {
                 view = convertView;
             }
 
-            DigitalIndicatorLayout indicator = (DigitalIndicatorLayout) view.findViewById(R.id.digital_indicator);
+            indicator = (DigitalIndicatorLayout) view.findViewById(R.id.digital_indicator);
             indicator.setNumber(position + 1);
 
             TextView demoName = (TextView) view.findViewById(R.id.txtvw_demo_name);

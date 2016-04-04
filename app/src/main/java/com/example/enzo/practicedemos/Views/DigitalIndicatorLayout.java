@@ -41,7 +41,7 @@ public class DigitalIndicatorLayout extends LinearLayout {
     private AnimatorSet xAnimIn, xAnimOut;
 
     private int xCurrNumber = 0;
-    private int xNumDecimal = 2; // default total number of decimals
+    private int xNumDecimal = 6; // default total number of decimals
     private int[] xCodeDecimals = new int[xNumDecimal];
     private boolean[] hasChanged = new boolean[xNumDecimal];
     private ImageView[] xDigitalImgs;
