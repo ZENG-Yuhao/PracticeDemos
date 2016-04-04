@@ -24,9 +24,9 @@
 
             <EditText
                 android:id="@+id/editxt_id"
-                android:inputType="number"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:inputType="number"/>
 
             <TextView
                 android:id="@+id/txt_name"
@@ -91,12 +91,14 @@
 
                 <Button
                     android:id="@+id/btn_add_user"
+                    style="@style/Base.Widget.AppCompat.Button.Colored"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Add user"/>
 
                 <Button
                     android:id="@+id/btn_get_user"
+                    style="@style/Base.Widget.AppCompat.Button.Colored"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@id/btn_add_user"
@@ -105,6 +107,7 @@
 
                 <Button
                     android:id="@+id/btn_delete_user"
+                    style="@style/Base.Widget.AppCompat.Button.Colored"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@id/btn_get_user"
@@ -113,6 +116,7 @@
 
                 <Button
                     android:id="@+id/btn_modify_password"
+                    style="@style/Base.Widget.AppCompat.Button.Colored"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/btn_add_user"
@@ -120,15 +124,17 @@
 
                 <Button
                     android:id="@+id/btn_list_users"
-                    android:text="List Users"
-                    android:layout_below="@id/btn_add_user"
-                    android:layout_toRightOf="@id/btn_modify_password"
-                    android:layout_toEndOf="@id/btn_modify_password"
+                    style="@style/Base.Widget.AppCompat.Button.Colored"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/btn_add_user"
+                    android:layout_toEndOf="@id/btn_modify_password"
+                    android:layout_toRightOf="@id/btn_modify_password"
+                    android:text="List Users"/>
 
                 <Button
                     android:id="@+id/btn_clear_all"
+                    style="@style/Base.Widget.AppCompat.Button.Colored"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/btn_modify_password"

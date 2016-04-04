@@ -12,25 +12,29 @@
 
     <Button
         android:id="@+id/btn_value_animator"
+        style="@style/Base.Widget.AppCompat.Button.Colored"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="ValueAnimator"
         android:textAllCaps="false"/>
 
+
     <Button
         android:id="@+id/btn_property_animator"
+        style="@style/Base.Widget.AppCompat.Button.Colored"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_below="@id/btn_value_animator"
         android:text="PropertyAnimator"
-        android:textAllCaps="false"
-        android:layout_below="@id/btn_value_animator"/>
+        android:textAllCaps="false"/>
 
     <Button
         android:id="@+id/btn_customized_animator"
+        style="@style/Base.Widget.AppCompat.Button.Colored"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:text="CustomizedAnimator"
         android:layout_below="@id/btn_property_animator"
+        android:text="CustomizedAnimator"
         android:textAllCaps="false"/>
 
 </RelativeLayout>

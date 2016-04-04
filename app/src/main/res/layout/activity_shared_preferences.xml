@@ -8,38 +8,40 @@
     tools:context="com.example.enzo.practicedemos.Activities.SharedPreferencesActivity">
 
     <TextView
-        android:textSize="20sp"
-        android:text="Enter or query a key-value pair:"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="Enter or query a key-value pair:"
+        android:textSize="20sp"/>
 
     <EditText
         android:id="@+id/editxt_key"
-        android:hint="Key"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Key"
         />
 
     <EditText
         android:id="@+id/editxt_value"
-        android:hint="Value"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:hint="Value"/>
 
     <Button
         android:id="@+id/btn_commit"
-        android:text="Commit"
-        android:layout_gravity="center_horizontal"
-        android:textAllCaps="false"
+        style="@style/Base.Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Commit"
+        android:textAllCaps="false"/>
 
     <Button
         android:id="@+id/btn_query"
-        android:text="Query"
-        android:layout_gravity="center_horizontal"
-        android:textAllCaps="false"
+        style="@style/Base.Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Query"
+        android:textAllCaps="false"/>
 
 </LinearLayout>
