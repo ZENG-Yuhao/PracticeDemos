@@ -100,7 +100,7 @@ public class Main2Activity extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View view = null;
-            DigitalIndicatorLayout indicator;
+            DigitalIndicatorLayout indicator = null;
             if (convertView == null) {
                 view = LayoutInflater.from(xContext).inflate(R.layout.item_list_main2, null);
                 // the first time we get the view, must init indicator
@@ -109,8 +109,8 @@ public class Main2Activity extends AppCompatActivity {
             } else {
                 view = convertView;
             }
-
-            indicator = (DigitalIndicatorLayout) view.findViewById(R.id.digital_indicator);
+            if (null == indicator)
+                indicator = (DigitalIndicatorLayout) view.findViewById(R.id.digital_indicator);
             indicator.setNumber(position + 1);
 
             TextView demoName = (TextView) view.findViewById(R.id.txtvw_demo_name);
