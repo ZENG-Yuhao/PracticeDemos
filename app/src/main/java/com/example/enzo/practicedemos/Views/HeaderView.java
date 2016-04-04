@@ -143,4 +143,9 @@ public class HeaderView extends LinearLayout {
     public int getVisibleHeight() {
         return xLayoutContainer.getHeight();
     }
+
+    public void clearAnimation(){
+        xImgRefreshIcon.clearAnimation();
+    }
+
 }

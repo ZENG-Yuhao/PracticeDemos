@@ -24,7 +24,7 @@ public class ListItemInflator {
 
     public static ArrayList<Map<String, Object>> getData() {
         ArrayList<Map<String, Object>> list = new ArrayList<>();
-        for (int i = 0; i < 60; i++) {
+        for (int i = 0; i < 40; i++) {
             Map<String, Object> listItem = new HashMap<>();
             listItem.put("title", "User " + i);
             listItem.put("content", "Content text " + i);

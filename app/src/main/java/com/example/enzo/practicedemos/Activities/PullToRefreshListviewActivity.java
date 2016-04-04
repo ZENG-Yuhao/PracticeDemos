@@ -59,6 +59,7 @@ public class PullToRefreshListviewActivity extends AppCompatActivity {
     @Override
     public void finish() {
         super.finish();
+        listview.onFinished();
         overridePendingTransition(R.anim.activity_translate_in_l2r, R.anim.activity_translate_out_l2r);
     }
 }

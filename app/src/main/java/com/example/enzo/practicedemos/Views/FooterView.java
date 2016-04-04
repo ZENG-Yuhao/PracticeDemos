@@ -92,4 +92,5 @@ public class FooterView extends LinearLayout {
     public void stopAnimation() {
         xImgRefreshIcon.clearAnimation();
     }
+
 }

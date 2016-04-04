@@ -327,7 +327,7 @@ public class PullToRefreshListView extends ListView {
 
     public void stopLoading() {
         if (isLoading) {
-            smoothScrollToPosition(xTotalItems - 50);
+            smoothScrollToPosition(xTotalItems - 20);
             xTotalItems = xAdapter.getCount();
             isLoading = false;
             resetFooterHeight();
@@ -352,4 +352,8 @@ public class PullToRefreshListView extends ListView {
     }
 
 
+    public void onFinished() {
+        xHeader.clearAnimation();
+        xFooter.clearAnimation();
+    }
 }
