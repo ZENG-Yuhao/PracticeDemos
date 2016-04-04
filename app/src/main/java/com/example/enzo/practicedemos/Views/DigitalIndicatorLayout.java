@@ -168,16 +168,18 @@ public class DigitalIndicatorLayout extends LinearLayout {
 
     private int[] convertNumberToDecimals(int number) {
         int[] decimals = new int[xNumDecimal];
-        int rest = number;
-        int lastDecimal;
-        int pos = 0; // current position
-        do {
-            lastDecimal = rest % 10;
-            rest /= 10;
-            decimals[pos] = lastDecimal;
-            //Log.i(TAG, "--convertNumberToDecimals--> " + decimals[pos]);
-            pos++;
-        } while (rest != 0);
+        if (number != 0) {
+            int rest = number;
+            int lastDecimal;
+            int pos = 0; // current position
+            do {
+                lastDecimal = rest % 10;
+                rest /= 10;
+                decimals[pos] = lastDecimal;
+                //Log.i(TAG, "--convertNumberToDecimals--> " + decimals[pos]);
+                pos++;
+            } while (rest != 0);
+        }
         return decimals;
     }
 
