@@ -115,6 +115,9 @@ public class DigitalIndicatorLayout extends LinearLayout {
 
         compare(decimals, xCodeDecimals);
 
+        // refresh number
+        xCurrNumber = number;
+
         // refresh decimal codes
         xCodeDecimals = decimals;
         displayAnimation();
