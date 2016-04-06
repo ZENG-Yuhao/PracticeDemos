@@ -21,6 +21,7 @@ public class Main2Activity extends AppCompatActivity {
     private static final String[] activity_titles = {
             "Service and Backend Notification",
             "PullToRefresh ListView",
+            "EfficientBitmap",
             "Digital Indicator",
             "SQLite",
             "ContentProvider",
@@ -35,13 +36,13 @@ public class Main2Activity extends AppCompatActivity {
             "Header & Footer",
             "Binding",
             "DrawerPager",
-            "OverridePendingTransition",
-            "EfficientBitmap"
+            "OverridePendingTransition"
     };
 
     private static final Class[] activities = {
             CreateServiceActivity.class,
             PullToRefreshListviewActivity.class,
+            EfficientBitmapActivity.class,
             DigitalIndicatorActivity.class,
             SQLiteActivity.class,
             ContentProviderActivity.class,
@@ -56,8 +57,7 @@ public class Main2Activity extends AppCompatActivity {
             HeaderFooterActivity.class,
             DataBindingActivity.class,
             DrawerPagerActivity.class,
-            TransitionActivity1.class,
-            EfficientBitmapActivity.class
+            TransitionActivity1.class
     };
 
     @Override
