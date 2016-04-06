@@ -86,7 +86,10 @@ public class EfficientBitmap {
             resId = params[0];
             int reqWidth = params[1];
             int reqHeight = params[2];
-            return decodeBitmap(res, resId, reqWidth, reqHeight);
+            if (!isCancelled())
+                return decodeBitmap(res, resId, reqWidth, reqHeight);
+            else
+                return null;
         }
 
         @Override
