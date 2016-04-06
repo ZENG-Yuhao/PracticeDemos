@@ -2,7 +2,6 @@ package com.example.enzo.practicedemos.Activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.enzo.practicedemos.Core.EfficientBitmap;
 import com.example.enzo.practicedemos.R;
 import com.example.enzo.practicedemos.Views.DigitalIndicatorLayout;
 import com.example.enzo.practicedemos.Views.SpringBackListView;

@@ -1,4 +1,4 @@
-package com.example.enzo.practicedemos.Core;
+package com.example.enzo.practicedemos.Core.Image;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.util.LruCache;
 import android.widget.ImageView;
 
 import java.lang.ref.WeakReference;
@@ -64,9 +65,13 @@ public class EfficientBitmap {
 
     // Helper class that treats the bitmap processing off the UI thread
     public static class DecoderAsyncTask extends AsyncTask<Integer, Void, Bitmap> {
-        private final WeakReference<ImageView> wkrefImageView;
-        private final Resources res;
+        final public static int MODE_MEMORY_CACHE = 0;
+        final public static int MODE_NO_MEMORY_CACHE = 1;
+
+        final private WeakReference<ImageView> wkrefImageView;
+        final private Resources res;
         private int resId = 0;
+        private int mode = MODE_MEMORY_CACHE;
 
         /**
          * execute(params...) method returns the Bitmap loaded.<br/>
@@ -80,15 +85,29 @@ public class EfficientBitmap {
             this.res = resources;
         }
 
+        public void setMode(int mode) {
+            switch (mode) {
+                case MODE_MEMORY_CACHE:
+                case MODE_NO_MEMORY_CACHE:
+                    this.mode = mode;
+                    break;
+            }
+        }
 
         @Override
         protected Bitmap doInBackground(Integer... params) {
             resId = params[0];
             int reqWidth = params[1];
             int reqHeight = params[2];
-            if (!isCancelled())
-                return decodeBitmap(res, resId, reqWidth, reqHeight);
-            else
+            if (!isCancelled()) {
+                Bitmap bitmap = decodeBitmap(res, resId, reqWidth, reqHeight);
+
+                if (mode == MODE_MEMORY_CACHE) {
+                    // add bitmap to Memory.
+                    MemoryCache.addBitmap(String.valueOf(resId), bitmap);
+                }
+                return bitmap;
+            } else
                 return null;
         }
 
@@ -163,13 +182,66 @@ public class EfficientBitmap {
         return null;
     }
 
-    public static void loadBitmap(Resources res, ImageView imageView, Bitmap bitmap, int resId, int reqWidth, int
-            reqHeight) {
+    public static void loadBitmap(Resources res, ImageView imageView, Bitmap placeHolderBitmap, int resId, int
+            reqWidth, int reqHeight, int mode) {
+
+        if (mode == DecoderAsyncTask.MODE_MEMORY_CACHE) {
+            final String imageKey = String.valueOf(resId);
+            final Bitmap bitmap = MemoryCache.getBitmap(imageKey);
+
+            // if bitmap already exists in memory, get it directly and quit.
+            if (bitmap != null) {
+                imageView.setImageBitmap(bitmap);
+                return;
+            }
+        }
+
+        // bitmap does not exist in memory, load a new one.
         if (cancelPotentialTask(resId, imageView)) {
             final DecoderAsyncTask task = new DecoderAsyncTask(res, imageView);
-            final AsyncDrawable asyncDrawable = new AsyncDrawable(res, bitmap, task);
+            task.setMode(mode);
+            final AsyncDrawable asyncDrawable = new AsyncDrawable(res, placeHolderBitmap, task);
             bindAsyncDrawableToImageView(asyncDrawable, imageView);
             task.execute(resId, reqWidth, reqHeight);
+        }
+    }
+
+
+    public static class MemoryCache {
+        private static LruCache<String, Bitmap> xMemoryCache;
+        final static int maxMemory;
+        final static int cacheSize;
+
+        // initialisation
+        static {
+            maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
+            cacheSize = maxMemory / 8;
+            xMemoryCache = new LruCache<String, Bitmap>(cacheSize) {
+                @Override
+                protected int sizeOf(String key, Bitmap bitmap) {
+                    // the cache size will be measured in kilobytes rather than
+                    // number of items.
+                    return bitmap.getByteCount() / 1024;
+                }
+            };
+        }
+
+        public static void addBitmap(String key, Bitmap bitmap) {
+            if (getBitmap(key) == null) {
+                xMemoryCache.put(key, bitmap);
+            }
+        }
+
+        public static void removeBitmap(String key) {
+            xMemoryCache.remove(key);
+        }
+
+        public static Bitmap getBitmap(String key) {
+            return xMemoryCache.get(key);
+        }
+
+        public static void clearAll() {
+            xMemoryCache.evictAll();
         }
     }
 }

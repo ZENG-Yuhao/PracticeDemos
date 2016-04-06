@@ -11,7 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.example.enzo.practicedemos.Core.EfficientBitmap;
+import com.example.enzo.practicedemos.Core.Image.EfficientBitmap;
 import com.example.enzo.practicedemos.R;
 
 import java.util.Random;
@@ -82,23 +82,27 @@ public class EfficientBitmapActivity extends AppCompatActivity {
 
             Random rd = new Random();
 
-//            EfficientBitmap.loadBitmap(xContext.getResources(), imageView0, mPlaceHolderBitmaps[0], IMG_SRC[rd.nextInt(5)
+//            EfficientBitmap.loadBitmap(xContext.getResources(), imageView0, mPlaceHolderBitmaps[0], IMG_SRC[rd
+// .nextInt(5)
 //                    ], 75, 75);
-//            EfficientBitmap.loadBitmap(xContext.getResources(), imageView1, mPlaceHolderBitmaps[1], IMG_SRC[rd.nextInt(5)
+//            EfficientBitmap.loadBitmap(xContext.getResources(), imageView1, mPlaceHolderBitmaps[1], IMG_SRC[rd
+// .nextInt(5)
 //                    ], 75, 75);
-//            EfficientBitmap.loadBitmap(xContext.getResources(), imageView2, mPlaceHolderBitmaps[2], IMG_SRC[rd.nextInt(5)
+//            EfficientBitmap.loadBitmap(xContext.getResources(), imageView2, mPlaceHolderBitmaps[2], IMG_SRC[rd
+// .nextInt(5)
 //                    ], 75, 75);
-//            EfficientBitmap.loadBitmap(xContext.getResources(), imageView3, mPlaceHolderBitmaps[3], IMG_SRC[rd.nextInt(5)
+//            EfficientBitmap.loadBitmap(xContext.getResources(), imageView3, mPlaceHolderBitmaps[3], IMG_SRC[rd
+// .nextInt(5)
 //                    ], 75, 75);
 
             EfficientBitmap.loadBitmap(xContext.getResources(), imageView0, mPlaceHolderBitmap, IMG_SRC[rd.nextInt(5)
-                    ], 75, 75);
+                    ], 75, 75, EfficientBitmap.DecoderAsyncTask.MODE_NO_MEMORY_CACHE);
             EfficientBitmap.loadBitmap(xContext.getResources(), imageView1, mPlaceHolderBitmap, IMG_SRC[rd.nextInt(5)
-                    ], 75, 75);
+                    ], 75, 75, EfficientBitmap.DecoderAsyncTask.MODE_NO_MEMORY_CACHE);
             EfficientBitmap.loadBitmap(xContext.getResources(), imageView2, mPlaceHolderBitmap, IMG_SRC[rd.nextInt(5)
-                    ], 75, 75);
+                    ], 75, 75, EfficientBitmap.DecoderAsyncTask.MODE_NO_MEMORY_CACHE);
             EfficientBitmap.loadBitmap(xContext.getResources(), imageView3, mPlaceHolderBitmap, IMG_SRC[rd.nextInt(5)
-                    ], 75, 75);
+                    ], 75, 75, EfficientBitmap.DecoderAsyncTask.MODE_NO_MEMORY_CACHE);
 
 
             return view;
