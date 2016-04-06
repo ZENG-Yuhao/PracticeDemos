@@ -2,9 +2,9 @@ package com.example.enzo.practicedemos.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +12,9 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.enzo.practicedemos.Core.EfficientBitmap;
 import com.example.enzo.practicedemos.R;
-import com.example.enzo.practicedemos.Services.CreateService;
 import com.example.enzo.practicedemos.Views.DigitalIndicatorLayout;
-import com.example.enzo.practicedemos.Views.PullToRefreshListView;
 import com.example.enzo.practicedemos.Views.SpringBackListView;
 
 public class Main2Activity extends AppCompatActivity {
@@ -73,6 +72,7 @@ public class Main2Activity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 
     class MyBaseAdapter extends BaseAdapter {
