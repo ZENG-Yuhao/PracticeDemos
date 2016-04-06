@@ -15,7 +15,6 @@
         android:id="@+id/btn12306"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:elevation="8dp"
         android:text="12306 --- 1(2)30(6)"/>
 
@@ -27,7 +26,6 @@
         android:layout_marginBottom="40dp"
         android:elevation="8dp"
         android:text="15308 --- 1(5)30(8)"/>
-
 
     <EditText
         android:id="@+id/editText"

@@ -268,8 +268,8 @@ public class PullToRefreshListView extends ListView {
                 lastPosY = ev.getRawY();
 
                 // when getVisibleHeight()>0, deltaY can <0 or >0, otherwise deltaY must >0
-                if (!isLoading && getFirstVisiblePosition() == FIRST_VISIBLE_POSITION && (xHeader.getVisibleHeight() > 0
-                        || deltaY > 0)) {
+                if (!isLoading && getFirstVisiblePosition() == FIRST_VISIBLE_POSITION && (xHeader.getVisibleHeight()
+                        > 0 || deltaY > 0)) {
                     updateHeaderHeight(deltaY / OFFSET_RATIO);
                 }
 
@@ -350,7 +350,6 @@ public class PullToRefreshListView extends ListView {
     public interface OnLoadMoreListener {
         void onLoadMore();
     }
-
 
     public void onFinished() {
         xHeader.clearAnimation();
