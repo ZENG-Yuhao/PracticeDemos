@@ -163,10 +163,11 @@ public class EfficientBitmap {
         return null;
     }
 
-    public static void loadBitmap(Resources res, ImageView imageView, int resId, int reqWidth, int reqHeight) {
+    public static void loadBitmap(Resources res, ImageView imageView, Bitmap bitmap, int resId, int reqWidth, int
+            reqHeight) {
         if (cancelPotentialTask(resId, imageView)) {
             final DecoderAsyncTask task = new DecoderAsyncTask(res, imageView);
-            final AsyncDrawable asyncDrawable = new AsyncDrawable(res, null, task);
+            final AsyncDrawable asyncDrawable = new AsyncDrawable(res, bitmap, task);
             bindAsyncDrawableToImageView(asyncDrawable, imageView);
             task.execute(resId, reqWidth, reqHeight);
         }

@@ -11,4 +11,5 @@
     <string name="header_view_hint_refreshing">Refreshing...</string>
     <string name="header_view_hint_last_update">Last update: </string>
     <string name="footer_view_hint_loading">Loading...</string>
+    <string name="title_activity_main3">Main3Activity</string>
 </resources>

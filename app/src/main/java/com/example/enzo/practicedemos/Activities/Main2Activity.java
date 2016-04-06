@@ -35,7 +35,8 @@ public class Main2Activity extends AppCompatActivity {
             "Header & Footer",
             "Binding",
             "DrawerPager",
-            "OverridePendingTransition"
+            "OverridePendingTransition",
+            "EfficientBitmap"
     };
 
     private static final Class[] activities = {
@@ -55,7 +56,8 @@ public class Main2Activity extends AppCompatActivity {
             HeaderFooterActivity.class,
             DataBindingActivity.class,
             DrawerPagerActivity.class,
-            TransitionActivity1.class
+            TransitionActivity1.class,
+            EfficientBitmapActivity.class
     };
 
     @Override
