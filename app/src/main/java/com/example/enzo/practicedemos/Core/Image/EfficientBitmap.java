@@ -14,6 +14,9 @@ import java.lang.ref.WeakReference;
 
 /**
  * Created by enzoz on 2016/4/6.
+ *
+ * Learning to be continued:
+ * http://developer.android.com/training/displaying-bitmaps/manage-memory.html
  */
 public class EfficientBitmap {
 
