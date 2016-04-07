@@ -96,13 +96,13 @@ public class EfficientBitmapActivity extends AppCompatActivity {
 //                    ], 75, 75);
 
             EfficientBitmap.loadBitmap(xContext.getResources(), imageView0, mPlaceHolderBitmap, IMG_SRC[rd.nextInt(5)
-                    ], 75, 75, EfficientBitmap.DecoderAsyncTask.MODE_NO_MEMORY_CACHE);
+                    ], 75, 75, EfficientBitmap.DecoderAsyncTask.MODE_MEMORY_CACHE);
             EfficientBitmap.loadBitmap(xContext.getResources(), imageView1, mPlaceHolderBitmap, IMG_SRC[rd.nextInt(5)
-                    ], 75, 75, EfficientBitmap.DecoderAsyncTask.MODE_NO_MEMORY_CACHE);
+                    ], 75, 75, EfficientBitmap.DecoderAsyncTask.MODE_MEMORY_CACHE);
             EfficientBitmap.loadBitmap(xContext.getResources(), imageView2, mPlaceHolderBitmap, IMG_SRC[rd.nextInt(5)
-                    ], 75, 75, EfficientBitmap.DecoderAsyncTask.MODE_NO_MEMORY_CACHE);
+                    ], 75, 75, EfficientBitmap.DecoderAsyncTask.MODE_MEMORY_CACHE);
             EfficientBitmap.loadBitmap(xContext.getResources(), imageView3, mPlaceHolderBitmap, IMG_SRC[rd.nextInt(5)
-                    ], 75, 75, EfficientBitmap.DecoderAsyncTask.MODE_NO_MEMORY_CACHE);
+                    ], 75, 75, EfficientBitmap.DecoderAsyncTask.MODE_MEMORY_CACHE);
 
 
             return view;

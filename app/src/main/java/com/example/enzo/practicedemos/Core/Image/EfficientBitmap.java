@@ -10,11 +10,12 @@ import android.os.AsyncTask;
 import android.util.LruCache;
 import android.widget.ImageView;
 
+import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 
 /**
  * Created by enzoz on 2016/4/6.
- *
+ * <p>
  * Learning to be continued:
  * http://developer.android.com/training/displaying-bitmaps/manage-memory.html
  */
@@ -211,7 +212,7 @@ public class EfficientBitmap {
 
 
     public static class MemoryCache {
-        private static LruCache<String, Bitmap> xMemoryCache;
+        private static SoftReference<LruCache<String, Bitmap>> xSftRefCache;
         final static int maxMemory;
         final static int cacheSize;
 
@@ -219,7 +220,11 @@ public class EfficientBitmap {
         static {
             maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
             cacheSize = maxMemory / 8;
-            xMemoryCache = new LruCache<String, Bitmap>(cacheSize) {
+            createCache();
+        }
+
+        public static void createCache() {
+            LruCache<String, Bitmap> memoryCache = new LruCache<String, Bitmap>(cacheSize) {
                 @Override
                 protected int sizeOf(String key, Bitmap bitmap) {
                     // the cache size will be measured in kilobytes rather than
@@ -227,24 +232,38 @@ public class EfficientBitmap {
                     return bitmap.getByteCount() / 1024;
                 }
             };
+            xSftRefCache = new SoftReference<LruCache<String, Bitmap>>(memoryCache);
         }
 
         public static void addBitmap(String key, Bitmap bitmap) {
-            if (getBitmap(key) == null) {
-                xMemoryCache.put(key, bitmap);
+            LruCache<String, Bitmap> memoryCache = xSftRefCache.get();
+            if (memoryCache != null) {
+                if (getBitmap(key) == null) {
+                    memoryCache.put(key, bitmap);
+                }
+            } else {
+                createCache();
             }
         }
 
         public static void removeBitmap(String key) {
-            xMemoryCache.remove(key);
+            LruCache<String, Bitmap> memoryCache = xSftRefCache.get();
+            if (memoryCache != null)
+                memoryCache.remove(key);
         }
 
         public static Bitmap getBitmap(String key) {
-            return xMemoryCache.get(key);
+            LruCache<String, Bitmap> memoryCache = xSftRefCache.get();
+            if (memoryCache != null)
+                return memoryCache.get(key);
+            else
+                return null;
         }
 
         public static void clearAll() {
-            xMemoryCache.evictAll();
+            LruCache<String, Bitmap> memoryCache = xSftRefCache.get();
+            if (memoryCache != null)
+                memoryCache.evictAll();
         }
     }
 }
